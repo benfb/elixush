@@ -2,7 +2,8 @@ defmodule Exush.Server do
   use GenServer
 
   def start_link do
-    Exush.Interpreter.define_registered(:integer_mod, &Exush.Instructions.Integer.integer_mod/1)
+    # Exush.Interpreter.define_registered(:integer_mod, &Exush.Instructions.Integer.integer_mod/1)
+    use Exush.Instructions
     GenServer.start_link(__MODULE__, :ok, name: __MODULE__)
   end
 

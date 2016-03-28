@@ -6,11 +6,11 @@ defmodule Exush.Supervisor do
   end
 
   def init(:ok) do
-    children =[
-      worker(Exush.Globals, [Exush.Globals]),
+    children = [
+      worker(Exush.Globals.Agent, [Exush.Globals.Agent]),
       worker(Exush.Server, [])
     ]
 
-    supervise(children, strategy: :one_for_one)
+    supervise(children, strategy: :one_for_all)
   end
 end

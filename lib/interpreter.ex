@@ -1,5 +1,5 @@
 defmodule Exush.Interpreter do
-  import Exush.Globals
+  import Exush.Globals.Agent
   import Enum, only: [empty?: 1]
 
   @doc "Add the provided name to the global list of registered instructions."
