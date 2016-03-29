@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.4">
     <title>Elixush.PushState – elixush v0.0.1</title>
-    <link rel="stylesheet" href="" />
+    <link rel="stylesheet" href="dist/app-1e374caa3d.css" />
     <script src="dist/sidebar_items.js"></script>
   </head>
   <body data-type="modules">
@@ -93,7 +93,9 @@
     <a href="#end_environment/1">end_environment(state)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Ends the current environment by popping the :environment stack and replacing all stacks with those on the environment stack. Then, everything on the old :return stack is pushed onto the :exec stack</p>
+    <div class="summary-synopsis"><p>Ends the current environment by popping the :environment stack and replacing
+all stacks with those on the environment stack. Then, everything on the old
+:return stack is pushed onto the :exec stack</p>
 </div>
   
 </div>
@@ -111,7 +113,8 @@
     <a href="#pop_item/2">pop_item(type, state)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Returns a copy of the state with the specified stack popped. This is a utility, not for use as an instruction in Push programs</p>
+    <div class="summary-synopsis"><p>Returns a copy of the state with the specified stack popped. This is a utility,
+not for use as an instruction in Push programs</p>
 </div>
   
 </div>
@@ -120,7 +123,8 @@
     <a href="#push_item/3">push_item(value, type, state)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Returns a copy of the state with the value pushed on the named stack. This is a utility, not for use in Push programs</p>
+    <div class="summary-synopsis"><p>Returns a copy of the state with the value pushed on the named stack. This is a utility,
+not for use in Push programs</p>
 </div>
   
 </div>
@@ -129,7 +133,8 @@
     <a href="#push_state_from_stacks/1">push_state_from_stacks(stack_assignments)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Takes a map of stack names and entire stack states, and returns a new push-state with those stacks set</p>
+    <div class="summary-synopsis"><p>Takes a map of stack names and entire stack states, and returns a new push-state
+with those stacks set</p>
 </div>
   
 </div>
@@ -147,7 +152,10 @@
     <a href="#registered_for_stacks/1">registered_for_stacks(types_list)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Takes a list of stacks and returns all instructions that have all of their stack requirements fulfilled. This won't include random instructions unless :random is in the types list. This won't include parenthesis-altering instructions unless :parentheses is in the types list</p>
+    <div class="summary-synopsis"><p>Takes a list of stacks and returns all instructions that have all
+of their stack requirements fulfilled. This won’t include random instructions
+unless :random is in the types list. This won’t include parenthesis-altering
+instructions unless :parentheses is in the types list</p>
 </div>
   
 </div>
@@ -174,7 +182,8 @@
     <a href="#stack_assoc/4">stack_assoc(value, type, position, state)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Puts value at position on type stack in state. This is a utility, not for use as an instruction in Push programs. NOT SAFE for invalid positions</p>
+    <div class="summary-synopsis"><p>Puts value at position on type stack in state. This is a utility, not for use
+as an instruction in Push programs. NOT SAFE for invalid positions</p>
 </div>
   
 </div>
@@ -183,7 +192,9 @@
     <a href="#stack_ref/3">stack_ref(type, position, state)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Returns the indicated item of the type stack in state. Returns :no-stack-item if called on an empty stack. This is a utility, not for use as an instruction in Push programs. NOT SAFE for invalid positions</p>
+    <div class="summary-synopsis"><p>Returns the indicated item of the type stack in state. Returns :no-stack-item if called
+on an empty stack. This is a utility, not for use as an instruction in Push programs.
+NOT SAFE for invalid positions</p>
 </div>
   
 </div>
@@ -198,7 +209,8 @@
     <a href="#top_item/2">top_item(type, state)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Returns the top item of the type stack in state. Returns :no-stack-item if called on an empty stack. This is a utility, not for use as an instruction in Push programs</p>
+    <div class="summary-synopsis"><p>Returns the top item of the type stack in state. Returns :no-stack-item if called on
+an empty stack. This is a utility, not for use as an instruction in Push programs</p>
 </div>
   
 </div>
@@ -255,7 +267,9 @@
     </div>
   
   <section class="docstring">
-    <p>Ends the current environment by popping the :environment stack and replacing all stacks with those on the environment stack. Then, everything on the old :return stack is pushed onto the :exec stack.</p>
+    <p>Ends the current environment by popping the :environment stack and replacing
+all stacks with those on the environment stack. Then, everything on the old
+:return stack is pushed onto the :exec stack.</p>
 
   </section>
 </div>
@@ -292,7 +306,8 @@
     </div>
   
   <section class="docstring">
-    <p>Returns a copy of the state with the specified stack popped. This is a utility, not for use as an instruction in Push programs.</p>
+    <p>Returns a copy of the state with the specified stack popped. This is a utility,
+not for use as an instruction in Push programs.</p>
 
   </section>
 </div>
@@ -306,7 +321,8 @@
   </div>
   
   <section class="docstring">
-    <p>Returns a copy of the state with the value pushed on the named stack. This is a utility, not for use in Push programs.</p>
+    <p>Returns a copy of the state with the value pushed on the named stack. This is a utility,
+not for use in Push programs.</p>
 
   </section>
 </div>
@@ -329,7 +345,8 @@
     </div>
   
   <section class="docstring">
-    <p>Takes a map of stack names and entire stack states, and returns a new push-state with those stacks set.</p>
+    <p>Takes a map of stack names and entire stack states, and returns a new push-state
+with those stacks set.</p>
 
   </section>
 </div>
@@ -366,7 +383,10 @@
     </div>
   
   <section class="docstring">
-    <p>Takes a list of stacks and returns all instructions that have all of their stack requirements fulfilled. This won't include random instructions unless :random is in the types list. This won't include parenthesis-altering instructions unless :parentheses is in the types list.</p>
+    <p>Takes a list of stacks and returns all instructions that have all
+of their stack requirements fulfilled. This won’t include random instructions
+unless :random is in the types list. This won’t include parenthesis-altering
+instructions unless :parentheses is in the types list.</p>
 
   </section>
 </div>
@@ -426,7 +446,8 @@
   </div>
   
   <section class="docstring">
-    <p>Puts value at position on type stack in state. This is a utility, not for use as an instruction in Push programs. NOT SAFE for invalid positions.</p>
+    <p>Puts value at position on type stack in state. This is a utility, not for use
+as an instruction in Push programs. NOT SAFE for invalid positions.</p>
 
   </section>
 </div>
@@ -449,7 +470,9 @@
     </div>
   
   <section class="docstring">
-    <p>Returns the indicated item of the type stack in state. Returns :no-stack-item if called on an empty stack. This is a utility, not for use as an instruction in Push programs. NOT SAFE for invalid positions.</p>
+    <p>Returns the indicated item of the type stack in state. Returns :no-stack-item if called
+on an empty stack. This is a utility, not for use as an instruction in Push programs.
+NOT SAFE for invalid positions.</p>
 
   </section>
 </div>
@@ -476,7 +499,8 @@
   </div>
   
   <section class="docstring">
-    <p>Returns the top item of the type stack in state. Returns :no-stack-item if called on an empty stack. This is a utility, not for use as an instruction in Push programs.</p>
+    <p>Returns the top item of the type stack in state. Returns :no-stack-item if called on
+an empty stack. This is a utility, not for use as an instruction in Push programs.</p>
 
   </section>
 </div>
@@ -503,7 +527,7 @@
   </div>
 </section>
 </div>
-  <script src=""></script>
+  <script src="dist/app-6d2e071366.js"></script>
   </body>
 </html>
 
