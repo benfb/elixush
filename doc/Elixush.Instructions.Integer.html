@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.4">
     <title>Elixush.Instructions.Integer – elixush v0.0.1</title>
-    <link rel="stylesheet" href="" />
+    <link rel="stylesheet" href="dist/app-1e374caa3d.css" />
     <script src="dist/sidebar_items.js"></script>
   </head>
   <body data-type="modules">
@@ -102,43 +102,8 @@
     <a href="#integer_div/1">integer_div(state)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Returns a function that pushes the quotient of the top two items. Does nothing if the denominator would be zero</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#integer_dup/1">integer_dup(state)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Returns a function that takes a state and duplicates the top item of the appropriate stack of the state</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#integer_empty/1">integer_empty(state)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Returns a function that takes a state and tells whether that stack is empty</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#integer_eq/1">integer_eq(state)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Returns a function that compares the top two items of the appropriate stack of the given state</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#integer_flush/1">integer_flush(state)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Returns a function that empties the stack of the given state</p>
+    <div class="summary-synopsis"><p>Returns a function that pushes the quotient of the top two items. Does
+nothing if the denominator would be zero</p>
 </div>
   
 </div>
@@ -165,7 +130,8 @@
     <a href="#integer_gt/1">integer_gt(state)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Returns a function that pushes the result of comparator of the top two items on the ':integer' stack onto the boolean stack</p>
+    <div class="summary-synopsis"><p>Returns a function that pushes the result of comparator of the top two items
+on the ‘:integer’ stack onto the boolean stack</p>
 </div>
   
 </div>
@@ -174,7 +140,8 @@
     <a href="#integer_gte/1">integer_gte(state)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Returns a function that pushes the result of comparator of the top two items on the ':integer' stack onto the boolean stack</p>
+    <div class="summary-synopsis"><p>Returns a function that pushes the result of comparator of the top two items
+on the ‘:integer’ stack onto the boolean stack</p>
 </div>
   
 </div>
@@ -189,7 +156,8 @@
     <a href="#integer_lt/1">integer_lt(state)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Returns a function that pushes the result of comparator of the top two items on the ':integer' stack onto the boolean stack</p>
+    <div class="summary-synopsis"><p>Returns a function that pushes the result of comparator of the top two items
+on the ‘:integer’ stack onto the boolean stack</p>
 </div>
   
 </div>
@@ -198,7 +166,8 @@
     <a href="#integer_lte/1">integer_lte(state)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Returns a function that pushes the result of comparator of the top two items on the ':integer' stack onto the boolean stack</p>
+    <div class="summary-synopsis"><p>Returns a function that pushes the result of comparator of the top two items
+on the ‘:integer’ stack onto the boolean stack</p>
 </div>
   
 </div>
@@ -225,7 +194,8 @@
     <a href="#integer_mod/1">integer_mod(state)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Returns a function that pushes the modulus of the top two items. Does nothing if the denominator would be zero</p>
+    <div class="summary-synopsis"><p>Returns a function that pushes the modulus of the top two items. Does
+nothing if the denominator would be zero</p>
 </div>
   
 </div>
@@ -240,73 +210,10 @@
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#integer_pop/1">integer_pop(state)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Returns a function that takes a state and pops the appropriate stack of the state</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#integer_rot/1">integer_rot(state)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Returns a function that takes a state and rotates the top 3 items of the appropriate stack of the state</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#integer_shove/1">integer_shove(state)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Returns a function that shoves an item deep in the specified stack, using the top integer to indicate how deep</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#integer_stackdepth/1">integer_stackdepth(state)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Returns a function that pushes the depth of the appropriate stack of the given state</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
     <a href="#integer_sub/1">integer_sub(state)</a>
   </div>
   
     <div class="summary-synopsis"><p>Returns a function that pushes the difference of the top two items</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#integer_swap/1">integer_swap(state)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Returns a function that takes a state and swaps the top 2 items of the appropriate stack of the state</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#integer_yank/1">integer_yank(state)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Returns a function that yanks an item from deep in the specified stack, using the top integer to indicate how deep</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#integer_yankdup/1">integer_yankdup(state)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Returns a function that yanks a copy of an item from deep in the specified stack, using the top integer to indicate how deep</p>
 </div>
   
 </div>
@@ -368,63 +275,8 @@
   </div>
   
   <section class="docstring">
-    <p>Returns a function that pushes the quotient of the top two items. Does nothing if the denominator would be zero.</p>
-
-  </section>
-</div>
-<div class="detail" id="integer_dup/1">
-  <div class="detail-header">
-    <a href="#integer_dup/1" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">integer_dup(state)</span>
-      
-  </div>
-  
-  <section class="docstring">
-    <p>Returns a function that takes a state and duplicates the top item of the appropriate stack of the state.</p>
-
-  </section>
-</div>
-<div class="detail" id="integer_empty/1">
-  <div class="detail-header">
-    <a href="#integer_empty/1" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">integer_empty(state)</span>
-      
-  </div>
-  
-  <section class="docstring">
-    <p>Returns a function that takes a state and tells whether that stack is empty.</p>
-
-  </section>
-</div>
-<div class="detail" id="integer_eq/1">
-  <div class="detail-header">
-    <a href="#integer_eq/1" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">integer_eq(state)</span>
-      
-  </div>
-  
-  <section class="docstring">
-    <p>Returns a function that compares the top two items of the appropriate stack of the given state.</p>
-
-  </section>
-</div>
-<div class="detail" id="integer_flush/1">
-  <div class="detail-header">
-    <a href="#integer_flush/1" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">integer_flush(state)</span>
-      
-  </div>
-  
-  <section class="docstring">
-    <p>Returns a function that empties the stack of the given state.</p>
+    <p>Returns a function that pushes the quotient of the top two items. Does
+nothing if the denominator would be zero.</p>
 
   </section>
 </div>
@@ -477,7 +329,8 @@
   </div>
   
   <section class="docstring">
-    <p>Returns a function that pushes the result of comparator of the top two items on the ':integer' stack onto the boolean stack.</p>
+    <p>Returns a function that pushes the result of comparator of the top two items
+on the ‘:integer’ stack onto the boolean stack.</p>
 
   </section>
 </div>
@@ -491,7 +344,8 @@
   </div>
   
   <section class="docstring">
-    <p>Returns a function that pushes the result of comparator of the top two items on the ':integer' stack onto the boolean stack.</p>
+    <p>Returns a function that pushes the result of comparator of the top two items
+on the ‘:integer’ stack onto the boolean stack.</p>
 
   </section>
 </div>
@@ -518,7 +372,8 @@
   </div>
   
   <section class="docstring">
-    <p>Returns a function that pushes the result of comparator of the top two items on the ':integer' stack onto the boolean stack.</p>
+    <p>Returns a function that pushes the result of comparator of the top two items
+on the ‘:integer’ stack onto the boolean stack.</p>
 
   </section>
 </div>
@@ -532,7 +387,8 @@
   </div>
   
   <section class="docstring">
-    <p>Returns a function that pushes the result of comparator of the top two items on the ':integer' stack onto the boolean stack.</p>
+    <p>Returns a function that pushes the result of comparator of the top two items
+on the ‘:integer’ stack onto the boolean stack.</p>
 
   </section>
 </div>
@@ -574,7 +430,8 @@
   </div>
   
   <section class="docstring">
-    <p>Returns a function that pushes the modulus of the top two items. Does nothing if the denominator would be zero.</p>
+    <p>Returns a function that pushes the modulus of the top two items. Does
+nothing if the denominator would be zero.</p>
 
   </section>
 </div>
@@ -592,62 +449,6 @@
 
   </section>
 </div>
-<div class="detail" id="integer_pop/1">
-  <div class="detail-header">
-    <a href="#integer_pop/1" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">integer_pop(state)</span>
-      
-  </div>
-  
-  <section class="docstring">
-    <p>Returns a function that takes a state and pops the appropriate stack of the state.</p>
-
-  </section>
-</div>
-<div class="detail" id="integer_rot/1">
-  <div class="detail-header">
-    <a href="#integer_rot/1" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">integer_rot(state)</span>
-      
-  </div>
-  
-  <section class="docstring">
-    <p>Returns a function that takes a state and rotates the top 3 items of the appropriate stack of the state.</p>
-
-  </section>
-</div>
-<div class="detail" id="integer_shove/1">
-  <div class="detail-header">
-    <a href="#integer_shove/1" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">integer_shove(state)</span>
-      
-  </div>
-  
-  <section class="docstring">
-    <p>Returns a function that shoves an item deep in the specified stack, using the top integer to indicate how deep.</p>
-
-  </section>
-</div>
-<div class="detail" id="integer_stackdepth/1">
-  <div class="detail-header">
-    <a href="#integer_stackdepth/1" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">integer_stackdepth(state)</span>
-      
-  </div>
-  
-  <section class="docstring">
-    <p>Returns a function that pushes the depth of the appropriate stack of the given state.</p>
-
-  </section>
-</div>
 <div class="detail" id="integer_sub/1">
   <div class="detail-header">
     <a href="#integer_sub/1" class="detail-link" title="Link to this function">
@@ -659,48 +460,6 @@
   
   <section class="docstring">
     <p>Returns a function that pushes the difference of the top two items.</p>
-
-  </section>
-</div>
-<div class="detail" id="integer_swap/1">
-  <div class="detail-header">
-    <a href="#integer_swap/1" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">integer_swap(state)</span>
-      
-  </div>
-  
-  <section class="docstring">
-    <p>Returns a function that takes a state and swaps the top 2 items of the appropriate stack of the state.</p>
-
-  </section>
-</div>
-<div class="detail" id="integer_yank/1">
-  <div class="detail-header">
-    <a href="#integer_yank/1" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">integer_yank(state)</span>
-      
-  </div>
-  
-  <section class="docstring">
-    <p>Returns a function that yanks an item from deep in the specified stack, using the top integer to indicate how deep.</p>
-
-  </section>
-</div>
-<div class="detail" id="integer_yankdup/1">
-  <div class="detail-header">
-    <a href="#integer_yankdup/1" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">integer_yankdup(state)</span>
-      
-  </div>
-  
-  <section class="docstring">
-    <p>Returns a function that yanks a copy of an item from deep in the specified stack, using the top integer to indicate how deep.</p>
 
   </section>
 </div>
@@ -727,7 +486,7 @@
   </div>
 </section>
 </div>
-  <script src=""></script>
+  <script src="dist/app-6d2e071366.js"></script>
   </body>
 </html>
 

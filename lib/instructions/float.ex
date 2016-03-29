@@ -219,5 +219,4 @@ defmodule Elixush.Instructions.Float do
       state
     end
   end
-
 end

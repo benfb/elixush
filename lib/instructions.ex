@@ -4,7 +4,7 @@ defmodule Elixush.Instructions do
   defmacro __using__(_opts) do
     quote do
       require Logger
-      modules = ["Integer", "Boolean", "Float"]
+      modules = ["Common", "Integer", "Float", "Boolean"]
       Enum.each(modules, fn(module) ->
         {funcs, _args} = Code.eval_string("Elixush.Instructions.#{module}.__info__(:functions)")
         Enum.each(funcs, fn{f_atom, f_arity} ->
