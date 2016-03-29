@@ -13,7 +13,7 @@ defmodule Exush.Server do
   end
 
   def handle_call({:run, program}, _from, state) do
-    result = Exush.Interpreter.run_push(program, Exush.Interpreter.make_push_state)
+    result = Exush.Interpreter.run_push(program, Exush.PushState.make_push_state)
     {:reply, result, state}
   end
 
