@@ -1,7 +1,7 @@
-defmodule Exush.Interpreter do
-  import Exush.Globals.Agent
-  import Exush.PushState
-  import Exush.Util, only: [recognize_literal: 1]
+defmodule Elixush.Interpreter do
+  import Elixush.Globals.Agent
+  import Elixush.PushState
+  import Elixush.Util, only: [recognize_literal: 1]
   import Enum, only: [empty?: 1]
 
   @doc "Executes a single Push instruction."

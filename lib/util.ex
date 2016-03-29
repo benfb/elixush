@@ -1,5 +1,5 @@
-defmodule Exush.Util do
-  import Exush.Globals.Agent
+defmodule Elixush.Util do
+  import Elixush.Globals.Agent
 
   @doc "If thing is a literal, return its type -- otherwise return false."
   def recognize_literal(thing) do

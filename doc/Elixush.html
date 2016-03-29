@@ -5,8 +5,8 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.4">
-    <title>Exush.Globals – exush v0.0.1</title>
-    <link rel="stylesheet" href="dist/app-1e374caa3d.css" />
+    <title>Elixush – elixush v0.0.1</title>
+    <link rel="stylesheet" href="" />
     <script src="dist/sidebar_items.js"></script>
   </head>
   <body data-type="modules">
@@ -24,7 +24,7 @@
   <a href="api-reference.html" class="sidebar-projectLink">
     <div class="sidebar-projectDetails">
       <h1 class="sidebar-projectName">
-        exush
+        elixush
       </h1>
       <h2 class="sidebar-projectVersion">
         v0.0.1
@@ -59,18 +59,12 @@
 
 
       <h1>
-        <small class="visible-xs">exush v0.0.1</small>
-        Exush.Globals
+        <small class="visible-xs">elixush v0.0.1</small>
+        Elixush
         
         
       </h1>
 
-      
-        <section id="moduledoc" class="docstring">
-          <p>The values defined here tend to remain constant over all runs. The atoms not starting with &quot;global_&quot; are used in a variety of places and therefore it is easiest to keep them global. The atoms starting with &quot;global_&quot; may change depending on arguments to pushgp.</p>
-<p>Most of the values and atoms in this file are those that are used by Push instructions; all others, with few exceptions, should be defined in push_argmap in pushgp.ex and should be passed to whatever functions use them as arguments.</p>
-
-        </section>
       
 
       
@@ -90,25 +84,10 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#get_globals/1">get_globals(key)</a>
+    <a href="#start/2">start(type, args)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Get a key from the globals service</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#start_link/0">start_link()</a>
-  </div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#update_globals/2">update_globals(key, value)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Update a key in the globals service</p>
+    <div class="summary-synopsis"><p>Callback implementation for <code>c::application.start/2</code></p>
 </div>
   
 </div>
@@ -133,62 +112,17 @@
             </a>
             Functions
           </h1>
-          <div class="detail" id="get_globals/1">
+          <div class="detail" id="start/2">
   <div class="detail-header">
-    <a href="#get_globals/1" class="detail-link" title="Link to this function">
+    <a href="#start/2" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">get_globals(key)</span>
-      
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
-        
-          <pre><code class="elixir">get_globals(atom) :: any</code></pre>
-        
-      </div>
-    </div>
-  
-  <section class="docstring">
-    <p>Get a key from the globals service</p>
-
-  </section>
-</div>
-<div class="detail" id="start_link/0">
-  <div class="detail-header">
-    <a href="#start_link/0" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">start_link()</span>
+    <span class="signature">start(type, args)</span>
       
   </div>
   
   <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="update_globals/2">
-  <div class="detail-header">
-    <a href="#update_globals/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">update_globals(key, value)</span>
-      
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
-        
-          <pre><code class="elixir">update_globals(atom, any) :: any</code></pre>
-        
-      </div>
-    </div>
-  
-  <section class="docstring">
-    <p>Update a key in the globals service</p>
+    <p>Callback implementation for <code>c::application.start/2</code>.</p>
 
   </section>
 </div>
@@ -215,7 +149,7 @@
   </div>
 </section>
 </div>
-  <script src="dist/app-6d2e071366.js"></script>
+  <script src=""></script>
   </body>
 </html>
 

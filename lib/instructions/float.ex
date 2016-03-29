@@ -1,6 +1,6 @@
-defmodule Exush.Instructions.Float do
-  import Exush.PushState
-  import Exush.Util
+defmodule Elixush.Instructions.Float do
+  import Elixush.PushState
+  import Elixush.Util
 
   @doc "Returns a function that pushes the sum of the top two items."
   def float_add(state) do

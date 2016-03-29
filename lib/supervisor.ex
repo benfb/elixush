@@ -1,4 +1,4 @@
-defmodule Exush.Supervisor do
+defmodule Elixush.Supervisor do
   use Supervisor
 
   def start_link do
@@ -7,8 +7,8 @@ defmodule Exush.Supervisor do
 
   def init(:ok) do
     children = [
-      worker(Exush.Globals.Agent, [Exush.Globals.Agent]),
-      worker(Exush.Server, [])
+      worker(Elixush.Globals.Agent, [Elixush.Globals.Agent]),
+      worker(Elixush.Server, [])
     ]
 
     supervise(children, strategy: :one_for_all)

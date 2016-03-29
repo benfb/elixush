@@ -5,8 +5,8 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.4">
-    <title>Exush – exush v0.0.1</title>
-    <link rel="stylesheet" href="dist/app-1e374caa3d.css" />
+    <title>Elixush.Instructions.Genome – elixush v0.0.1</title>
+    <link rel="stylesheet" href="" />
     <script src="dist/sidebar_items.js"></script>
   </head>
   <body data-type="modules">
@@ -24,7 +24,7 @@
   <a href="api-reference.html" class="sidebar-projectLink">
     <div class="sidebar-projectDetails">
       <h1 class="sidebar-projectName">
-        exush
+        elixush
       </h1>
       <h2 class="sidebar-projectVersion">
         v0.0.1
@@ -59,8 +59,8 @@
 
 
       <h1>
-        <small class="visible-xs">exush v0.0.1</small>
-        Exush
+        <small class="visible-xs">elixush v0.0.1</small>
+        Elixush.Instructions.Genome
         
         
       </h1>
@@ -84,64 +84,49 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#eval_push/1">eval_push(state)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Executes the contents of the exec stack, aborting prematurely if execution limits are exceeded. The resulting push state will map :termination to :normal if termination was normal, or :abnormal otherwise</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#eval_push/2">eval_push(state, print_steps)</a>
+    <a href="#autoconstructive_boolean_rand/1">autoconstructive_boolean_rand(state)</a>
   </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#eval_push/3">eval_push(state, print_steps, trace)</a>
+    <a href="#autoconstructive_integer_rand/1">autoconstructive_integer_rand(state)</a>
   </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#eval_push/4">eval_push(state, print_steps, trace, save_state_sequence)</a>
+    <a href="#genome_gene_delete/1">genome_gene_delete(state)</a>
   </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#inner_loop/3">inner_loop(iteration, s, time_limit)</a>
+    <a href="#genome_gene_dup/1">genome_gene_dup(state)</a>
   </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#interpret/1">interpret(exec)</a>
+    <a href="#genome_new/1">genome_new(state)</a>
   </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#run_push/2">run_push(code, state)</a>
+    <a href="#genome_parent1/1">genome_parent1(state)</a>
   </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#run_push/3">run_push(code, state, print_steps)</a>
+    <a href="#genome_parent2/1">genome_parent2(state)</a>
   </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#run_push/4">run_push(code, state, print_steps, trace)</a>
-  </div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#run_push/5">run_push(code, state, print_steps, trace, save_state_sequence)</a>
+    <a href="#genome_rotate/1">genome_rotate(state)</a>
   </div>
   
 </div>
@@ -166,26 +151,12 @@
             </a>
             Functions
           </h1>
-          <div class="detail" id="eval_push/1">
+          <div class="detail" id="autoconstructive_boolean_rand/1">
   <div class="detail-header">
-    <a href="#eval_push/1" class="detail-link" title="Link to this function">
+    <a href="#autoconstructive_boolean_rand/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">eval_push(state)</span>
-      
-  </div>
-  
-  <section class="docstring">
-    <p>Executes the contents of the exec stack, aborting prematurely if execution limits are exceeded. The resulting push state will map :termination to :normal if termination was normal, or :abnormal otherwise.</p>
-
-  </section>
-</div>
-<div class="detail" id="eval_push/2">
-  <div class="detail-header">
-    <a href="#eval_push/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">eval_push(state, print_steps)</span>
+    <span class="signature">autoconstructive_boolean_rand(state)</span>
       
   </div>
   
@@ -193,12 +164,12 @@
     
   </section>
 </div>
-<div class="detail" id="eval_push/3">
+<div class="detail" id="autoconstructive_integer_rand/1">
   <div class="detail-header">
-    <a href="#eval_push/3" class="detail-link" title="Link to this function">
+    <a href="#autoconstructive_integer_rand/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">eval_push(state, print_steps, trace)</span>
+    <span class="signature">autoconstructive_integer_rand(state)</span>
       
   </div>
   
@@ -206,12 +177,12 @@
     
   </section>
 </div>
-<div class="detail" id="eval_push/4">
+<div class="detail" id="genome_gene_delete/1">
   <div class="detail-header">
-    <a href="#eval_push/4" class="detail-link" title="Link to this function">
+    <a href="#genome_gene_delete/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">eval_push(state, print_steps, trace, save_state_sequence)</span>
+    <span class="signature">genome_gene_delete(state)</span>
       
   </div>
   
@@ -219,12 +190,12 @@
     
   </section>
 </div>
-<div class="detail" id="inner_loop/3">
+<div class="detail" id="genome_gene_dup/1">
   <div class="detail-header">
-    <a href="#inner_loop/3" class="detail-link" title="Link to this function">
+    <a href="#genome_gene_dup/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">inner_loop(iteration, s, time_limit)</span>
+    <span class="signature">genome_gene_dup(state)</span>
       
   </div>
   
@@ -232,12 +203,12 @@
     
   </section>
 </div>
-<div class="detail" id="interpret/1">
+<div class="detail" id="genome_new/1">
   <div class="detail-header">
-    <a href="#interpret/1" class="detail-link" title="Link to this function">
+    <a href="#genome_new/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">interpret(exec)</span>
+    <span class="signature">genome_new(state)</span>
       
   </div>
   
@@ -245,12 +216,12 @@
     
   </section>
 </div>
-<div class="detail" id="run_push/2">
+<div class="detail" id="genome_parent1/1">
   <div class="detail-header">
-    <a href="#run_push/2" class="detail-link" title="Link to this function">
+    <a href="#genome_parent1/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">run_push(code, state)</span>
+    <span class="signature">genome_parent1(state)</span>
       
   </div>
   
@@ -258,12 +229,12 @@
     
   </section>
 </div>
-<div class="detail" id="run_push/3">
+<div class="detail" id="genome_parent2/1">
   <div class="detail-header">
-    <a href="#run_push/3" class="detail-link" title="Link to this function">
+    <a href="#genome_parent2/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">run_push(code, state, print_steps)</span>
+    <span class="signature">genome_parent2(state)</span>
       
   </div>
   
@@ -271,25 +242,12 @@
     
   </section>
 </div>
-<div class="detail" id="run_push/4">
+<div class="detail" id="genome_rotate/1">
   <div class="detail-header">
-    <a href="#run_push/4" class="detail-link" title="Link to this function">
+    <a href="#genome_rotate/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">run_push(code, state, print_steps, trace)</span>
-      
-  </div>
-  
-  <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="run_push/5">
-  <div class="detail-header">
-    <a href="#run_push/5" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">run_push(code, state, print_steps, trace, save_state_sequence)</span>
+    <span class="signature">genome_rotate(state)</span>
       
   </div>
   
@@ -320,7 +278,7 @@
   </div>
 </section>
 </div>
-  <script src="dist/app-6d2e071366.js"></script>
+  <script src=""></script>
   </body>
 </html>
 

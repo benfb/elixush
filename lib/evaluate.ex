@@ -1,6 +1,6 @@
-defmodule Exush.Evaluate do
+defmodule Elixush.Evaluate do
   import Enum, only: [count: 1, map: 2, reduce: 2]
-  import Exush.Globals.Agent
+  import Elixush.Globals.Agent
 
   ########################################################
   # calculate the solution rates (only called from pushgp)

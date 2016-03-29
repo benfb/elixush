@@ -1,6 +1,6 @@
-defmodule Exush.Instructions.Genome do
-  import Exush.Globals.Agent
-  import Exush.PushState
+defmodule Elixush.Instructions.Genome do
+  import Elixush.Globals.Agent
+  import Elixush.PushState
   
   def genome_gene_dup(state) do
     if (not(Enum.empty?(state[:integer])) and not(Enum.empty?(state[:genome]))) and (not(Enum.empty?(stack_ref(:genome, 0, state))) and length(hd(state[:genome])) < (get_globals(:global_max_points) / 2)) do

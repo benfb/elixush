@@ -1,5 +1,5 @@
-defmodule Exush.Instructions.Boolean do
-  import Exush.PushState
+defmodule Elixush.Instructions.Boolean do
+  import Elixush.PushState
 
   def boolean_and(state) do
     if not(state[:boolean] |> Enum.drop(1) |> Enum.empty?) do

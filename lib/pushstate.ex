@@ -1,6 +1,6 @@
-defmodule Exush.PushState do
+defmodule Elixush.PushState do
   import Enum, only: [empty?: 1]
-  import Exush.Globals.Agent
+  import Elixush.Globals.Agent
 
   @doc "Returns an empty push state."
   def make_push_state do

@@ -1,6 +1,6 @@
-defmodule ExushTest do
+defmodule ElixushTest do
   use ExUnit.Case
-  doctest Exush
+  doctest Elixush
 
   test "the truth" do
     assert 1 + 1 == 2

@@ -1,9 +1,9 @@
-defmodule Exush.Server do
+defmodule Elixush.Server do
   use GenServer
 
   def start_link do
-    # Exush.Interpreter.define_registered(:integer_mod, &Exush.Instructions.Integer.integer_mod/1)
-    use Exush.Instructions
+    # Elixush.Interpreter.define_registered(:integer_mod, &Elixush.Instructions.Integer.integer_mod/1)
+    use Elixush.Instructions
     GenServer.start_link(__MODULE__, :ok, name: __MODULE__)
   end
 
@@ -13,7 +13,7 @@ defmodule Exush.Server do
   end
 
   def handle_call({:run, program}, _from, state) do
-    result = Exush.Interpreter.run_push(program, Exush.PushState.make_push_state)
+    result = Elixush.Interpreter.run_push(program, Elixush.PushState.make_push_state)
     {:reply, result, state}
   end
 

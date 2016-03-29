@@ -1,4 +1,4 @@
-defmodule Exush.Individual do
+defmodule Elixush.Individual do
   def make_individual do
     %{
       genome: nil,

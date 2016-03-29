@@ -10,11 +10,11 @@ use Mix.Config
 
 # You can configure for your application as:
 #
-#     config :exush, key: :value
+#     config :elixush, key: :value
 #
 # And access this configuration in your application as:
 #
-#     Application.get_env(:exush, :key)
+#     Application.get_env(:elixush, :key)
 #
 # Or configure a 3rd-party app:
 #

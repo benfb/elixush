@@ -1,17 +1,17 @@
-defmodule Exush.GlobalsTest do
+defmodule Elixush.GlobalsTest do
   use ExUnit.Case, async: true
   # run with --no-start
   setup do
-    {:ok, globals} = Exush.Globals.start_link(Exush.Globals)
+    {:ok, globals} = Elixush.Globals.Agent.start_link(Elixush.Globals.Agent)
     {:ok, globals: globals}
   end
 
   test "stores values by key" do
-    assert Exush.Globals.get_globals(:milk) == nil
-    assert Exush.Globals.get_globals(:max_vector_length) == 5000
+    assert Elixush.Globals.Agent.get_globals(:milk) == nil
+    assert Elixush.Globals.Agent.get_globals(:max_vector_length) == 5000
 
-    Exush.Globals.update_globals(:milk, 3)
-    assert Exush.Globals.get_globals(:milk) == 3
+    Elixush.Globals.Agent.update_globals(:milk, 3)
+    assert Elixush.Globals.Agent.get_globals(:milk) == 3
   end
 
 end

@@ -1,4 +1,4 @@
-defmodule Exush.Globals.Agent do
+defmodule Elixush.Globals.Agent do
   @moduledoc """
   The values defined here tend to remain constant over all runs. The atoms
   not starting with "global_" are used in a variety of places and therefore
