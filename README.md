@@ -23,7 +23,10 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
 For now, the best way to run Push programs is IEx:
 
     $ iex -S mix
+      Compiled lib/elixush.ex
+
     iex(1)> Elixush.Server.run_program [1, 2, :integer_sub]
+    
     %{auxiliary: [], boolean: [], char: [], code: [], environment: [], exec: [],
       float: [], genome: [], input: [], integer: [-1], output: [], return: [],
       string: [], tag: [], termination: :normal, vector_boolean: [],
