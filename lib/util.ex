@@ -36,6 +36,7 @@ defmodule Elixush.Util do
   end
 
   @doc "Returns a version of n that obeys limit parameters."
+  @spec keep_number_reasonable(number) :: number
   def keep_number_reasonable(n) do
     max_number_magnitude = get_globals(:max_number_magnitude)
     cond do

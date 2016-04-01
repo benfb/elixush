@@ -46,6 +46,7 @@ defmodule Elixush.Interpreter do
       Map.put(s, :termination, if(both_empty, do: :normal, else: :abnormal))
     else
       if empty?(s[:exec]) do
+        s = end_environment(s)
         inner_loop(iteration + 1, s, time_limit)
       else
         exec_top = top_item(:exec, s)
@@ -69,8 +70,8 @@ defmodule Elixush.Interpreter do
   def run_push(code, state, print_steps, trace, save_state_sequence) do
     s = if get_globals(:global_top_level_push_code), do: push_item(code, :code, state), else: state
     s = push_item(code, :exec, s)
+    if print_steps, do: "State after 0 steps:\n#{state_pretty_print(s)}"
     s = eval_push(s, print_steps, trace, save_state_sequence)
-    IO.puts(List.first(s[:exec]))
     if get_globals(:global_top_level_pop_code), do: pop_item(:code, s), else: s
   end
 

@@ -43,9 +43,9 @@ defmodule Elixush.PushState do
   end
 
   def state_pretty_print(state) do
-    for t <- get_globals(:push_types) do
-      IO.puts "#{t} = #{Map.get(state, t)}"
-    end
+    Enum.each(get_globals(:push_types), fn(t) ->
+      IO.puts "#{t} = #{Macro.to_string(Map.get(state, t))}"
+    end)
   end
 
   @doc """

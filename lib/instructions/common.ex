@@ -84,7 +84,7 @@ defmodule Elixush.Instructions.Common do
       actual_index = raw_index |> min(length(with_index_popped[:integer]) - 1) |> max(0)
       item = stack_ref(:integer, actual_index, with_index_popped)
       stk = with_index_popped[:integer]
-      with_item_pulled = Map.merge(with_index_popped, %{:integer => Enum.concat(Enum.take(stk, actual_index), tl(Enum.drop(stk, actual_index)))})
+      with_item_pulled = Map.merge(with_index_popped, %{:integer => Enum.concat(Enum.take(stk, actual_index), Enum.drop(Enum.drop(stk, actual_index), 1))})
       push_item(item, :integer, with_item_pulled)
     else
       state
@@ -209,7 +209,7 @@ defmodule Elixush.Instructions.Common do
       actual_index = raw_index |> min(length(with_index_popped[:float]) - 1) |> max(0)
       item = stack_ref(:float, actual_index, with_index_popped)
       stk = with_index_popped[:float]
-      with_item_pulled = Map.merge(with_index_popped, %{:float => Enum.concat(Enum.take(stk, actual_index), tl(Enum.drop(stk, actual_index)))})
+      with_item_pulled = Map.merge(with_index_popped, %{:float => Enum.concat(Enum.take(stk, actual_index), Enum.drop(Enum.drop(stk, actual_index), 1))})
       push_item(item, :float, with_item_pulled)
     else
       state
@@ -336,7 +336,7 @@ defmodule Elixush.Instructions.Common do
       actual_index = raw_index |> min(length(with_index_popped[:boolean]) - 1) |> max(0)
       item = stack_ref(:boolean, actual_index, with_index_popped)
       stk = with_index_popped[:boolean]
-      with_item_pulled = Map.merge(with_index_popped, %{:boolean => Enum.concat(Enum.take(stk, actual_index), tl(Enum.drop(stk, actual_index)))})
+      with_item_pulled = Map.merge(with_index_popped, %{:boolean => Enum.concat(Enum.take(stk, actual_index), Enum.drop(Enum.drop(stk, actual_index), 1))})
       push_item(item, :boolean, with_item_pulled)
     else
       state
