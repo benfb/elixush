@@ -69,6 +69,12 @@ defmodule Elixush.Globals.Agent do
     } end, name: name)
   end
 
+  # @doc "Get all keys from the globals service"
+  # @spec get_globals_keys() :: any
+  # def get_globals_keys() do
+  #   Agent.get(__MODULE__, &Map.keys(&1))
+  # end
+
   @doc "Get a key from the globals service"
   @spec get_globals(atom) :: any
   def get_globals(key) do

@@ -79,4 +79,29 @@ defmodule Elixush.Instructions.Code do
       state
     end
   end
+
+  @doc "Creates new environment using the top item on the exec stack"
+  def environment_new(state) do
+    if not(Enum.empty?(state[:exec])) do
+      new_exec = top_item(:exec, state)
+      parent_env = pop_item(:exec, state)
+      push_item(new_exec, :exec, push_item(parent_env, :environment, state) |> Map.put(:return, []) |> Map.put(:exec, []))
+    else
+      state
+    end
+  end
+
+  @doc "Creates new environment using the entire exec stack"
+  def environment_begin(state) do
+    Map.put(push_item(Map.put(state, :exec, []), :environment, state), :return, [])
+  end
+
+  @doc "Ends current environment"
+  def environment_end(state) do
+    if not(Enum.empty?(state[:environment])) do
+      end_environment(state)
+    else
+      state
+    end
+  end
 end
