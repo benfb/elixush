@@ -165,7 +165,7 @@ defmodule Elixush.GP.Selection do
   def select(pop, location, argmap \\ %{}) do
     parent_selection = argmap[:parent_selection]
     print_selection_counts = argmap[:parent_selection_counts]
-    pop_with_meta_errors = "" # TODO: figure out update_in alternative Enum.map(pop, fn(ind) -> )
+    pop_with_meta_errors = Enum.map(pop, fn(ind) -> update_in(ind, [:errors], &(Enum.concat(ind[:meta_errors], &1))) end)
     selected = case parent_selection do
       :tournament -> tournament_selection(pop_with_meta_errors, location, argmap)
       :lexicase -> lexicase_selection(pop_with_meta_errors, location, argmap)

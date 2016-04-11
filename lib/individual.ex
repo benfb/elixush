@@ -1,5 +1,5 @@
 defmodule Elixush.Individual do
-  def make_individual do
+  def make_individual(args \\ []) do
     %{
       genome: nil,
       program: nil,
