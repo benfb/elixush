@@ -33,3 +33,12 @@ For now, the best way to run Push programs is IEx:
       float: [], genome: [], input: [], integer: [-1], output: [], return: [],
       string: [], tag: [], termination: :normal, vector_boolean: [],
       vector_float: [], vector_integer: [], vector_string: [], zip: []}
+
+## Getting Started
+
+To run Elixush, you'll need to install Elixir. The official instructions for how
+to do so can be found [here](http://elixir-lang.org/install.html). If you have a
+Mac, a simple `brew install elixir` should suffice.
+
+Installing the Elixir language also installs the Erlang virtual machine, as well
+as Elixir's interactive shell (REPL), IEx.
