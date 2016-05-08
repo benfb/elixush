@@ -1,6 +1,7 @@
 # Elixush
 
-**TODO: Add description**
+An Elixir-based interpreter for the Push genetic programming language.
+The result is a minimalist, simply-implemented Push interpreter.
 
 ## Installation
 

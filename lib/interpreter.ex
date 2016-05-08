@@ -37,26 +37,45 @@ defmodule Elixush.Interpreter do
     else
       get_globals(:global_evalpush_time_limit) + System.system_time(:nano_seconds)
     end
-    inner_loop(1, state, time_limit)
+    inner_loop(1, state, time_limit, print_steps, trace, save_state_sequence)
   end
 
-  def inner_loop(iteration, s, time_limit) do
+  def inner_loop(iteration, s, time_limit, print_steps, trace, save_state_sequence) do
     both_empty = empty?(s[:exec]) and empty?(s[:environment])
     if ((iteration > get_globals(:global_evalpush_limit)) or both_empty) or (time_limit != 0 and (System.system_time(:nano_seconds) > time_limit)) do
       Map.put(s, :termination, if(both_empty, do: :normal, else: :abnormal))
     else
       if empty?(s[:exec]) do
         s = end_environment(s)
-        inner_loop(iteration + 1, s, time_limit)
+        if print_steps do
+          IO.puts("\nState after #{iteration} steps (last step: end_environment_from_empty_exec):\n")
+          state_pretty_print(s)
+        end
+        if save_state_sequence, do: update_globals(:saved_state_sequence, List.insert_at(get_globals(:saved_state_sequence), 0, s)) # REVIEW: saved_state_sequence is in globals which may not be correct
+        inner_loop(iteration + 1, s, time_limit, print_steps, trace, save_state_sequence)
       else
         exec_top = top_item(:exec, s)
         s = pop_item(:exec, s)
         s = if is_list(exec_top) do
           Map.put(s, :exec, Enum.concat(exec_top, s[:exec]))
         else
-          execute_instruction(exec_top, s)
+          execution_result = execute_instruction(exec_top, s)
+          cond do
+            trace == :changes -> if execution_result == s do
+              execution_result
+            else
+              Map.put(execution_result, :trace, List.insert_at((if is_list(s[:trace]), do: s[:trace], else: []), 0, exec_top))
+            end
+            trace == false -> execution_result
+            trace == true -> Map.put(execution_result, :trace, List.insert_at((if is_list(s[:trace]), do: s[:trace], else: []), 0, exec_top))
+          end
         end
-        inner_loop(iteration + 1, s, time_limit)
+        if print_steps do
+          IO.puts("\nState after #{iteration} steps (last step: #{if is_list(exec_top), do: "(...)", else: to_string(exec_top)}):\n")
+          state_pretty_print(s)
+        end
+        if save_state_sequence, do: update_globals(:saved_state_sequence, List.insert_at(get_globals(:saved_state_sequence), 0, s)) # REVIEW: saved_state_sequence is in globals which may not be correct
+        inner_loop(iteration + 1, s, time_limit, print_steps, trace, save_state_sequence)
       end
     end
   end
@@ -70,7 +89,11 @@ defmodule Elixush.Interpreter do
   def run_push(code, state, print_steps, trace, save_state_sequence) do
     s = if get_globals(:global_top_level_push_code), do: push_item(code, :code, state), else: state
     s = push_item(code, :exec, s)
-    if print_steps, do: "State after 0 steps:\n#{state_pretty_print(s)}"
+    if print_steps do
+      IO.puts("\nState after 0 steps:\n")
+      state_pretty_print(s)
+    end
+    if save_state_sequence, do: saved_state_sequence = [s]
     s = eval_push(s, print_steps, trace, save_state_sequence)
     if get_globals(:global_top_level_pop_code), do: pop_item(:code, s), else: s
   end

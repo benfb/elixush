@@ -380,8 +380,6 @@ defmodule Elixush.Instructions.Common do
   @doc "Returns a function that takes a state and tells whether that stack is empty."
   def boolean_empty(state), do: push_item(Enum.empty?(state[:boolean]), :boolean, state)
 
-  ### ZIP
-
   ### STRING
 
   ### CHAR
