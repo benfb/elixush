@@ -41,4 +41,13 @@ to do so can be found [here](http://elixir-lang.org/install.html). If you have a
 Mac, a simple `brew install elixir` should suffice.
 
 Installing the Elixir language also installs the Erlang virtual machine, as well
-as Elixir's interactive shell (REPL), IEx.
+as Elixir's interactive shell (REPL), IEx. Once Elixir is installed, you can run
+`iex -S mix` in the Elixush directory and it will start up a REPL with Elixush
+loaded in.
+
+## Roadmap
+
+* Clean up codebase
+* Finish porting over instructions from Clojush
+* Add tests!
+* Make a standalone executable?
