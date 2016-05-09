@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.4">
-    <title>Elixush.Interpreter – elixush v0.0.1</title>
+    <title>Elixush.Instructions.Code – elixush v0.0.1</title>
     <link rel="stylesheet" href="dist/app-1e374caa3d.css" />
     <script src="dist/sidebar_items.js"></script>
   </head>
@@ -60,7 +60,7 @@
 
       <h1>
         <small class="visible-xs">elixush v0.0.1</small>
-        Elixush.Interpreter
+        Elixush.Instructions.Code
         
         
       </h1>
@@ -84,69 +84,88 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#eval_push/1">eval_push(state)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Executes the contents of the exec stack, aborting prematurely if execution limits are
-exceeded. The resulting push state will map :termination to :normal if termination was
-normal, or :abnormal otherwise</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#eval_push/2">eval_push(state, print_steps)</a>
+    <a href="#code_append/1">code_append(state)</a>
   </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#eval_push/3">eval_push(state, print_steps, trace)</a>
+    <a href="#code_atom/1">code_atom(state)</a>
   </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#eval_push/4">eval_push(state, print_steps, trace, save_state_sequence)</a>
+    <a href="#code_car/1">code_car(state)</a>
   </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#execute_instruction/2">execute_instruction(instruction, state)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Executes a single Push instruction</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#inner_loop/6">inner_loop(iteration, s, time_limit, print_steps, trace, save_state_sequence)</a>
+    <a href="#code_cdr/1">code_cdr(state)</a>
   </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#run_push/2">run_push(code, state)</a>
+    <a href="#code_cons/1">code_cons(state)</a>
   </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#run_push/3">run_push(code, state, print_steps)</a>
+    <a href="#code_do/1">code_do(state)</a>
   </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#run_push/4">run_push(code, state, print_steps, trace)</a>
+    <a href="#code_do_star/1">code_do_star(state)</a>
   </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#run_push/5">run_push(code, state, print_steps, trace, save_state_sequence)</a>
+    <a href="#code_noop/1">code_noop(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#environment_begin/1">environment_begin(state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Creates new environment using the entire exec stack</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#environment_end/1">environment_end(state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Ends current environment</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#environment_new/1">environment_new(state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Creates new environment using the top item on the exec stack</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#noop_delete_prev_paren_pair/1">noop_delete_prev_paren_pair(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#noop_open_paren/1">noop_open_paren(state)</a>
   </div>
   
 </div>
@@ -171,81 +190,158 @@ normal, or :abnormal otherwise</p>
             </a>
             Functions
           </h1>
-          <div class="detail" id="eval_push/1">
+          <div class="detail" id="code_append/1">
   <div class="detail-header">
-    <a href="#eval_push/1" class="detail-link" title="Link to this function">
+    <a href="#code_append/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">eval_push(state)</span>
+    <span class="signature">code_append(state)</span>
       
   </div>
   
   <section class="docstring">
-    <p>Executes the contents of the exec stack, aborting prematurely if execution limits are
-exceeded. The resulting push state will map :termination to :normal if termination was
-normal, or :abnormal otherwise.</p>
+    
+  </section>
+</div>
+<div class="detail" id="code_atom/1">
+  <div class="detail-header">
+    <a href="#code_atom/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">code_atom(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="code_car/1">
+  <div class="detail-header">
+    <a href="#code_car/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">code_car(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="code_cdr/1">
+  <div class="detail-header">
+    <a href="#code_cdr/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">code_cdr(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="code_cons/1">
+  <div class="detail-header">
+    <a href="#code_cons/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">code_cons(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="code_do/1">
+  <div class="detail-header">
+    <a href="#code_do/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">code_do(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="code_do_star/1">
+  <div class="detail-header">
+    <a href="#code_do_star/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">code_do_star(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="code_noop/1">
+  <div class="detail-header">
+    <a href="#code_noop/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">code_noop(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="environment_begin/1">
+  <div class="detail-header">
+    <a href="#environment_begin/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">environment_begin(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Creates new environment using the entire exec stack</p>
 
   </section>
 </div>
-<div class="detail" id="eval_push/2">
+<div class="detail" id="environment_end/1">
   <div class="detail-header">
-    <a href="#eval_push/2" class="detail-link" title="Link to this function">
+    <a href="#environment_end/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">eval_push(state, print_steps)</span>
+    <span class="signature">environment_end(state)</span>
       
   </div>
   
   <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="eval_push/3">
-  <div class="detail-header">
-    <a href="#eval_push/3" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">eval_push(state, print_steps, trace)</span>
-      
-  </div>
-  
-  <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="eval_push/4">
-  <div class="detail-header">
-    <a href="#eval_push/4" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">eval_push(state, print_steps, trace, save_state_sequence)</span>
-      
-  </div>
-  
-  <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="execute_instruction/2">
-  <div class="detail-header">
-    <a href="#execute_instruction/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">execute_instruction(instruction, state)</span>
-      
-  </div>
-  
-  <section class="docstring">
-    <p>Executes a single Push instruction.</p>
+    <p>Ends current environment</p>
 
   </section>
 </div>
-<div class="detail" id="inner_loop/6">
+<div class="detail" id="environment_new/1">
   <div class="detail-header">
-    <a href="#inner_loop/6" class="detail-link" title="Link to this function">
+    <a href="#environment_new/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">inner_loop(iteration, s, time_limit, print_steps, trace, save_state_sequence)</span>
+    <span class="signature">environment_new(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Creates new environment using the top item on the exec stack</p>
+
+  </section>
+</div>
+<div class="detail" id="noop_delete_prev_paren_pair/1">
+  <div class="detail-header">
+    <a href="#noop_delete_prev_paren_pair/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">noop_delete_prev_paren_pair(state)</span>
       
   </div>
   
@@ -253,51 +349,12 @@ normal, or :abnormal otherwise.</p>
     
   </section>
 </div>
-<div class="detail" id="run_push/2">
+<div class="detail" id="noop_open_paren/1">
   <div class="detail-header">
-    <a href="#run_push/2" class="detail-link" title="Link to this function">
+    <a href="#noop_open_paren/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">run_push(code, state)</span>
-      
-  </div>
-  
-  <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="run_push/3">
-  <div class="detail-header">
-    <a href="#run_push/3" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">run_push(code, state, print_steps)</span>
-      
-  </div>
-  
-  <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="run_push/4">
-  <div class="detail-header">
-    <a href="#run_push/4" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">run_push(code, state, print_steps, trace)</span>
-      
-  </div>
-  
-  <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="run_push/5">
-  <div class="detail-header">
-    <a href="#run_push/5" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">run_push(code, state, print_steps, trace, save_state_sequence)</span>
+    <span class="signature">noop_open_paren(state)</span>
       
   </div>
   

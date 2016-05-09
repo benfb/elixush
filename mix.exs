@@ -7,6 +7,8 @@ defmodule Elixush.Mixfile do
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     description: description,
+     package: package,
      deps: deps]
   end
 
@@ -31,6 +33,21 @@ defmodule Elixush.Mixfile do
     [
       {:earmark, "~> 0.1", only: :dev},
       {:ex_doc, "~> 0.11", only: :dev}
+    ]
+  end
+
+  defp description do
+    """
+    A simple Push programming language interpreter implemented in Elixir.
+    """
+  end
+
+  defp package do
+    [
+      name: :elixush,
+      maintainers: ["Ben Bailey"],
+      licenses: ["MIT"],
+      links: %{"Github" => "https://github.com/benfb/elixush"}
     ]
   end
 end

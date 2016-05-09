@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.4">
-    <title>Elixush.Interpreter – elixush v0.0.1</title>
+    <title>Elixush.Instructions.String – elixush v0.0.1</title>
     <link rel="stylesheet" href="dist/app-1e374caa3d.css" />
     <script src="dist/sidebar_items.js"></script>
   </head>
@@ -60,7 +60,7 @@
 
       <h1>
         <small class="visible-xs">elixush v0.0.1</small>
-        Elixush.Interpreter
+        Elixush.Instructions.String
         
         
       </h1>
@@ -84,69 +84,43 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#eval_push/1">eval_push(state)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Executes the contents of the exec stack, aborting prematurely if execution limits are
-exceeded. The resulting push state will map :termination to :normal if termination was
-normal, or :abnormal otherwise</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#eval_push/2">eval_push(state, print_steps)</a>
+    <a href="#string_concat/1">string_concat(state)</a>
   </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#eval_push/3">eval_push(state, print_steps, trace)</a>
+    <a href="#string_fromboolean/1">string_fromboolean(state)</a>
   </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#eval_push/4">eval_push(state, print_steps, trace, save_state_sequence)</a>
+    <a href="#string_fromchar/1">string_fromchar(state)</a>
   </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#execute_instruction/2">execute_instruction(instruction, state)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Executes a single Push instruction</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#inner_loop/6">inner_loop(iteration, s, time_limit, print_steps, trace, save_state_sequence)</a>
+    <a href="#string_fromfloat/1">string_fromfloat(state)</a>
   </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#run_push/2">run_push(code, state)</a>
+    <a href="#string_frominteger/1">string_frominteger(state)</a>
   </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#run_push/3">run_push(code, state, print_steps)</a>
+    <a href="#string_substring/1">string_substring(state)</a>
   </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#run_push/4">run_push(code, state, print_steps, trace)</a>
-  </div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#run_push/5">run_push(code, state, print_steps, trace, save_state_sequence)</a>
+    <a href="#string_take/1">string_take(state)</a>
   </div>
   
 </div>
@@ -171,28 +145,12 @@ normal, or :abnormal otherwise</p>
             </a>
             Functions
           </h1>
-          <div class="detail" id="eval_push/1">
+          <div class="detail" id="string_concat/1">
   <div class="detail-header">
-    <a href="#eval_push/1" class="detail-link" title="Link to this function">
+    <a href="#string_concat/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">eval_push(state)</span>
-      
-  </div>
-  
-  <section class="docstring">
-    <p>Executes the contents of the exec stack, aborting prematurely if execution limits are
-exceeded. The resulting push state will map :termination to :normal if termination was
-normal, or :abnormal otherwise.</p>
-
-  </section>
-</div>
-<div class="detail" id="eval_push/2">
-  <div class="detail-header">
-    <a href="#eval_push/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">eval_push(state, print_steps)</span>
+    <span class="signature">string_concat(state)</span>
       
   </div>
   
@@ -200,12 +158,12 @@ normal, or :abnormal otherwise.</p>
     
   </section>
 </div>
-<div class="detail" id="eval_push/3">
+<div class="detail" id="string_fromboolean/1">
   <div class="detail-header">
-    <a href="#eval_push/3" class="detail-link" title="Link to this function">
+    <a href="#string_fromboolean/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">eval_push(state, print_steps, trace)</span>
+    <span class="signature">string_fromboolean(state)</span>
       
   </div>
   
@@ -213,12 +171,12 @@ normal, or :abnormal otherwise.</p>
     
   </section>
 </div>
-<div class="detail" id="eval_push/4">
+<div class="detail" id="string_fromchar/1">
   <div class="detail-header">
-    <a href="#eval_push/4" class="detail-link" title="Link to this function">
+    <a href="#string_fromchar/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">eval_push(state, print_steps, trace, save_state_sequence)</span>
+    <span class="signature">string_fromchar(state)</span>
       
   </div>
   
@@ -226,26 +184,12 @@ normal, or :abnormal otherwise.</p>
     
   </section>
 </div>
-<div class="detail" id="execute_instruction/2">
+<div class="detail" id="string_fromfloat/1">
   <div class="detail-header">
-    <a href="#execute_instruction/2" class="detail-link" title="Link to this function">
+    <a href="#string_fromfloat/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">execute_instruction(instruction, state)</span>
-      
-  </div>
-  
-  <section class="docstring">
-    <p>Executes a single Push instruction.</p>
-
-  </section>
-</div>
-<div class="detail" id="inner_loop/6">
-  <div class="detail-header">
-    <a href="#inner_loop/6" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">inner_loop(iteration, s, time_limit, print_steps, trace, save_state_sequence)</span>
+    <span class="signature">string_fromfloat(state)</span>
       
   </div>
   
@@ -253,12 +197,12 @@ normal, or :abnormal otherwise.</p>
     
   </section>
 </div>
-<div class="detail" id="run_push/2">
+<div class="detail" id="string_frominteger/1">
   <div class="detail-header">
-    <a href="#run_push/2" class="detail-link" title="Link to this function">
+    <a href="#string_frominteger/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">run_push(code, state)</span>
+    <span class="signature">string_frominteger(state)</span>
       
   </div>
   
@@ -266,12 +210,12 @@ normal, or :abnormal otherwise.</p>
     
   </section>
 </div>
-<div class="detail" id="run_push/3">
+<div class="detail" id="string_substring/1">
   <div class="detail-header">
-    <a href="#run_push/3" class="detail-link" title="Link to this function">
+    <a href="#string_substring/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">run_push(code, state, print_steps)</span>
+    <span class="signature">string_substring(state)</span>
       
   </div>
   
@@ -279,25 +223,12 @@ normal, or :abnormal otherwise.</p>
     
   </section>
 </div>
-<div class="detail" id="run_push/4">
+<div class="detail" id="string_take/1">
   <div class="detail-header">
-    <a href="#run_push/4" class="detail-link" title="Link to this function">
+    <a href="#string_take/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">run_push(code, state, print_steps, trace)</span>
-      
-  </div>
-  
-  <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="run_push/5">
-  <div class="detail-header">
-    <a href="#run_push/5" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">run_push(code, state, print_steps, trace, save_state_sequence)</span>
+    <span class="signature">string_take(state)</span>
       
   </div>
   

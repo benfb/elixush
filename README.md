@@ -1,11 +1,11 @@
 # Elixush
 
-An Elixir-based interpreter for the Push genetic programming language.
+An Elixir-based interpreter for the [Push genetic programming language](http://pushlanguage.org).
 The result is a minimalist, simply-implemented Push interpreter.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+The package can be installed as:
 
   1. Add elixush to your list of dependencies in `mix.exs`:
 
