@@ -83,3 +83,9 @@ some testing is still necessary.
 * Make a standalone executable?
 * Implement GP?
 * Implement Plush?
+
+## Publishing
+
+* Bump version number in `mix.exs` and `README.md`
+* `mix hex.publish`
+* `mix hex.docs`
