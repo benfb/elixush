@@ -99,6 +99,29 @@ defmodule Elixush.Util do
     loop.(loop, tree, 0)
   end
 
+  @doc "Returns a subtree of tree indexed by point-index in a depth first traversal."
+  def code_at_point(tree, point_index) do
+    index = point_index |> abs |> rem(count_points(tree))
+    zipper = seq_zip(tree)
+    loop = fn(f, z, i) ->
+      if i == 0, do: node(z), else: f.(f, next(z), i - 1)
+    end
+    loop.(loop, zipper, index)
+  end
+
+  @doc """
+  Returns a copy of tree with the subtree formerly indexed by
+  point_index (in a depth-first traversal) replaced by new_subtree.
+  """
+  def insert_code_at_point(tree, point_index, new_subtree) do
+    index = point_index |> abs |> rem(count_points(tree))
+    zipper = seq_zip(tree)
+    loop = fn(f, z, i) ->
+      if i == 0, do: root(replace(z, new_subtree)), else: f.(f, next(z), i - 1)
+    end
+    loop.loop(zipper, index)
+  end
+
   @doc "Like walk, but only for lists."
   def walklist(inner, outer, form) do
     if is_list(form) do
@@ -112,6 +135,60 @@ defmodule Elixush.Util do
   # REVIEW: check that this works correctly
   def postwalklist(f, form) do
     walklist(&(postwalklist(f, &1)), f, form)
+  end
+
+  @doc "Like postwalk-replace, but only for lists"
+  def postwalklist_replace(smap, form) do # TODO: is this valid syntax?
+    postwalklist(&(if Map.has_key?(smap, &1), do: Map.get(smap, &1), else: &1), form)
+  end
+
+  @doc """
+  Returns the given list but with all instances of that (at any depth)
+  replaced with this. Read as 'subst this for that in list'.
+  """
+  def subst(this, that, lst) do
+    postwalklist_replace(Map.new([{that, this}]), lst)
+  end
+
+  @doc """
+  Returns true if tree contains subtree at any level. Inefficient but
+  functional implementation.
+  """
+  def contains_subtree(tree, subtree) do # TODO: what does gensym do here?
+    tree == subtree or not(tree == subst(:gensym, subtree, tree))
+  end
+
+  @doc """
+  If tree contains subtree at any level then this returns the smallest
+  subtree of tree that contains but is not equal to the first instance of
+  subtree. For example, contining-subtree([b [c [a]] [d [a]]], [a]]) => [c [a]].
+  Returns nil if tree does not contain subtree.
+  """
+  def containing_subtree(tree, subtree) do
+    cond do
+      not(is_list(tree)) -> nil
+      Enum.empty?(tree) -> nil
+      Enum.member?(tree, subtree) -> tree
+      true -> some(tree, &(containing_subtree(&1, subtree)))
+    end
+  end
+
+  ## some
+
+  def some(enumerable, fun) when is_list(enumerable) do
+    do_some(enumerable, fun)
+  end
+
+  defp do_some([h|t], fun) do
+    if fun.(h) do
+      h
+    else
+      do_some(t, fun)
+    end
+  end
+
+  defp do_some([], _) do
+    false
   end
 
   # TODO: insert-code-at-point, remove-code-at-point

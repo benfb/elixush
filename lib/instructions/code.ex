@@ -276,7 +276,181 @@ defmodule Elixush.Instructions.Code do
     end
   end
 
-  # TODO: continue adding from here https://github.com/lspector/Clojush/blob/master/src/clojush/instructions/code.clj#L313
+  def code_list(state) do
+    if not(Enum.empty?(state[:code])) do
+      new_item = [List.first(Enum.drop(state[:code], 1)), List.first(state[:code])]
+      if count_points(new_item) <= get_globals(:global_max_points) do
+        push_item(new_item, :code, pop_item(:code, pop_item(:code, state)))
+      else
+        state
+      end
+    else
+      state
+    end
+  end
+
+  def code_wrap(state) do
+    if not(Enum.empty?(state[:code])) do
+      new_item = [List.first(state[:code])]
+      if count_points(new_item) <= get_globals(:global_max_points) do
+        push_item(new_item, :code, pop_item(:code, state))
+      else
+        state
+      end
+    else
+      state
+    end
+  end
+
+  def code_member(state) do
+    if not(Enum.empty?(Enum.drop(state[:code], 1))) do
+      Enum.drop(state[:code], 1) |> List.first
+                                 |> Enum.member?(List.first(state[:code]))
+                                 |> push_item(:boolean, pop_item(:code, pop_item(:code, state)))
+    else
+      state
+    end
+  end
+
+  def code_nth(state) do # TODO: This is disgusting
+    if not((Enum.empty?(state[:integer]) or Enum.empty?(state[:code])) or Enum.empty?(ensure_list(List.first(state[:code])))) do
+      push_item(Enum.at(ensure_list(List.first(state[:code])), rem(abs(List.first(state[:integer])), Enum.count(ensure_list(List.first(state[:code]))))), :code, pop_item(:integer, pop_item(:code, state)))
+    else
+      state
+    end
+  end
+
+  def code_nthcdr(state) do
+    if not((Enum.empty?(state[:integer]) or Enum.empty?(state[:code])) or Enum.empty?(ensure_list(List.first(state[:code])))) do
+      Enum.drop(ensure_list(List.first(state[:code])), state[:integer]
+                                                       |> List.first
+                                                       |> abs
+                                                       |> rem(Enum.count(ensure_list(List.first(state[:code])))))
+      |> push_item(:code, pop_item(:integer, pop_item(:code, state)))
+    else
+      state
+    end
+  end
+
+  def code_null(state) do
+    if not(Enum.empty?(state[:code])) do
+      item = List.first(state[:code])
+      push_item(is_list(item) and Enum.empty?(item), :boolean, pop_item(:code, state))
+    else
+      state
+    end
+  end
+
+  def code_size(state) do
+    if not(Enum.empty?(state[:code])) do
+      push_item(state[:code] |> List.first |> count_points, :integer, pop_item(:code, state))
+    else
+      state
+    end
+  end
+
+  def code_extract(state) do
+    if not(Enum.empty?(state[:code]) or Enum.empty?(state[:integer])) do
+      push_item(code_at_point(List.first(state[:code]), List.first(state[:integer])), :code, pop_item(:code, pop_item(:integer, state)))
+    end
+  end
+
+  def code_insert(state) do
+    if not(Enum.empty?(Enum.drop(state[:code], 1)) or Enum.empty?(state[:integer])) do
+      new_item = insert_code_at_point(List.first(state[:code]), List.first(state[:integer]), Enum.at(state[:code], 1))
+      if count_points(new_item) <= get_globals(:global_max_points) do
+        push_item(new_item, :code, pop_item(:code, pop_item(:code, pop_item(:integer, state))))
+      else
+        state
+      end
+    else
+      state
+    end
+  end
+
+  def code_subst(state) do
+    if not(Enum.empty?(Enum.drop(Enum.drop(state[:code], 1), 1))) do
+      new_item = subst(stack_ref(:code, 2, state), stack_ref(:code, 1, state), stack_ref(:code, 0, state))
+      if count_points(new_item) <= get_globals(:global_max_points) do
+        push_item(new_item, :code, pop_item(:code, pop_item(:code, pop_item(:code, state))))
+      else
+        state
+      end
+    else
+      state
+    end
+  end
+
+  def code_contains(state) do
+    if not(Enum.empty?(Enum.drop(state[:code], 1))) do
+      push_item(contains_subtree(stack_ref(:code, 1, state), stack_ref(:code, 0, state)), :boolean, pop_item(:code, pop_item(:code, state)))
+    else
+      state
+    end
+  end
+
+  def code_container(state) do
+    if not(Enum.empty?(Enum.drop(state[:code], 1))) do
+      push_item(containing_subtree(stack_ref(:code, 0, state), stack_ref(:code, 1, state)), :code, pop_item(:code, pop_item(:code, state)))
+    else
+      state
+    end
+  end
+
+  @doc """
+  Returns a lazy sequence containing the positions at which pred
+  is true for items in coll.
+  """
+  def positions(pred, coll) do
+    with_nils = for {idx, elt} <- Enum.zip(Stream.iterate(0, &(&1+1)), coll) do
+      if pred.(elt), do: idx
+    end
+    Enum.filter(with_nils, &(&1 != nil))
+  end
+
+  def code_position(state) do
+    if not(Enum.empty?(Enum.drop(state[:code], 1))) do
+      (List.first(positions(&(&1 == stack_ref(:code, 1, state)), ensure_list(stack_ref(:code, 0, state)))) or -1)
+        |> push_item(:integer, pop_item(:code, pop_item(:code, state)))
+    end
+  end
+
+  def exec_k(state) do
+    if not(Enum.empty?(Enum.drop(state[:exec], 1))) do
+      push_item(List.first(state[:exec]), :exec, pop_item(:exec, pop_item(:exec, state)))
+    else
+      state
+    end
+  end
+
+  def exec_s(state) do
+    if not(Enum.empty?(Enum.drop(Enum.drop(state[:exec], 1), 1))) do
+      stk = state[:exec]
+      x = List.first(stk)
+      y = List.first(Enum.drop(stk, 1))
+      z = List.first(Enum.drop(Enum.drop(stk, 1), 1))
+      if count_points([y, z]) <= get_globals(:global_max_points) do
+        push_item(x, :exec, push_item(z, :exec, push_item([y, z], :exec, pop_item(:exec, pop_item(:exec, pop_item(:exec, state))))))
+      else
+        state
+      end
+    else
+      state
+    end
+  end
+
+  def exec_y(state) do
+    if not(Enum.empty?(state[:exec])) do
+      new_item = [:exec_y, List.first(state[:exec])]
+      if count_points(new_item) <= get_globals(:global_max_points) do
+        push_item(List.first(state[:exec]), :exec, push_item(new_item, :exec, pop_item(:exec, state)))
+      else
+        state
+      end
+    else
+      state
+    end
+  end
 
   @doc "Creates new environment using the top item on the exec stack"
   def environment_new(state) do
