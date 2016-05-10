@@ -102,9 +102,9 @@ defmodule Elixush.Util do
   @doc "Returns a subtree of tree indexed by point-index in a depth first traversal."
   def code_at_point(tree, point_index) do
     index = point_index |> abs |> rem(count_points(tree))
-    zipper = seq_zip(tree)
+    zipper = :zipper_default.list(tree) # TODO: check that this is the right function
     loop = fn(f, z, i) ->
-      if i == 0, do: node(z), else: f.(f, next(z), i - 1)
+      if i == 0, do: :zipper.node(z), else: f.(f, :zipper.next(z), i - 1)
     end
     loop.(loop, zipper, index)
   end
@@ -115,9 +115,9 @@ defmodule Elixush.Util do
   """
   def insert_code_at_point(tree, point_index, new_subtree) do
     index = point_index |> abs |> rem(count_points(tree))
-    zipper = seq_zip(tree)
+    zipper = :zipper_default.list(tree) # TODO: check that this is the right function
     loop = fn(f, z, i) ->
-      if i == 0, do: root(replace(z, new_subtree)), else: f.(f, next(z), i - 1)
+      if i == 0, do: :zipper.root(:zipper.replace(z, new_subtree)), else: f.(f, :zipper.next(z), i - 1)
     end
     loop.loop(zipper, index)
   end

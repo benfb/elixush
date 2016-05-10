@@ -42,8 +42,9 @@ Mac, a simple `brew install elixir` should suffice.
 
 Installing the Elixir language also installs the Erlang virtual machine, as well
 as Elixir's interactive shell (REPL), IEx. Once Elixir is installed, run `mix deps.get`
-to install the requisite dependencies. You can then run `iex -S mix` in the Elixush
-directory and it will start up a REPL with Elixush loaded in.
+to install the requisite dependencies, then `mix deps.compile` to compile them.
+You can then run `iex -S mix` in the Elixush directory and it will start up a REPL
+with Elixush loaded in.
 
 Elixush includes a "Server" that takes Push programs as lists of instructions.
 This server can be accessed by calling `Elixush.Server.run_program` from the REPL,
