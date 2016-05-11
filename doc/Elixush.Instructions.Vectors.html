@@ -1,0 +1,3047 @@
+    <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.11.4">
+    <title>Elixush.Instructions.Vectors – elixush v0.0.4</title>
+    <link rel="stylesheet" href="dist/app-1e374caa3d.css" />
+    <script src="dist/sidebar_items.js"></script>
+  </head>
+  <body data-type="modules">
+
+    <div class="main">
+<button class="sidebar-toggle">
+  <i class="icon-menu"></i>
+</button>
+<section class="sidebar">
+  <button class="sidebar-toggle">
+    <i class="icon-menu"></i>
+  </button>
+
+  
+  <a href="api-reference.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        elixush
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        v0.0.4
+      </h2>
+    </div>
+    
+  </a>
+
+  <div class="sidebar-search">
+    <i class="icon-search"></i>
+    <input type="text" class="sidebar-searchInput" placeholder="search" autocomplete="off" />
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+
+    
+  </ul>
+
+  <ul id="full-list" class="sidebar-fullList"></ul>
+  <div class="sidebar-noResults"></div>
+</section>
+
+<section class="content">
+  <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="visible-xs">elixush v0.0.4</small>
+        Elixush.Instructions.Vectors
+        
+        
+      </h1>
+
+      
+
+      
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <i class="icon-link"></i>
+            </a>
+            Summary
+          </h1>
+          
+
+          
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#butlaster/2">butlaster(type, state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Takes a type and a state and takes the butlast of the top item on the type stack</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#concater/2">concater(type, state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Takes a type and a state and concats two vectors on the type stack</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#conjer/3">conjer(vec_type, lit_type, state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Takes a vec_type, a lit_type, and a state and conj's an item onto the type stack</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#containser/3">containser(type, lit_type, state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Takes a type and a state and tells whether the top lit_type item is in the top type vector</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#emptyvectorer/2">emptyvectorer(type, state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Takes a type and a state and pushes a boolean of whether the top vector is empty</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#exec_do_star_vector_boolean/1">exec_do_star_vector_boolean(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#exec_do_star_vector_float/1">exec_do_star_vector_float(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#exec_do_star_vector_integer/1">exec_do_star_vector_integer(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#exec_do_star_vector_string/1">exec_do_star_vector_string(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#firster/3">firster(type, lit_type, state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Takes a type and a state and gets the first item from the type stack</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#indexofer/3">indexofer(type, lit_type, state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Takes a type and a state and finds the index of the top lit_type item in the top type vector</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#iterateer/4">iterateer(type, lit_type, instr, state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Takes a type and a state and iterates over the type vector using the code on the exec stack. If the vector isn't empty, expands to: ((first vector) (top-item :exec state) (rest vector) exec_do*vector_type (top-item :exec state) rest_of_program)</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#laster/3">laster(type, lit_type, state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Takes a type and a state and gets the last item from the type stack</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#lengther/2">lengther(type, state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Takes a type and a state and takes the length of the top item on the type stack</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#nther/3">nther(type, lit_type, state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Takes a type and a state and gets the nth item from the type stack</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#occurrencesofer/3">occurrencesofer(type, lit_type, state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Takes a type and a state and counts the occurrences of the top lit_type item in the top type vector</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#pushaller/3">pushaller(type, lit_type, state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Takes a type and a state and pushes every item from the first vector onto the appropriate stack</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#removeer/3">removeer(type, lit_type, state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Takes a type and a state and removes all occurrences of the first lit_type item in the top type vector</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#replaceer/3">replaceer(type, lit_type, state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Takes a type and a state and replaces all occurrences of the second lit_type item with the first lit_type item in the top type vector</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#replacefirster/3">replacefirster(type, lit_type, state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Takes a type and a state and replaces the first occurrence of the second lit_type item with the first lit_type item in the top type vector</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#rester/2">rester(type, state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Takes a type and a state and takes the rest of the top item on the type stack</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#reverser/2">reverser(type, state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Takes a type and a state and takes the reverse of the top item on the type stack</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#seter/3">seter(type, lit_type, state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Takes a type and a state and replaces, in the top type vector, item at index (from integer stack) with the first lit_type item</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#subvecer/2">subvecer(type, state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Takes a type and a state and takes the subvec of the top item on the type stack</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#taker/2">taker(type, state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Takes a type and a state and takes the first N items from the type stack, where N is from the integer stack</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_butlast/1">vector_boolean_butlast(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_concat/1">vector_boolean_concat(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_conj/1">vector_boolean_conj(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_contains/1">vector_boolean_contains(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_dup/1">vector_boolean_dup(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_empty/1">vector_boolean_empty(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_emptyvector/1">vector_boolean_emptyvector(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_eq/1">vector_boolean_eq(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_first/1">vector_boolean_first(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_flush/1">vector_boolean_flush(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_indexof/1">vector_boolean_indexof(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_last/1">vector_boolean_last(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_length/1">vector_boolean_length(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_nth/1">vector_boolean_nth(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_occurrencesof/1">vector_boolean_occurrencesof(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_pop/1">vector_boolean_pop(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_pushall/1">vector_boolean_pushall(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_remove/1">vector_boolean_remove(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_replace/1">vector_boolean_replace(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_replacefirst/1">vector_boolean_replacefirst(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_rest/1">vector_boolean_rest(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_reverse/1">vector_boolean_reverse(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_rot/1">vector_boolean_rot(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_set/1">vector_boolean_set(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_shove/1">vector_boolean_shove(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_stackdepth/1">vector_boolean_stackdepth(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_subvec/1">vector_boolean_subvec(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_swap/1">vector_boolean_swap(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_take/1">vector_boolean_take(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_yank/1">vector_boolean_yank(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_boolean_yankdup/1">vector_boolean_yankdup(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_butlast/1">vector_float_butlast(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_concat/1">vector_float_concat(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_conj/1">vector_float_conj(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_contains/1">vector_float_contains(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_dup/1">vector_float_dup(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_empty/1">vector_float_empty(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_emptyvector/1">vector_float_emptyvector(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_eq/1">vector_float_eq(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_first/1">vector_float_first(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_flush/1">vector_float_flush(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_indexof/1">vector_float_indexof(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_last/1">vector_float_last(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_length/1">vector_float_length(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_nth/1">vector_float_nth(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_occurrencesof/1">vector_float_occurrencesof(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_pop/1">vector_float_pop(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_pushall/1">vector_float_pushall(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_remove/1">vector_float_remove(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_replace/1">vector_float_replace(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_replacefirst/1">vector_float_replacefirst(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_rest/1">vector_float_rest(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_reverse/1">vector_float_reverse(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_rot/1">vector_float_rot(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_set/1">vector_float_set(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_shove/1">vector_float_shove(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_stackdepth/1">vector_float_stackdepth(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_subvec/1">vector_float_subvec(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_swap/1">vector_float_swap(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_take/1">vector_float_take(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_yank/1">vector_float_yank(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_float_yankdup/1">vector_float_yankdup(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_butlast/1">vector_integer_butlast(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_concat/1">vector_integer_concat(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_conj/1">vector_integer_conj(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_contains/1">vector_integer_contains(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_dup/1">vector_integer_dup(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_empty/1">vector_integer_empty(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_emptyvector/1">vector_integer_emptyvector(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_eq/1">vector_integer_eq(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_first/1">vector_integer_first(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_flush/1">vector_integer_flush(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_indexof/1">vector_integer_indexof(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_last/1">vector_integer_last(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_length/1">vector_integer_length(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_nth/1">vector_integer_nth(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_occurrencesof/1">vector_integer_occurrencesof(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_pop/1">vector_integer_pop(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_pushall/1">vector_integer_pushall(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_remove/1">vector_integer_remove(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_replace/1">vector_integer_replace(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_replacefirst/1">vector_integer_replacefirst(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_rest/1">vector_integer_rest(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_reverse/1">vector_integer_reverse(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_rot/1">vector_integer_rot(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_set/1">vector_integer_set(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_shove/1">vector_integer_shove(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_stackdepth/1">vector_integer_stackdepth(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_subvec/1">vector_integer_subvec(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_swap/1">vector_integer_swap(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_take/1">vector_integer_take(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_yank/1">vector_integer_yank(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_integer_yankdup/1">vector_integer_yankdup(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_butlast/1">vector_string_butlast(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_concat/1">vector_string_concat(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_conj/1">vector_string_conj(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_contains/1">vector_string_contains(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_dup/1">vector_string_dup(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_empty/1">vector_string_empty(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_emptyvector/1">vector_string_emptyvector(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_eq/1">vector_string_eq(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_first/1">vector_string_first(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_flush/1">vector_string_flush(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_indexof/1">vector_string_indexof(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_last/1">vector_string_last(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_length/1">vector_string_length(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_nth/1">vector_string_nth(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_occurrencesof/1">vector_string_occurrencesof(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_pop/1">vector_string_pop(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_pushall/1">vector_string_pushall(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_remove/1">vector_string_remove(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_replace/1">vector_string_replace(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_replacefirst/1">vector_string_replacefirst(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_rest/1">vector_string_rest(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_reverse/1">vector_string_reverse(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_rot/1">vector_string_rot(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_set/1">vector_string_set(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_shove/1">vector_string_shove(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_stackdepth/1">vector_string_stackdepth(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_subvec/1">vector_string_subvec(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_swap/1">vector_string_swap(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_take/1">vector_string_take(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_yank/1">vector_string_yank(state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#vector_string_yankdup/1">vector_string_yankdup(state)</a>
+  </div>
+  
+</div>
+
+  </div>
+
+
+          
+
+          
+
+        </section>
+      
+
+      
+
+      
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <i class="icon-link"></i>
+            </a>
+            Functions
+          </h1>
+          <div class="detail" id="butlaster/2">
+  <div class="detail-header">
+    <a href="#butlaster/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">butlaster(type, state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Takes a type and a state and takes the butlast of the top item on the type stack.</p>
+
+  </section>
+</div>
+<div class="detail" id="concater/2">
+  <div class="detail-header">
+    <a href="#concater/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">concater(type, state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Takes a type and a state and concats two vectors on the type stack.</p>
+
+  </section>
+</div>
+<div class="detail" id="conjer/3">
+  <div class="detail-header">
+    <a href="#conjer/3" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">conjer(vec_type, lit_type, state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Takes a vec_type, a lit_type, and a state and conj's an item onto the type stack.</p>
+
+  </section>
+</div>
+<div class="detail" id="containser/3">
+  <div class="detail-header">
+    <a href="#containser/3" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">containser(type, lit_type, state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Takes a type and a state and tells whether the top lit_type item is in the top type vector.</p>
+
+  </section>
+</div>
+<div class="detail" id="emptyvectorer/2">
+  <div class="detail-header">
+    <a href="#emptyvectorer/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">emptyvectorer(type, state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Takes a type and a state and pushes a boolean of whether the top vector is empty.</p>
+
+  </section>
+</div>
+<div class="detail" id="exec_do_star_vector_boolean/1">
+  <div class="detail-header">
+    <a href="#exec_do_star_vector_boolean/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">exec_do_star_vector_boolean(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="exec_do_star_vector_float/1">
+  <div class="detail-header">
+    <a href="#exec_do_star_vector_float/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">exec_do_star_vector_float(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="exec_do_star_vector_integer/1">
+  <div class="detail-header">
+    <a href="#exec_do_star_vector_integer/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">exec_do_star_vector_integer(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="exec_do_star_vector_string/1">
+  <div class="detail-header">
+    <a href="#exec_do_star_vector_string/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">exec_do_star_vector_string(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="firster/3">
+  <div class="detail-header">
+    <a href="#firster/3" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">firster(type, lit_type, state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Takes a type and a state and gets the first item from the type stack.</p>
+
+  </section>
+</div>
+<div class="detail" id="indexofer/3">
+  <div class="detail-header">
+    <a href="#indexofer/3" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">indexofer(type, lit_type, state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Takes a type and a state and finds the index of the top lit_type item in the top type vector.</p>
+
+  </section>
+</div>
+<div class="detail" id="iterateer/4">
+  <div class="detail-header">
+    <a href="#iterateer/4" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">iterateer(type, lit_type, instr, state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Takes a type and a state and iterates over the type vector using the code on the exec stack. If the vector isn't empty, expands to: ((first vector) (top-item :exec state) (rest vector) exec_do*vector_type (top-item :exec state) rest_of_program)</p>
+
+  </section>
+</div>
+<div class="detail" id="laster/3">
+  <div class="detail-header">
+    <a href="#laster/3" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">laster(type, lit_type, state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Takes a type and a state and gets the last item from the type stack.</p>
+
+  </section>
+</div>
+<div class="detail" id="lengther/2">
+  <div class="detail-header">
+    <a href="#lengther/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">lengther(type, state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Takes a type and a state and takes the length of the top item on the type stack.</p>
+
+  </section>
+</div>
+<div class="detail" id="nther/3">
+  <div class="detail-header">
+    <a href="#nther/3" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">nther(type, lit_type, state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Takes a type and a state and gets the nth item from the type stack.</p>
+
+  </section>
+</div>
+<div class="detail" id="occurrencesofer/3">
+  <div class="detail-header">
+    <a href="#occurrencesofer/3" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">occurrencesofer(type, lit_type, state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Takes a type and a state and counts the occurrences of the top lit_type item in the top type vector.</p>
+
+  </section>
+</div>
+<div class="detail" id="pushaller/3">
+  <div class="detail-header">
+    <a href="#pushaller/3" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">pushaller(type, lit_type, state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Takes a type and a state and pushes every item from the first vector onto the appropriate stack.</p>
+
+  </section>
+</div>
+<div class="detail" id="removeer/3">
+  <div class="detail-header">
+    <a href="#removeer/3" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">removeer(type, lit_type, state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Takes a type and a state and removes all occurrences of the first lit_type item in the top type vector.</p>
+
+  </section>
+</div>
+<div class="detail" id="replaceer/3">
+  <div class="detail-header">
+    <a href="#replaceer/3" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">replaceer(type, lit_type, state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Takes a type and a state and replaces all occurrences of the second lit_type item with the first lit_type item in the top type vector.</p>
+
+  </section>
+</div>
+<div class="detail" id="replacefirster/3">
+  <div class="detail-header">
+    <a href="#replacefirster/3" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">replacefirster(type, lit_type, state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Takes a type and a state and replaces the first occurrence of the second lit_type item with the first lit_type item in the top type vector.</p>
+
+  </section>
+</div>
+<div class="detail" id="rester/2">
+  <div class="detail-header">
+    <a href="#rester/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">rester(type, state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Takes a type and a state and takes the rest of the top item on the type stack.</p>
+
+  </section>
+</div>
+<div class="detail" id="reverser/2">
+  <div class="detail-header">
+    <a href="#reverser/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">reverser(type, state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Takes a type and a state and takes the reverse of the top item on the type stack.</p>
+
+  </section>
+</div>
+<div class="detail" id="seter/3">
+  <div class="detail-header">
+    <a href="#seter/3" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">seter(type, lit_type, state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Takes a type and a state and replaces, in the top type vector, item at index (from integer stack) with the first lit_type item.</p>
+
+  </section>
+</div>
+<div class="detail" id="subvecer/2">
+  <div class="detail-header">
+    <a href="#subvecer/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">subvecer(type, state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Takes a type and a state and takes the subvec of the top item on the type stack.</p>
+
+  </section>
+</div>
+<div class="detail" id="taker/2">
+  <div class="detail-header">
+    <a href="#taker/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">taker(type, state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Takes a type and a state and takes the first N items from the type stack, where N is from the integer stack.</p>
+
+  </section>
+</div>
+<div class="detail" id="vector_boolean_butlast/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_butlast/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_butlast(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_concat/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_concat/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_concat(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_conj/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_conj/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_conj(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_contains/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_contains/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_contains(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_dup/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_dup/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_dup(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_empty/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_empty/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_empty(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_emptyvector/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_emptyvector/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_emptyvector(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_eq/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_eq/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_eq(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_first/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_first/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_first(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_flush/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_flush/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_flush(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_indexof/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_indexof/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_indexof(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_last/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_last/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_last(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_length/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_length/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_length(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_nth/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_nth/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_nth(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_occurrencesof/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_occurrencesof/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_occurrencesof(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_pop/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_pop/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_pop(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_pushall/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_pushall/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_pushall(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_remove/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_remove/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_remove(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_replace/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_replace/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_replace(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_replacefirst/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_replacefirst/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_replacefirst(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_rest/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_rest/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_rest(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_reverse/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_reverse/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_reverse(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_rot/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_rot/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_rot(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_set/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_set/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_set(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_shove/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_shove/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_shove(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_stackdepth/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_stackdepth/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_stackdepth(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_subvec/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_subvec/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_subvec(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_swap/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_swap/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_swap(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_take/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_take/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_take(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_yank/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_yank/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_yank(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_boolean_yankdup/1">
+  <div class="detail-header">
+    <a href="#vector_boolean_yankdup/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_boolean_yankdup(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_butlast/1">
+  <div class="detail-header">
+    <a href="#vector_float_butlast/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_butlast(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_concat/1">
+  <div class="detail-header">
+    <a href="#vector_float_concat/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_concat(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_conj/1">
+  <div class="detail-header">
+    <a href="#vector_float_conj/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_conj(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_contains/1">
+  <div class="detail-header">
+    <a href="#vector_float_contains/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_contains(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_dup/1">
+  <div class="detail-header">
+    <a href="#vector_float_dup/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_dup(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_empty/1">
+  <div class="detail-header">
+    <a href="#vector_float_empty/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_empty(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_emptyvector/1">
+  <div class="detail-header">
+    <a href="#vector_float_emptyvector/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_emptyvector(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_eq/1">
+  <div class="detail-header">
+    <a href="#vector_float_eq/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_eq(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_first/1">
+  <div class="detail-header">
+    <a href="#vector_float_first/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_first(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_flush/1">
+  <div class="detail-header">
+    <a href="#vector_float_flush/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_flush(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_indexof/1">
+  <div class="detail-header">
+    <a href="#vector_float_indexof/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_indexof(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_last/1">
+  <div class="detail-header">
+    <a href="#vector_float_last/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_last(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_length/1">
+  <div class="detail-header">
+    <a href="#vector_float_length/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_length(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_nth/1">
+  <div class="detail-header">
+    <a href="#vector_float_nth/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_nth(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_occurrencesof/1">
+  <div class="detail-header">
+    <a href="#vector_float_occurrencesof/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_occurrencesof(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_pop/1">
+  <div class="detail-header">
+    <a href="#vector_float_pop/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_pop(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_pushall/1">
+  <div class="detail-header">
+    <a href="#vector_float_pushall/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_pushall(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_remove/1">
+  <div class="detail-header">
+    <a href="#vector_float_remove/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_remove(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_replace/1">
+  <div class="detail-header">
+    <a href="#vector_float_replace/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_replace(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_replacefirst/1">
+  <div class="detail-header">
+    <a href="#vector_float_replacefirst/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_replacefirst(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_rest/1">
+  <div class="detail-header">
+    <a href="#vector_float_rest/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_rest(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_reverse/1">
+  <div class="detail-header">
+    <a href="#vector_float_reverse/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_reverse(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_rot/1">
+  <div class="detail-header">
+    <a href="#vector_float_rot/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_rot(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_set/1">
+  <div class="detail-header">
+    <a href="#vector_float_set/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_set(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_shove/1">
+  <div class="detail-header">
+    <a href="#vector_float_shove/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_shove(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_stackdepth/1">
+  <div class="detail-header">
+    <a href="#vector_float_stackdepth/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_stackdepth(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_subvec/1">
+  <div class="detail-header">
+    <a href="#vector_float_subvec/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_subvec(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_swap/1">
+  <div class="detail-header">
+    <a href="#vector_float_swap/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_swap(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_take/1">
+  <div class="detail-header">
+    <a href="#vector_float_take/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_take(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_yank/1">
+  <div class="detail-header">
+    <a href="#vector_float_yank/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_yank(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_float_yankdup/1">
+  <div class="detail-header">
+    <a href="#vector_float_yankdup/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_float_yankdup(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_butlast/1">
+  <div class="detail-header">
+    <a href="#vector_integer_butlast/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_butlast(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_concat/1">
+  <div class="detail-header">
+    <a href="#vector_integer_concat/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_concat(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_conj/1">
+  <div class="detail-header">
+    <a href="#vector_integer_conj/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_conj(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_contains/1">
+  <div class="detail-header">
+    <a href="#vector_integer_contains/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_contains(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_dup/1">
+  <div class="detail-header">
+    <a href="#vector_integer_dup/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_dup(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_empty/1">
+  <div class="detail-header">
+    <a href="#vector_integer_empty/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_empty(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_emptyvector/1">
+  <div class="detail-header">
+    <a href="#vector_integer_emptyvector/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_emptyvector(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_eq/1">
+  <div class="detail-header">
+    <a href="#vector_integer_eq/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_eq(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_first/1">
+  <div class="detail-header">
+    <a href="#vector_integer_first/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_first(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_flush/1">
+  <div class="detail-header">
+    <a href="#vector_integer_flush/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_flush(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_indexof/1">
+  <div class="detail-header">
+    <a href="#vector_integer_indexof/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_indexof(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_last/1">
+  <div class="detail-header">
+    <a href="#vector_integer_last/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_last(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_length/1">
+  <div class="detail-header">
+    <a href="#vector_integer_length/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_length(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_nth/1">
+  <div class="detail-header">
+    <a href="#vector_integer_nth/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_nth(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_occurrencesof/1">
+  <div class="detail-header">
+    <a href="#vector_integer_occurrencesof/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_occurrencesof(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_pop/1">
+  <div class="detail-header">
+    <a href="#vector_integer_pop/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_pop(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_pushall/1">
+  <div class="detail-header">
+    <a href="#vector_integer_pushall/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_pushall(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_remove/1">
+  <div class="detail-header">
+    <a href="#vector_integer_remove/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_remove(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_replace/1">
+  <div class="detail-header">
+    <a href="#vector_integer_replace/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_replace(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_replacefirst/1">
+  <div class="detail-header">
+    <a href="#vector_integer_replacefirst/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_replacefirst(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_rest/1">
+  <div class="detail-header">
+    <a href="#vector_integer_rest/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_rest(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_reverse/1">
+  <div class="detail-header">
+    <a href="#vector_integer_reverse/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_reverse(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_rot/1">
+  <div class="detail-header">
+    <a href="#vector_integer_rot/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_rot(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_set/1">
+  <div class="detail-header">
+    <a href="#vector_integer_set/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_set(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_shove/1">
+  <div class="detail-header">
+    <a href="#vector_integer_shove/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_shove(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_stackdepth/1">
+  <div class="detail-header">
+    <a href="#vector_integer_stackdepth/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_stackdepth(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_subvec/1">
+  <div class="detail-header">
+    <a href="#vector_integer_subvec/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_subvec(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_swap/1">
+  <div class="detail-header">
+    <a href="#vector_integer_swap/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_swap(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_take/1">
+  <div class="detail-header">
+    <a href="#vector_integer_take/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_take(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_yank/1">
+  <div class="detail-header">
+    <a href="#vector_integer_yank/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_yank(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_integer_yankdup/1">
+  <div class="detail-header">
+    <a href="#vector_integer_yankdup/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_integer_yankdup(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_butlast/1">
+  <div class="detail-header">
+    <a href="#vector_string_butlast/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_butlast(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_concat/1">
+  <div class="detail-header">
+    <a href="#vector_string_concat/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_concat(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_conj/1">
+  <div class="detail-header">
+    <a href="#vector_string_conj/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_conj(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_contains/1">
+  <div class="detail-header">
+    <a href="#vector_string_contains/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_contains(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_dup/1">
+  <div class="detail-header">
+    <a href="#vector_string_dup/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_dup(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_empty/1">
+  <div class="detail-header">
+    <a href="#vector_string_empty/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_empty(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_emptyvector/1">
+  <div class="detail-header">
+    <a href="#vector_string_emptyvector/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_emptyvector(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_eq/1">
+  <div class="detail-header">
+    <a href="#vector_string_eq/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_eq(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_first/1">
+  <div class="detail-header">
+    <a href="#vector_string_first/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_first(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_flush/1">
+  <div class="detail-header">
+    <a href="#vector_string_flush/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_flush(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_indexof/1">
+  <div class="detail-header">
+    <a href="#vector_string_indexof/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_indexof(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_last/1">
+  <div class="detail-header">
+    <a href="#vector_string_last/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_last(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_length/1">
+  <div class="detail-header">
+    <a href="#vector_string_length/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_length(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_nth/1">
+  <div class="detail-header">
+    <a href="#vector_string_nth/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_nth(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_occurrencesof/1">
+  <div class="detail-header">
+    <a href="#vector_string_occurrencesof/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_occurrencesof(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_pop/1">
+  <div class="detail-header">
+    <a href="#vector_string_pop/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_pop(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_pushall/1">
+  <div class="detail-header">
+    <a href="#vector_string_pushall/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_pushall(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_remove/1">
+  <div class="detail-header">
+    <a href="#vector_string_remove/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_remove(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_replace/1">
+  <div class="detail-header">
+    <a href="#vector_string_replace/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_replace(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_replacefirst/1">
+  <div class="detail-header">
+    <a href="#vector_string_replacefirst/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_replacefirst(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_rest/1">
+  <div class="detail-header">
+    <a href="#vector_string_rest/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_rest(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_reverse/1">
+  <div class="detail-header">
+    <a href="#vector_string_reverse/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_reverse(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_rot/1">
+  <div class="detail-header">
+    <a href="#vector_string_rot/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_rot(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_set/1">
+  <div class="detail-header">
+    <a href="#vector_string_set/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_set(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_shove/1">
+  <div class="detail-header">
+    <a href="#vector_string_shove/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_shove(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_stackdepth/1">
+  <div class="detail-header">
+    <a href="#vector_string_stackdepth/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_stackdepth(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_subvec/1">
+  <div class="detail-header">
+    <a href="#vector_string_subvec/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_subvec(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_swap/1">
+  <div class="detail-header">
+    <a href="#vector_string_swap/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_swap(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_take/1">
+  <div class="detail-header">
+    <a href="#vector_string_take/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_take(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_yank/1">
+  <div class="detail-header">
+    <a href="#vector_string_yank/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_yank(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="vector_string_yankdup/1">
+  <div class="detail-header">
+    <a href="#vector_string_yankdup/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">vector_string_yankdup(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+
+        </section>
+      
+
+      
+
+      
+        <footer class="footer">
+      <p>
+        <span class="line">
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.11.4),
+        </span>
+        <span class="line">
+          designed by
+          <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          </span>
+      </p>
+      <button class="night-mode-toggle" />
+    </footer>
+  </div>
+</section>
+</div>
+  <script src="dist/app-6d2e071366.js"></script>
+  </body>
+</html>
+
