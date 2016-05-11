@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.4">
-    <title>Elixush.Instructions.Common – elixush v0.0.2</title>
+    <title>Elixush.Instructions.Common – elixush v0.0.3</title>
     <link rel="stylesheet" href="dist/app-1e374caa3d.css" />
     <script src="dist/sidebar_items.js"></script>
   </head>
@@ -27,7 +27,7 @@
         elixush
       </h1>
       <h2 class="sidebar-projectVersion">
-        v0.0.2
+        v0.0.3
       </h2>
     </div>
     
@@ -59,7 +59,7 @@
 
 
       <h1>
-        <small class="visible-xs">elixush v0.0.2</small>
+        <small class="visible-xs">elixush v0.0.3</small>
         Elixush.Instructions.Common
         
         
@@ -175,6 +175,204 @@
 <div class="summary-row">
   <div class="summary-signature">
     <a href="#boolean_yankdup/1">boolean_yankdup(state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a function that yanks a copy of an item from deep in the specified stack, using the top integer to indicate how deep</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#code_dup/1">code_dup(state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a function that takes a state and duplicates the top item of the appropriate stack of the state</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#code_empty/1">code_empty(state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a function that takes a state and tells whether that stack is empty</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#code_eq/1">code_eq(state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a function that compares the top two items of the appropriate stack of the given state</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#code_flush/1">code_flush(state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a function that empties the stack of the given state</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#code_pop/1">code_pop(state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a function that takes a state and pops the appropriate stack of the state</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#code_rot/1">code_rot(state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a function that takes a state and rotates the top 3 items of the appropriate stack of the state</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#code_shove/1">code_shove(state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a function that shoves an item deep in the specified stack, using the top integer to indicate how deep</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#code_stackdepth/1">code_stackdepth(state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a function that pushes the depth of the appropriate stack of the given state</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#code_swap/1">code_swap(state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a function that takes a state and swaps the top 2 items of the appropriate stack of the state</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#code_yank/1">code_yank(state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a function that yanks an item from deep in the specified stack, using the top integer to indicate how deep</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#code_yankdup/1">code_yankdup(state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a function that yanks a copy of an item from deep in the specified stack, using the top integer to indicate how deep</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#exec_dup/1">exec_dup(state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a function that takes a state and duplicates the top item of the appropriate stack of the state</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#exec_empty/1">exec_empty(state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a function that takes a state and tells whether that stack is empty</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#exec_eq/1">exec_eq(state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a function that compares the top two items of the appropriate stack of the given state</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#exec_flush/1">exec_flush(state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a function that empties the stack of the given state</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#exec_pop/1">exec_pop(state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a function that takes a state and pops the appropriate stack of the state</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#exec_rot/1">exec_rot(state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a function that takes a state and rotates the top 3 items of the appropriate stack of the state</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#exec_shove/1">exec_shove(state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a function that shoves an item deep in the specified stack, using the top integer to indicate how deep</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#exec_stackdepth/1">exec_stackdepth(state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a function that pushes the depth of the appropriate stack of the given state</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#exec_swap/1">exec_swap(state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a function that takes a state and swaps the top 2 items of the appropriate stack of the state</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#exec_yank/1">exec_yank(state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a function that yanks an item from deep in the specified stack, using the top integer to indicate how deep</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#exec_yankdup/1">exec_yankdup(state)</a>
   </div>
   
     <div class="summary-synopsis"><p>Returns a function that yanks a copy of an item from deep in the specified stack, using the top integer to indicate how deep</p>
@@ -546,6 +744,314 @@
       <i class="icon-link"></i>
     </a>
     <span class="signature">boolean_yankdup(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Returns a function that yanks a copy of an item from deep in the specified stack, using the top integer to indicate how deep.</p>
+
+  </section>
+</div>
+<div class="detail" id="code_dup/1">
+  <div class="detail-header">
+    <a href="#code_dup/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">code_dup(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Returns a function that takes a state and duplicates the top item of the appropriate stack of the state.</p>
+
+  </section>
+</div>
+<div class="detail" id="code_empty/1">
+  <div class="detail-header">
+    <a href="#code_empty/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">code_empty(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Returns a function that takes a state and tells whether that stack is empty.</p>
+
+  </section>
+</div>
+<div class="detail" id="code_eq/1">
+  <div class="detail-header">
+    <a href="#code_eq/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">code_eq(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Returns a function that compares the top two items of the appropriate stack of the given state.</p>
+
+  </section>
+</div>
+<div class="detail" id="code_flush/1">
+  <div class="detail-header">
+    <a href="#code_flush/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">code_flush(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Returns a function that empties the stack of the given state.</p>
+
+  </section>
+</div>
+<div class="detail" id="code_pop/1">
+  <div class="detail-header">
+    <a href="#code_pop/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">code_pop(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Returns a function that takes a state and pops the appropriate stack of the state.</p>
+
+  </section>
+</div>
+<div class="detail" id="code_rot/1">
+  <div class="detail-header">
+    <a href="#code_rot/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">code_rot(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Returns a function that takes a state and rotates the top 3 items of the appropriate stack of the state.</p>
+
+  </section>
+</div>
+<div class="detail" id="code_shove/1">
+  <div class="detail-header">
+    <a href="#code_shove/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">code_shove(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Returns a function that shoves an item deep in the specified stack, using the top integer to indicate how deep.</p>
+
+  </section>
+</div>
+<div class="detail" id="code_stackdepth/1">
+  <div class="detail-header">
+    <a href="#code_stackdepth/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">code_stackdepth(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Returns a function that pushes the depth of the appropriate stack of the given state.</p>
+
+  </section>
+</div>
+<div class="detail" id="code_swap/1">
+  <div class="detail-header">
+    <a href="#code_swap/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">code_swap(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Returns a function that takes a state and swaps the top 2 items of the appropriate stack of the state.</p>
+
+  </section>
+</div>
+<div class="detail" id="code_yank/1">
+  <div class="detail-header">
+    <a href="#code_yank/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">code_yank(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Returns a function that yanks an item from deep in the specified stack, using the top integer to indicate how deep.</p>
+
+  </section>
+</div>
+<div class="detail" id="code_yankdup/1">
+  <div class="detail-header">
+    <a href="#code_yankdup/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">code_yankdup(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Returns a function that yanks a copy of an item from deep in the specified stack, using the top integer to indicate how deep.</p>
+
+  </section>
+</div>
+<div class="detail" id="exec_dup/1">
+  <div class="detail-header">
+    <a href="#exec_dup/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">exec_dup(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Returns a function that takes a state and duplicates the top item of the appropriate stack of the state.</p>
+
+  </section>
+</div>
+<div class="detail" id="exec_empty/1">
+  <div class="detail-header">
+    <a href="#exec_empty/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">exec_empty(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Returns a function that takes a state and tells whether that stack is empty.</p>
+
+  </section>
+</div>
+<div class="detail" id="exec_eq/1">
+  <div class="detail-header">
+    <a href="#exec_eq/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">exec_eq(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Returns a function that compares the top two items of the appropriate stack of the given state.</p>
+
+  </section>
+</div>
+<div class="detail" id="exec_flush/1">
+  <div class="detail-header">
+    <a href="#exec_flush/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">exec_flush(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Returns a function that empties the stack of the given state.</p>
+
+  </section>
+</div>
+<div class="detail" id="exec_pop/1">
+  <div class="detail-header">
+    <a href="#exec_pop/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">exec_pop(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Returns a function that takes a state and pops the appropriate stack of the state.</p>
+
+  </section>
+</div>
+<div class="detail" id="exec_rot/1">
+  <div class="detail-header">
+    <a href="#exec_rot/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">exec_rot(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Returns a function that takes a state and rotates the top 3 items of the appropriate stack of the state.</p>
+
+  </section>
+</div>
+<div class="detail" id="exec_shove/1">
+  <div class="detail-header">
+    <a href="#exec_shove/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">exec_shove(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Returns a function that shoves an item deep in the specified stack, using the top integer to indicate how deep.</p>
+
+  </section>
+</div>
+<div class="detail" id="exec_stackdepth/1">
+  <div class="detail-header">
+    <a href="#exec_stackdepth/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">exec_stackdepth(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Returns a function that pushes the depth of the appropriate stack of the given state.</p>
+
+  </section>
+</div>
+<div class="detail" id="exec_swap/1">
+  <div class="detail-header">
+    <a href="#exec_swap/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">exec_swap(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Returns a function that takes a state and swaps the top 2 items of the appropriate stack of the state.</p>
+
+  </section>
+</div>
+<div class="detail" id="exec_yank/1">
+  <div class="detail-header">
+    <a href="#exec_yank/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">exec_yank(state)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Returns a function that yanks an item from deep in the specified stack, using the top integer to indicate how deep.</p>
+
+  </section>
+</div>
+<div class="detail" id="exec_yankdup/1">
+  <div class="detail-header">
+    <a href="#exec_yankdup/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">exec_yankdup(state)</span>
       
   </div>
   
