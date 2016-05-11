@@ -10,7 +10,7 @@ The package can be installed as:
   1. Add elixush to your list of dependencies in `mix.exs`:
 
         def deps do
-          [{:elixush, "~> 0.0.3"}]
+          [{:elixush, "~> 0.0.4"}]
         end
 
   2. Ensure elixush is started before your application:

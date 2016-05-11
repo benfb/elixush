@@ -159,5 +159,269 @@ defmodule Elixush.Instructions.Vectors do
   def vector_boolean_last(state), do: laster(:vector_boolean, :boolean, state)
   def vector_string_last(state), do: laster(:vector_string, :string, state)
 
-  
+  @doc "Takes a type and a state and gets the nth item from the type stack."
+  def nther(type, lit_type, state) do
+    if (not(Enum.empty?(state[type])) and not(Enum.empty?(List.first(state[type])))) and not(Enum.empty?(state[:integr])) do
+      vect = stack_ref(type, 0, state)
+      index = rem(stack_ref(:integer, 0, state), Enum.count(vect))
+      Enum.at(vect, index) |> push_item(lit_type, pop_item(:integer, pop_item(type, state)))
+    else
+      state
+    end
+  end
+
+  def vector_integer_nth(state), do: nther(:vector_integer, :integer, state)
+  def vector_float_nth(state), do: nther(:vector_float, :float, state)
+  def vector_boolean_nth(state), do: nther(:vector_boolean, :boolean, state)
+  def vector_string_nth(state), do: nther(:vector_string, :string, state)
+
+  @doc "Takes a type and a state and takes the rest of the top item on the type stack."
+  def rester(type, state) do
+    if (not(Enum.empty?(state[type]))) do
+      top_item(type, state) |> Enum.drop(1) |> push_item(type, pop_item(type, state))
+    else
+      state
+    end
+  end
+
+  def vector_integer_rest(state), do: rester(:vector_integer, state)
+  def vector_float_rest(state), do: rester(:vector_float, state)
+  def vector_boolean_rest(state), do: rester(:vector_boolean, state)
+  def vector_string_rest(state), do: rester(:vector_string, state)
+
+  @doc "Takes a type and a state and takes the butlast of the top item on the type stack."
+  def butlaster(type, state) do
+    if (not(Enum.empty?(state[type]))) do
+      top_item(type, state) |> Enum.drop(-1) |> push_item(type, pop_item(type, state))
+    else
+      state
+    end
+  end
+
+  def vector_integer_butlast(state), do: butlaster(:vector_integer, state)
+  def vector_float_butlast(state), do: butlaster(:vector_float, state)
+  def vector_boolean_butlast(state), do: butlaster(:vector_boolean, state)
+  def vector_string_butlast(state), do: butlaster(:vector_string, state)
+
+  @doc "Takes a type and a state and takes the length of the top item on the type stack."
+  def lengther(type, state) do
+    if (not(Enum.empty?(state[type]))) do
+      top_item(type, state) |> Enum.count |> push_item(:integer, pop_item(type, state))
+    else
+      state
+    end
+  end
+
+  def vector_integer_length(state), do: lengther(:vector_integer, state)
+  def vector_float_length(state), do: lengther(:vector_float, state)
+  def vector_boolean_length(state), do: lengther(:vector_boolean, state)
+  def vector_string_length(state), do: lengther(:vector_string, state)
+
+  @doc "Takes a type and a state and takes the reverse of the top item on the type stack."
+  def reverser(type, state) do
+    if (not(Enum.empty?(state[type]))) do
+      top_item(type, state) |> Enum.reverse |> push_item(type, pop_item(type, state))
+    else
+      state
+    end
+  end
+
+  def vector_integer_reverse(state), do: reverser(:vector_integer, state)
+  def vector_float_reverse(state), do: reverser(:vector_float, state)
+  def vector_boolean_reverse(state), do: reverser(:vector_boolean, state)
+  def vector_string_reverse(state), do: reverser(:vector_string, state)
+
+  @doc "Takes a type and a state and pushes every item from the first vector onto the appropriate stack."
+  def pushaller(type, lit_type, state) do
+    if Enum.empty?(state[type]) do
+      state
+    else
+      loop = fn(f, lit_list, loop_state) ->
+        if Enum.empty?(lit_list) do
+          loop_state
+        else
+          f.(f, Enum.drop(lit_list, 1), push_item(List.first(lit_list), lit_type, loop_state))
+        end
+      end
+      loop.(loop, Enum.reverse(top_item(type, state)), pop_item(type, state))
+    end
+  end
+
+  def vector_integer_pushall(state), do: pushaller(:vector_integer, :integer, state)
+  def vector_float_pushall(state), do: pushaller(:vector_float, :float, state)
+  def vector_boolean_pushall(state), do: pushaller(:vector_boolean, :boolean, state)
+  def vector_string_pushall(state), do: pushaller(:vector_string, :string, state)
+
+  @doc "Takes a type and a state and pushes a boolean of whether the top vector is empty."
+  def emptyvectorer(type, state) do
+    if (not(Enum.empty?(state[type]))) do
+      top_item(type, state) |> Enum.empty? |> push_item(:boolean, pop_item(type, state))
+    else
+      state
+    end
+  end
+
+  def vector_integer_emptyvector(state), do: emptyvectorer(:vector_integer, state)
+  def vector_float_emptyvector(state), do: emptyvectorer(:vector_float, state)
+  def vector_boolean_emptyvector(state), do: emptyvectorer(:vector_boolean, state)
+  def vector_string_emptyvector(state), do: emptyvectorer(:vector_string, state)
+
+  @doc "Takes a type and a state and tells whether the top lit_type item is in the top type vector."
+  def containser(type, lit_type, state) do
+    if Enum.empty?(state[type]) or Enum.empty?(state[lit_type]) do
+      state
+    else
+      item = top_item(lit_type, state)
+      vect = top_item(type, state)
+      Enum.member?(vect, item) |> push_item(:boolean, pop_item(lit_type, pop_item(type, state)))
+    end
+  end
+
+  def vector_integer_contains(state), do: containser(:vector_integer, :integer, state)
+  def vector_float_contains(state), do: containser(:vector_float, :float, state)
+  def vector_boolean_contains(state), do: containser(:vector_boolean, :boolean, state)
+  def vector_string_contains(state), do: containser(:vector_string, :string, state)
+
+  @doc "Takes a type and a state and finds the index of the top lit_type item in the top type vector."
+  def indexofer(type, lit_type, state) do
+    if Enum.empty?(state[type]) or Enum.empty?(state[lit_type]) do
+      state
+    else
+      item = top_item(lit_type, state)
+      vect = top_item(type, state)
+      result = Enum.find_index(vect, item)
+      (if result == nil, do: -1, else: result) |> push_item(:integer, pop_item(lit_type, pop_item(type, state)))
+    end
+  end
+
+  def vector_integer_indexof(state), do: indexofer(:vector_integer, :integer, state)
+  def vector_float_indexof(state), do: indexofer(:vector_float, :float, state)
+  def vector_boolean_indexof(state), do: indexofer(:vector_boolean, :boolean, state)
+  def vector_string_indexof(state), do: indexofer(:vector_string, :string, state)
+
+  @doc "Takes a type and a state and counts the occurrences of the top lit_type item in the top type vector."
+  def occurrencesofer(type, lit_type, state) do
+    if Enum.empty?(state[type]) or Enum.empty?(state[lit_type]) do
+      state
+    else
+      item = top_item(lit_type, state)
+      vect = top_item(type, state)
+      result = vect |> Enum.filter(&(&1 == item)) |> Enum.count
+      result |> push_item(:integer, pop_item(lit_type, pop_item(type, state)))
+    end
+  end
+
+  def vector_integer_occurrencesof(state), do: occurrencesofer(:vector_integer, :integer, state)
+  def vector_float_occurrencesof(state), do: occurrencesofer(:vector_float, :float, state)
+  def vector_boolean_occurrencesof(state), do: occurrencesofer(:vector_boolean, :boolean, state)
+  def vector_string_occurrencesof(state), do: occurrencesofer(:vector_string, :string, state)
+
+  @doc """
+  Takes a type and a state and replaces, in the top type vector, item at index
+  (from integer stack) with the first lit_type item.
+  """
+  def seter(type, lit_type, state) do
+    if (Enum.empty?(state[type]) or Enum.empty?(state[lit_type])) or (Enum.empty?(state[:integer]) or (lit_type == :integer and Enum.empty?(Enum.drop(state[:integer], 1)))) do
+      state
+    else
+      vect = top_item(type, state)
+      item = if lit_type == :integer, do: stack_ref(:integer, 1, state), else: top_item(lit_type, state)
+      index = if Enum.empty?(vect), do: 0, else: rem(top_item(:integer, state), Enum.count(vect))
+      result = if Enum.empty?(vect), do: vect, else: List.replace_at(vect, index, item)
+      result |> push_item(type, pop_item(lit_type, pop_item(:integer, pop_item(type, state))))
+    end
+  end
+
+  def vector_integer_set(state), do: seter(:vector_integer, :integer, state)
+  def vector_float_set(state), do: seter(:vector_float, :float, state)
+  def vector_boolean_set(state), do: seter(:vector_boolean, :boolean, state)
+  def vector_string_set(state), do: seter(:vector_string, :string, state)
+
+  @doc """
+  Takes a type and a state and replaces all occurrences of the second lit_type
+  item with the first lit_type item in the top type vector.
+  """
+  def replaceer(type, lit_type, state) do
+    if Enum.empty?(state[type]) or Enum.empty?(Enum.drop(state[lit_type], 1)) do
+      state
+    else
+      replace_with = stack_ref(lit_type, 0, state)
+      to_replace = stack_ref(lit_type, 1, state)
+      vect = top_item(type, state)
+      result = vect |> Enum.map(&(if &1 == to_replace, do: replace_with, else: &1))
+      result |> push_item(type, pop_item(lit_type, pop_item(lit_type, pop_item(type, state))))
+    end
+  end
+
+  def vector_integer_replace(state), do: replaceer(:vector_integer, :integer, state)
+  def vector_float_replace(state), do: replaceer(:vector_float, :float, state)
+  def vector_boolean_replace(state), do: replaceer(:vector_boolean, :boolean, state)
+  def vector_string_replace(state), do: replaceer(:vector_string, :string, state)
+
+  @doc """
+  Takes a type and a state and replaces the first occurrence of the second
+  lit_type item with the first lit_type item in the top type vector.
+  """
+  def replacefirster(type, lit_type, state) do
+    if Enum.empty?(state[type]) or Enum.empty?(Enum.drop(state[lit_type], 1)) do
+      state
+    else
+      replace_with = stack_ref(lit_type, 0, state)
+      to_replace = stack_ref(lit_type, 1, state)
+      vect = top_item(type, state)
+      index = vect |> Enum.find(&(&1 == to_replace))
+      index = if index == nil, do: -1, else: index
+      result = List.replace_at(vect, index, replace_with)
+      result |> push_item(type, pop_item(lit_type, pop_item(lit_type, pop_item(type, state))))
+    end
+  end
+
+  def vector_integer_replacefirst(state), do: replacefirster(:vector_integer, :integer, state)
+  def vector_float_replacefirst(state), do: replacefirster(:vector_float, :float, state)
+  def vector_boolean_replacefirst(state), do: replacefirster(:vector_boolean, :boolean, state)
+  def vector_string_replacefirst(state), do: replacefirster(:vector_string, :string, state)
+
+  @doc """
+  Takes a type and a state and removes all occurrences of the first lit_type item
+  in the top type vector.
+  """
+  def removeer(type, lit_type, state) do
+    if Enum.empty?(state[type]) or Enum.empty?(state[lit_type]) do
+      state
+    else
+      vect = top_item(type, state)
+      item = top_item(lit_type, state)
+      result = vect |> Enum.filter(&(&1 != top_item(lit_type, state)))
+      result |> push_item(type, pop_item(lit_type, pop_item(type, state)))
+    end
+  end
+
+  def vector_integer_remove(state), do: removeer(:vector_integer, :integer, state)
+  def vector_float_remove(state), do: removeer(:vector_float, :float, state)
+  def vector_boolean_remove(state), do: removeer(:vector_boolean, :boolean, state)
+  def vector_string_remove(state), do: removeer(:vector_string, :string, state)
+
+  @doc """
+  Takes a type and a state and iterates over the type vector using the code on the
+  exec stack. If the vector isn't empty, expands to:
+  ((first vector) (top-item :exec state) (rest vector) exec_do*vector_type (top-item :exec state) rest_of_program)
+  """
+  def iterateer(type, lit_type, instr, state) do
+    if Enum.empty?(state[type]) or Enum.empty?(state[:exec]) do
+      state
+    else
+      vect = top_item(type, state)
+      cond do
+        Enum.empty?(vect) -> pop_item(:exec, pop_item(type, state))
+        Enum.empty?(Enum.drop(vect, 1)) -> push_item(List.first(vect), lit_type, pop_item(type, state))
+        true -> push_item(List.first(vect), lit_type, push_item(top_item(:exec, state), :exec, push_item(Enum.drop(vect, 1), :exec, push_item(instr, :exec, pop_item(type, state)))))
+      end
+    end
+  end
+
+  def exec_do_star_vector_integer(state), do: iterateer(:vector_integer, :integer, :exec_do_star_vector_integer, state)
+  def exec_do_star_vector_float(state), do: iterateer(:vector_float, :float, :exec_do_star_vector_float, state)
+  def exec_do_star_vector_boolean(state), do: iterateer(:vector_boolean, :boolean, :exec_do_star_vector_boolean, state)
+  def exec_do_star_vector_string(state), do: iterateer(:vector_string, :string, :exec_do_star_vector_string, state)
+
 end
