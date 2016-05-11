@@ -1,58 +1,72 @@
 defmodule Elixush.Instructions.Vectors do
   import Elixush.PushState
+  import Elixush.Instructions.Common
   import Elixush.Globals.Agent, only: [get_globals: 1]
-
-  def popper(type, state), do: pop_item(type, state)
 
   def vector_integer_pop(state), do: popper(:vector_integer, state)
   def vector_float_pop(state), do: popper(:vector_float, state)
   def vector_boolean_pop(state), do: popper(:vector_boolean, state)
   def vector_string_pop(state), do: popper(:vector_string, state)
 
-  def duper(type, state) do
-    if Enum.empty?(state[type]) do
-      state
-    else
-      type |> top_item(state) |> push_item(type, state)
-    end
-  end
-
   def vector_integer_dup(state), do: duper(:vector_integer, state)
   def vector_float_dup(state), do: duper(:vector_float, state)
   def vector_boolean_dup(state), do: duper(:vector_boolean, state)
   def vector_string_dup(state), do: duper(:vector_string, state)
 
-  def string_fromfloat(state) do
-    if not(state[:float] |> Enum.empty?) do
-      item = stack_ref(:float, 0, state)
-      push_item(to_string(item), :string, pop_item(:float, state))
-    else
-      state
-    end
-  end
+  def vector_integer_swap(state), do: swapper(:vector_integer, state)
+  def vector_float_swap(state), do: swapper(:vector_float, state)
+  def vector_boolean_swap(state), do: swapper(:vector_boolean, state)
+  def vector_string_swap(state), do: swapper(:vector_string, state)
 
-  def string_fromboolean(state) do
-    if not(state[:boolean] |> Enum.empty?) do
-      item = stack_ref(:boolean, 0, state)
-      push_item(to_string(item), :string, pop_item(:boolean, state))
-    else
-      state
-    end
-  end
+  def vector_integer_rot(state), do: rotter(:vector_integer, state)
+  def vector_float_rot(state), do: rotter(:vector_float, state)
+  def vector_boolean_rot(state), do: rotter(:vector_boolean, state)
+  def vector_string_rot(state), do: rotter(:vector_string, state)
 
-  def string_fromchar(state) do
-    if not(state[:char] |> Enum.empty?) do
-      item = stack_ref(:char, 0, state)
-      push_item(to_string(item), :string, pop_item(:char, state))
-    else
-      state
-    end
-  end
+  def vector_integer_flush(state), do: flusher(:vector_integer, state)
+  def vector_float_flush(state), do: flusher(:vector_float, state)
+  def vector_boolean_flush(state), do: flusher(:vector_boolean, state)
+  def vector_string_flush(state), do: flusher(:vector_string, state)
 
-  def string_concat(state) do
-    if not(state[:string] |> Enum.drop(1) |> Enum.empty?) do
-      if(get_globals(:max_string_length) >= Enum.count(stack_ref(:string, 1, state)) + Enum.count(stack_ref(:string, 0, state))) do
-        push_item(stack_ref(:string, 1, state) <> stack_ref(:string, 0, state), :string, pop_item(:string, pop_item(:string, state)))
+  def vector_integer_eq(state), do: eqer(:vector_integer, state)
+  def vector_float_eq(state), do: eqer(:vector_float, state)
+  def vector_boolean_eq(state), do: eqer(:vector_boolean, state)
+  def vector_string_eq(state), do: eqer(:vector_string, state)
+
+  def vector_integer_stackdepth(state), do: stackdepther(:vector_integer, state)
+  def vector_float_stackdepth(state), do: stackdepther(:vector_float, state)
+  def vector_boolean_stackdepth(state), do: stackdepther(:vector_boolean, state)
+  def vector_string_stackdepth(state), do: stackdepther(:vector_string, state)
+
+  def vector_integer_yank(state), do: yanker(:vector_integer, state)
+  def vector_float_yank(state), do: yanker(:vector_float, state)
+  def vector_boolean_yank(state), do: yanker(:vector_boolean, state)
+  def vector_string_yank(state), do: yanker(:vector_string, state)
+
+  def vector_integer_yankdup(state), do: yankduper(:vector_integer, state)
+  def vector_float_yankdup(state), do: yankduper(:vector_float, state)
+  def vector_boolean_yankdup(state), do: yankduper(:vector_boolean, state)
+  def vector_string_yankdup(state), do: yankduper(:vector_string, state)
+
+  def vector_integer_shove(state), do: shover(:vector_integer, state)
+  def vector_float_shove(state), do: shover(:vector_float, state)
+  def vector_boolean_shove(state), do: shover(:vector_boolean, state)
+  def vector_string_shove(state), do: shover(:vector_string, state)
+
+  def vector_integer_empty(state), do: emptyer(:vector_integer, state)
+  def vector_float_empty(state), do: emptyer(:vector_float, state)
+  def vector_boolean_empty(state), do: emptyer(:vector_boolean, state)
+  def vector_string_empty(state), do: emptyer(:vector_string, state)
+
+  ### common instructions for vectors
+
+  @doc "Takes a type and a state and concats two vectors on the type stack."
+  def concater(type, state) do
+    if not(Enum.empty?(Enum.drop(state[type], 1))) do
+      first_item = stack_ref(type, 0, state)
+      second_item = stack_ref(type, 1, state)
+      if get_globals(:max_vector_length) >= Enum.count(first_item) + Enum.count(second_item) do
+        Enum.concat(second_item, first_item) |> push_item(type, pop_item(type, pop_item(type, state)))
       else
         state
       end
@@ -61,27 +75,8 @@ defmodule Elixush.Instructions.Vectors do
     end
   end
 
-  # TODO: add string_conjchar
-
-  def string_take(state) do
-    if not(state[:string] |> Enum.empty?) and not(state[:integer] |> Enum.empty?) do
-      push_item(String.slice(stack_ref(:string, 0, state), 0, stack_ref(:integer, 0, state)),
-                :string, pop_item(:string, pop_item(:integer, state)))
-    else
-      state
-    end
-  end
-
-  def string_substring(state) do # REVIEW: make sure this goes to the same index as clojush
-    if not(state[:string] |> Enum.empty?) and not(state[:integer] |> Enum.drop(1) |> Enum.empty?) do
-      st = stack_ref(:string, 0, state)
-      first_index = min(Enum.count(st), max(0, stack_ref(:integer, 1, state)))
-      second_index = min(Enum.count(st), max(first_index, stack_ref(:integer, 0, state)))
-      push_item(String.slice(st, first_index, second_index),
-                :string, pop_item(:string, pop_item(:integer, pop_item(:integer, state))))
-    else
-      state
-    end
-  end
-
+  def vector_integer_concat(state), do: concater(:vector_integer, state)
+  def vector_float_concat(state), do: concater(:vector_float, state)
+  def vector_boolean_concat(state), do: concater(:vector_boolean, state)
+  def vector_string_concat(state), do: concater(:vector_string, state)
 end
