@@ -14,7 +14,8 @@ defmodule Elixush.Instructions do
           Elixush.PushState.define_registered(f_atom, f_partial)
         end)
       end)
-      Logger.info("Instructions:\n#{inspect(Elixush.Globals.Agent.get_globals(:instruction_table), pretty: true)}")
+      # Logger.info("Instructions:\n#{inspect(Elixush.Globals.Agent.get_globals(:instruction_table), pretty: true)}")
+      Logger.info("Elixush interpreter started!")
     end
   end
 end

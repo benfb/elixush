@@ -5,7 +5,6 @@ defmodule Elixush.Instructions.Code do
 
   def code_noop(state), do: state
 
-  # TODO: Look at these to make sure they're in the right place
   def noop_open_paren(state), do: state
   def noop_delete_prev_paren_pair(state), do: state
 

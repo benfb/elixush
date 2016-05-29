@@ -2,7 +2,6 @@ defmodule Elixush.Server do
   use GenServer
 
   def start_link do
-    # Elixush.Interpreter.define_registered(:integer_mod, &Elixush.Instructions.Integer.integer_mod/1)
     use Elixush.Instructions
     GenServer.start_link(__MODULE__, :ok, name: __MODULE__)
   end

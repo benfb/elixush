@@ -191,7 +191,7 @@ defmodule Elixush.Util do
     false
   end
 
-  # TODO: insert-code-at-point, remove-code-at-point
+  # TODO: remove-code-at-point
 
   @doc "computes the next row using the prev-row current-element and the other seq"
   def compute_next_row(prev_row, current_element, other_seq, pred) do
