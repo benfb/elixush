@@ -1,4 +1,5 @@
 defmodule Elixush.Instructions.Common do
+  @moduledoc "Common instructions that operate on many stacks."
   import Elixush.PushState
 
   @doc "Takes a type and a state and pops the appropriate stack of the state."

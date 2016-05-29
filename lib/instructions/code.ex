@@ -1,4 +1,5 @@
 defmodule Elixush.Instructions.Code do
+  @moduledoc "Instructions that operate on the code stack."
   import Elixush.PushState
   import Elixush.Util
   import Elixush.Globals.Agent
@@ -32,9 +33,11 @@ defmodule Elixush.Instructions.Code do
 
   def code_car(state) do
     if not(Enum.empty?(state[:code])) and length(ensure_list(stack_ref(:code, 0, state))) > 0 do
-      stack_ref(:code, 0, state) |> ensure_list
-                                 |> List.first
-                                 |> push_item(:code, pop_item(:code, state))
+      :code
+      |> stack_ref(0, state)
+      |> ensure_list
+      |> List.first
+      |> push_item(:code, pop_item(:code, state))
     else
       state
     end
@@ -42,9 +45,11 @@ defmodule Elixush.Instructions.Code do
 
   def code_cdr(state) do
     if not(Enum.empty?(state[:code])) do
-      stack_ref(:code, 0, state) |> ensure_list
-                                 |> Enum.drop(1)
-                                 |> push_item(:code, pop_item(:code, state))
+      :code
+      |> stack_ref(0, state)
+      |> ensure_list
+      |> Enum.drop(1)
+      |> push_item(:code, pop_item(:code, state))
     else
       state
     end
@@ -192,8 +197,9 @@ defmodule Elixush.Instructions.Code do
       end
       second = [:code_wrap]
       third = for _item <- Enum.drop(ensure_list(List.first(state[:code])), 1), do: :code_cons
-      Enum.concat(first, Enum.concat(second, third)) |>
-        push_item(:exec, pop_item(:code, pop_item(:exec, state)))
+      first
+      |> Enum.concat(Enum.concat(second, third))
+      |> push_item(:exec, pop_item(:code, pop_item(:exec, state)))
     else
       state
     end
@@ -303,9 +309,11 @@ defmodule Elixush.Instructions.Code do
 
   def code_member(state) do
     if not(Enum.empty?(Enum.drop(state[:code], 1))) do
-      Enum.drop(state[:code], 1) |> List.first
-                                 |> Enum.member?(List.first(state[:code]))
-                                 |> push_item(:boolean, pop_item(:code, pop_item(:code, state)))
+      state[:code]
+      |> Enum.drop(1)
+      |> List.first
+      |> Enum.member?(List.first(state[:code]))
+      |> push_item(:boolean, pop_item(:code, pop_item(:code, state)))
     else
       state
     end
@@ -321,10 +329,10 @@ defmodule Elixush.Instructions.Code do
 
   def code_nthcdr(state) do
     if not((Enum.empty?(state[:integer]) or Enum.empty?(state[:code])) or Enum.empty?(ensure_list(List.first(state[:code])))) do
-      Enum.drop(ensure_list(List.first(state[:code])), state[:integer]
-                                                       |> List.first
-                                                       |> abs
-                                                       |> rem(Enum.count(ensure_list(List.first(state[:code])))))
+      state[:code] |> List.first |> ensure_list |> Enum.drop(state[:integer]
+                                                             |> List.first
+                                                             |> abs
+                                                             |> rem(Enum.count(ensure_list(List.first(state[:code])))))
       |> push_item(:code, pop_item(:integer, pop_item(:code, state)))
     else
       state
@@ -456,7 +464,7 @@ defmodule Elixush.Instructions.Code do
     if not(Enum.empty?(state[:exec])) do
       new_exec = top_item(:exec, state)
       parent_env = pop_item(:exec, state)
-      push_item(new_exec, :exec, push_item(parent_env, :environment, state) |> Map.put(:return, []) |> Map.put(:exec, []))
+      push_item(new_exec, :exec, parent_env |> push_item(:environment, state) |> Map.put(:return, []) |> Map.put(:exec, []))
     else
       state
     end

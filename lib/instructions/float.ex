@@ -1,4 +1,5 @@
 defmodule Elixush.Instructions.Float do
+  @moduledoc "Instructions that operate on the float stack."
   import Elixush.PushState
   import Elixush.Util
 

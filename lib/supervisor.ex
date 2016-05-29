@@ -1,4 +1,5 @@
 defmodule Elixush.Supervisor do
+  @moduledoc "An OTP supervisor that keeps agents and servers running."
   use Supervisor
 
   def start_link do

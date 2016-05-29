@@ -1,4 +1,5 @@
 defmodule Elixush.Evaluate do
+  @moduledoc "Code to evaluate individual Push programs."
   import Enum, only: [count: 1, map: 2, reduce: 2]
   import Elixush.Globals.Agent
 

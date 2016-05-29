@@ -1,4 +1,5 @@
 defmodule Elixush.Instructions.Genome do
+  @moduledoc "Instructions that operate on the genome stack."
   import Elixush.Globals.Agent
   import Elixush.PushState
 

@@ -1,4 +1,5 @@
 defmodule Elixush.Instructions.Vectors do
+  @moduledoc "Instructions that operate on various vector stacks."
   import Elixush.PushState
   import Elixush.Instructions.Common
   import Elixush.Globals.Agent, only: [get_globals: 1]
@@ -66,7 +67,7 @@ defmodule Elixush.Instructions.Vectors do
       first_item = stack_ref(type, 0, state)
       second_item = stack_ref(type, 1, state)
       if get_globals(:max_vector_length) >= Enum.count(first_item) + Enum.count(second_item) do
-        Enum.concat(second_item, first_item) |> push_item(type, pop_item(type, pop_item(type, state)))
+        second_item |> Enum.concat(first_item) |> push_item(type, pop_item(type, pop_item(type, state)))
       else
         state
       end
@@ -83,7 +84,7 @@ defmodule Elixush.Instructions.Vectors do
   @doc "Takes a vec_type, a lit_type, and a state and conj's an item onto the type stack."
   def conjer(vec_type, lit_type, state) do
     if not(Enum.empty?(state[vec_type])) and not(Enum.empty?(state[lit_type])) do
-      result = top_item(lit_type, state) |> List.insert_at(-1, top_item(vec_type, state))
+      result = lit_type |> top_item(state) |> List.insert_at(-1, top_item(vec_type, state))
       if get_globals(:max_vector_length) >= Enum.count(result) do
         push_item(result, vec_type, pop_item(lit_type, pop_item(vec_type, state)))
       else
@@ -119,8 +120,9 @@ defmodule Elixush.Instructions.Vectors do
       vect = top_item(type, state)
       first_index = min(Enum.count(vect), max(0, stack_ref(:integer, 1, state)))
       second_index = min(Enum.count(vect), max(first_index, stack_ref(:integer, 0, state)))
-      Enum.slice(vect, first_index, second_index - first_index)
-        |> push_item(type, pop_item(type, pop_item(:integer, pop_item(:integer, state))))
+      vect
+      |> Enum.slice(first_index, second_index - first_index)
+      |> push_item(type, pop_item(type, pop_item(:integer, pop_item(:integer, state))))
     else
       state
     end
@@ -164,7 +166,7 @@ defmodule Elixush.Instructions.Vectors do
     if (not(Enum.empty?(state[type])) and not(Enum.empty?(List.first(state[type])))) and not(Enum.empty?(state[:integr])) do
       vect = stack_ref(type, 0, state)
       index = rem(stack_ref(:integer, 0, state), Enum.count(vect))
-      Enum.at(vect, index) |> push_item(lit_type, pop_item(:integer, pop_item(type, state)))
+      vect |> Enum.at(index) |> push_item(lit_type, pop_item(:integer, pop_item(type, state)))
     else
       state
     end
@@ -178,7 +180,7 @@ defmodule Elixush.Instructions.Vectors do
   @doc "Takes a type and a state and takes the rest of the top item on the type stack."
   def rester(type, state) do
     if (not(Enum.empty?(state[type]))) do
-      top_item(type, state) |> Enum.drop(1) |> push_item(type, pop_item(type, state))
+      type |> top_item(state) |> Enum.drop(1) |> push_item(type, pop_item(type, state))
     else
       state
     end
@@ -206,7 +208,7 @@ defmodule Elixush.Instructions.Vectors do
   @doc "Takes a type and a state and takes the length of the top item on the type stack."
   def lengther(type, state) do
     if (not(Enum.empty?(state[type]))) do
-      top_item(type, state) |> Enum.count |> push_item(:integer, pop_item(type, state))
+      type |> top_item(state) |> Enum.count |> push_item(:integer, pop_item(type, state))
     else
       state
     end
@@ -220,7 +222,7 @@ defmodule Elixush.Instructions.Vectors do
   @doc "Takes a type and a state and takes the reverse of the top item on the type stack."
   def reverser(type, state) do
     if (not(Enum.empty?(state[type]))) do
-      top_item(type, state) |> Enum.reverse |> push_item(type, pop_item(type, state))
+      type |> top_item(state) |> Enum.reverse |> push_item(type, pop_item(type, state))
     else
       state
     end
@@ -273,7 +275,7 @@ defmodule Elixush.Instructions.Vectors do
     else
       item = top_item(lit_type, state)
       vect = top_item(type, state)
-      Enum.member?(vect, item) |> push_item(:boolean, pop_item(lit_type, pop_item(type, state)))
+      vect |> Enum.member?(item) |> push_item(:boolean, pop_item(lit_type, pop_item(type, state)))
     end
   end
 

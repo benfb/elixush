@@ -1,4 +1,5 @@
 defmodule Elixush.Interpreter do
+  @moduledoc "The heart of the interpreter that runs Push programs."
   import Elixush.Globals.Agent
   import Elixush.PushState
   import Elixush.Util, only: [recognize_literal: 1]
@@ -14,7 +15,7 @@ defmodule Elixush.Interpreter do
       cond do
         literal_type -> push_item(instruction, literal_type, state)
         is_list(instruction) and ([] == instruction) -> push_item([], :vector_integer, push_item([], :vector_float, push_item([], :vector_string, push_item([], :vector_boolean, state))))
-        get_globals(:instruction_table) |> Map.has_key?(instruction) -> Map.get(get_globals(:instruction_table), instruction).(state)
+        :instruction_table |> get_globals |> Map.has_key?(instruction) -> Map.get(get_globals(:instruction_table), instruction).(state)
         true -> raise(ArgumentError, message: "Undefined instruction: #{Macro.to_string(instruction)}")
       end
     end
@@ -51,7 +52,9 @@ defmodule Elixush.Interpreter do
           IO.puts("\nState after #{iteration} steps (last step: end_environment_from_empty_exec):\n")
           state_pretty_print(s)
         end
-        if save_state_sequence, do: update_globals(:saved_state_sequence, List.insert_at(get_globals(:saved_state_sequence), 0, s)) # REVIEW: saved_state_sequence is in globals which may not be correct
+        # REVIEW: saved_state_sequence is in globals which may not be correct
+        if save_state_sequence,
+          do: update_globals(:saved_state_sequence, List.insert_at(get_globals(:saved_state_sequence), 0, s))
         inner_loop(iteration + 1, s, time_limit, print_steps, trace, save_state_sequence)
       else
         exec_top = top_item(:exec, s)
@@ -74,7 +77,9 @@ defmodule Elixush.Interpreter do
           IO.puts("\nState after #{iteration} steps (last step: #{if is_list(exec_top), do: "(...)", else: to_string(exec_top)}):\n")
           state_pretty_print(s)
         end
-        if save_state_sequence, do: update_globals(:saved_state_sequence, List.insert_at(get_globals(:saved_state_sequence), 0, s)) # REVIEW: saved_state_sequence is in globals which may not be correct
+        # REVIEW: saved_state_sequence is in globals which may not be correct
+        if save_state_sequence,
+          do: update_globals(:saved_state_sequence, List.insert_at(get_globals(:saved_state_sequence), 0, s))
         inner_loop(iteration + 1, s, time_limit, print_steps, trace, save_state_sequence)
       end
     end
@@ -87,13 +92,14 @@ defmodule Elixush.Interpreter do
   def run_push(code, state, print_steps, trace), do: run_push(code, state, print_steps, trace, false)
 
   def run_push(code, state, print_steps, trace, save_state_sequence) do
-    s = if get_globals(:global_top_level_push_code), do: push_item(code, :code, state), else: state
+    s = if get_globals(:global_top_level_push_code),
+          do: push_item(code, :code, state), else: state
     s = push_item(code, :exec, s)
     if print_steps do
       IO.puts("\nState after 0 steps:\n")
       state_pretty_print(s)
     end
-    if save_state_sequence, do: saved_state_sequence = [s]
+    if save_state_sequence, do: update_globals(:saved_state_sequence, [s])
     s = eval_push(s, print_steps, trace, save_state_sequence)
     if get_globals(:global_top_level_pop_code), do: pop_item(:code, s), else: s
   end

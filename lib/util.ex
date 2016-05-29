@@ -1,4 +1,5 @@
 defmodule Elixush.Util do
+  @moduledoc "Utility functions used throughout Elixush to simplify code."
   import Elixush.Globals.Agent
 
   @doc "If thing is a literal, return its type -- otherwise return false."
@@ -39,6 +40,7 @@ defmodule Elixush.Util do
   @spec keep_number_reasonable(number) :: number
   def keep_number_reasonable(n) do
     max_number_magnitude = get_globals(:max_number_magnitude)
+    min_number_magnitude = get_globals(:min_number_magnitude)
     if is_integer(n) do
       cond do
         n > max_number_magnitude -> max_number_magnitude
@@ -49,7 +51,7 @@ defmodule Elixush.Util do
       cond do
         n > max_number_magnitude -> max_number_magnitude * 1.0
         n < -max_number_magnitude -> -max_number_magnitude * 1.0
-        n < -max_number_magnitude and n > max_number_magnitude -> 0.0
+        n < min_number_magnitude and n > -min_number_magnitude -> 0.0
         true -> n
       end
     end

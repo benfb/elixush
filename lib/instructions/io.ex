@@ -1,4 +1,5 @@
 defmodule Elixush.Instructions.IO do
+  @moduledoc "Instructions that operate on the IO stack."
   alias Elixir.String
   import Elixush.PushState
   import Elixush.Util

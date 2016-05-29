@@ -1,4 +1,5 @@
 defmodule Elixush.Instructions.Boolean do
+  @moduledoc "Instructions that operate on the boolean stack."
   import Elixush.PushState
 
   def boolean_and(state) do

@@ -1,4 +1,5 @@
 defmodule Elixush.Instructions.String do
+  @moduledoc "Instructions that operate on the string stack."
   import Elixush.PushState
   import Elixush.Globals.Agent, only: [get_globals: 1]
 

@@ -1,4 +1,6 @@
 defmodule Elixush.Instructions.Integer do
+  @moduledoc "Instructions that operate on the integer stack."
+
   import Elixush.PushState
   import Elixush.Util
 
@@ -44,7 +46,7 @@ defmodule Elixush.Instructions.Integer do
     if not(Enum.empty?(Enum.drop(state[:integer], 1))) and not(stack_ref(:integer, 0, state) == 0) do
       first = stack_ref(:integer, 0, state)
       second = stack_ref(:integer, 1, state)
-      item = (second / first) |> keep_number_reasonable |> trunc
+      item = second |> div(first) |> keep_number_reasonable |> trunc
       push_item(item, :integer, pop_item(:integer, pop_item(:integer, state)))
     else
       state
@@ -59,7 +61,7 @@ defmodule Elixush.Instructions.Integer do
     if not(Enum.empty?(Enum.drop(state[:integer], 1))) and not(stack_ref(:integer, 0, state) == 0) do
       first = stack_ref(:integer, 0, state)
       second = stack_ref(:integer, 1, state)
-      item = (rem(second, first)) |> keep_number_reasonable |> trunc
+      item = second |> rem(first) |> keep_number_reasonable |> trunc
       push_item(item, :integer, pop_item(:integer, pop_item(:integer, state)))
     else
       state

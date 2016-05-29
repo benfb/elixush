@@ -1,4 +1,5 @@
 defmodule Elixush.PushState do
+  @moduledoc "Keeps track of and modifies Push states and stacks."
   import Enum, only: [empty?: 1]
   import Elixush.Globals.Agent
 
