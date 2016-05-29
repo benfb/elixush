@@ -39,30 +39,29 @@ defmodule Elixush.Util do
   @spec keep_number_reasonable(number) :: number
   def keep_number_reasonable(n) do
     max_number_magnitude = get_globals(:max_number_magnitude)
-    cond do
-      is_integer(n) ->
-        cond do
-          n > max_number_magnitude -> max_number_magnitude
-          n < -max_number_magnitude -> -max_number_magnitude
-          true -> n
-        end
-      true ->
-        cond do
-          n > max_number_magnitude -> max_number_magnitude * 1.0
-          n < -max_number_magnitude -> -max_number_magnitude * 1.0
-          n < -max_number_magnitude and n > max_number_magnitude -> 0.0
-          true -> n
-        end
+    if is_integer(n) do
+      cond do
+        n > max_number_magnitude -> max_number_magnitude
+        n < -max_number_magnitude -> -max_number_magnitude
+        true -> n
+      end
+    else
+      cond do
+        n > max_number_magnitude -> max_number_magnitude * 1.0
+        n < -max_number_magnitude -> -max_number_magnitude * 1.0
+        n < -max_number_magnitude and n > max_number_magnitude -> 0.0
+        true -> n
+      end
     end
   end
 
   @doc "If a number, rounds float f to n decimal places."
   def round_to_n_decimal_places(f, n) do
-    if !is_number(f) do
-      f
-    else
+    if is_number(f) do
       factor = :math.pow(10, n)
       round(f * factor) / factor
+    else
+      f
     end
   end
 
@@ -117,9 +116,10 @@ defmodule Elixush.Util do
     index = point_index |> abs |> rem(count_points(tree))
     zipper = :zipper_default.list(tree) # TODO: check that this is the right function
     loop = fn(f, z, i) ->
-      if i == 0, do: :zipper.root(:zipper.replace(z, new_subtree)), else: f.(f, :zipper.next(z), i - 1)
+      if i == 0, do:
+        :zipper.root(:zipper.replace(z, new_subtree)), else: f.(f, :zipper.next(z), i - 1)
     end
-    loop.loop(zipper, index)
+    loop.(loop, zipper, index)
   end
 
   @doc "Like walk, but only for lists."
@@ -193,46 +193,47 @@ defmodule Elixush.Util do
 
   # TODO: remove-code-at-point
 
-  @doc "computes the next row using the prev-row current-element and the other seq"
-  def compute_next_row(prev_row, current_element, other_seq, pred) do
-    Enum.reduce(List.zip([prev_row, Enum.fetch(prev_row, 1), other_seq]), (hd(prev_row) + 1),
-    fn(row, [diagonal, above, other_element]) ->
-      update_val = if pred.(other_element, current_element) do
-        # if the elements are deemed equivalent according to the predicate
-        # pred, then no change has taken place to the string, so we are
-        # going to set it the same value as diagonal (which is the previous edit-distance)
-        diagonal
-      else
-        # in the case where the elements are not considered equivalent, then we are going
-        # to figure out if its a substitution (then there is a change of 1 from the previous
-        # edit distance) thus the value is diagonal + 1 or if its a deletion, then the value
-        # is present in the columns, but not in the rows, the edit distance is the edit-distance
-        # of last of row + 1 (since we will be using vectors, peek is more efficient)
-        # or it could be a case of insertion, then the value is above+1, and we chose
-        # the minimum of the three
-        Enum.min([diagonal, above, hd(row)]) + 1
-      end
-      List.insert_at(row, 0, update_val)
-    end)
-  end
+  # @doc "computes the next row using the prev-row current-element and the other seq"
+  # def compute_next_row(prev_row, current_element, other_seq, pred) do
+  #   Enum.reduce(List.zip([prev_row, Enum.fetch(prev_row, 1), other_seq]), (hd(prev_row) + 1),
+  #   fn(row, [diagonal, above, other_element]) ->
+  #     update_val = if pred.(other_element, current_element) do
+  #       # if the elements are deemed equivalent according to the predicate
+  #       # pred, then no change has taken place to the string, so we are
+  #       # going to set it the same value as diagonal (which is the previous edit-distance)
+  #       diagonal
+  #     else
+  #       # in the case where the elements are not considered equivalent, then we are going
+  #       # to figure out if its a substitution (then there is a change of 1 from the previous
+  #       # edit distance) thus the value is diagonal + 1 or if its a deletion, then the value
+  #       # is present in the columns, but not in the rows, the edit distance is the edit-distance
+  #       # of last of row + 1 (since we will be using vectors, peek is more efficient)
+  #       # or it could be a case of insertion, then the value is above+1, and we chose
+  #       # the minimum of the three
+  #       Enum.min([diagonal, above, hd(row)]) + 1
+  #     end
+  #     List.insert_at(row, 0, update_val)
+  #   end)
+  # end
 
-  @doc """
-  Levenshtein Distance - http://en.wikipedia.org/wiki/Levenshtein_distance
-    In information theory and computer science, the Levenshtein distance is a
-    metric for measuring the amount of difference between two sequences. This
-    is a functional implementation of the levenshtein edit
-    distance with as little mutability as possible.
-    Still maintains the O(n*m) guarantee.
-  """
-  def levenshtein_distance(a, b, p) do
-    cond do
-      List.empty? a -> length b
-      List.empty? b -> length a
-      true -> Enum.reduce()
-      fn(prev_row, current_element) ->
-        compute_next_row(prev_row, current_element, b, p)
-      end
-      Range.new(0, length(b) + 1)
-    end
-  end
+  # TODO: Finish Levenshtein Distance
+  # @doc """
+  # Levenshtein Distance - http://en.wikipedia.org/wiki/Levenshtein_distance
+  #   In information theory and computer science, the Levenshtein distance is a
+  #   metric for measuring the amount of difference between two sequences. This
+  #   is a functional implementation of the levenshtein edit
+  #   distance with as little mutability as possible.
+  #   Still maintains the O(n*m) guarantee.
+  # """
+  # def levenshtein_distance(a, b, p) do
+  #   cond do
+  #     Enum.empty? a -> length b
+  #     Enum.empty? b -> length a
+  #     true -> Enum.reduce()
+  #     fn(prev_row, current_element) ->
+  #       compute_next_row(prev_row, current_element, b, p)
+  #     end
+  #     Range.new(0, length(b) + 1)
+  #   end
+  # end
 end

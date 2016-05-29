@@ -62,13 +62,14 @@ defmodule Elixush.Evaluate do
 
   @spec compute_root_mean_squared_error(Enum.t) :: Enum.t
   def compute_root_mean_squared_error(errors) do
-    mse = errors |> map(&(&1*&1)) |> reduce(&+/2)
+    mse = errors |> map(&(&1 * &1)) |> reduce(&+/2)
     :math.sqrt(mse/count(errors))
   end
 
   @spec compute_hah_error(Enum.t) :: float
   def compute_hah_error(errors) do
-    get_globals(:solution_rates)
+    :solution_rates
+    |> get_globals
     |> Enum.zip(errors)
     |> Enum.map(fn({rate, e}) -> e * (rate - 1.01) end)
     |> Enum.reduce(&+/2)

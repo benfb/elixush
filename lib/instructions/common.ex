@@ -95,7 +95,7 @@ defmodule Elixush.Instructions.Common do
       with_args_popped = pop_item(type, with_index_popped)
       actual_index = raw_index |> min(length(with_args_popped[type])) |> max(0)
       stk = with_args_popped[type]
-      Map.merge(with_args_popped, %{type => Enum.concat(Enum.take(stk, actual_index), [item], Enum.drop(stk, actual_index))})
+      Map.merge(with_args_popped, %{type => Enum.concat(Enum.take(stk, actual_index), Enum.concat([item], Enum.drop(stk, actual_index)))})
     else
       state
     end

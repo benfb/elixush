@@ -102,7 +102,7 @@ defmodule Elixush.Instructions.Vectors do
   @doc "Takes a type and a state and takes the first N items from the type stack, where N is from the integer stack."
   def taker(type, state) do
     if not(Enum.empty?(state[type])) and not(Enum.empty?(state[:integer])) do
-      top_item(type, state) |> Enum.take(top_item(:integer, state)) |> push_item(type, pop_item(type, pop_item(:integer, state)))
+      type |> top_item(state) |> Enum.take(top_item(:integer, state)) |> push_item(type, pop_item(type, pop_item(:integer, state)))
     else
       state
     end
@@ -192,7 +192,7 @@ defmodule Elixush.Instructions.Vectors do
   @doc "Takes a type and a state and takes the butlast of the top item on the type stack."
   def butlaster(type, state) do
     if (not(Enum.empty?(state[type]))) do
-      top_item(type, state) |> Enum.drop(-1) |> push_item(type, pop_item(type, state))
+      type |> top_item(state) |> Enum.drop(-1) |> push_item(type, pop_item(type, state))
     else
       state
     end
@@ -255,7 +255,7 @@ defmodule Elixush.Instructions.Vectors do
   @doc "Takes a type and a state and pushes a boolean of whether the top vector is empty."
   def emptyvectorer(type, state) do
     if (not(Enum.empty?(state[type]))) do
-      top_item(type, state) |> Enum.empty? |> push_item(:boolean, pop_item(type, state))
+      type |> top_item(state) |> Enum.empty? |> push_item(:boolean, pop_item(type, state))
     else
       state
     end

@@ -1,4 +1,5 @@
 defmodule Elixush.Instructions.IO do
+  alias Elixir.String
   import Elixush.PushState
   import Elixush.Util
   import Elixush.Globals.Agent
@@ -9,7 +10,7 @@ defmodule Elixush.Instructions.IO do
     else
       top_thing = top_item(:exec, state)
       top_thing_string = Macro.to_string(top_thing)
-      if get_globals(:max_string_length) < length(to_string(stack_ref(:output, 0, state)) <> top_thing_string) do
+      if get_globals(:max_string_length) < String.length(to_string(stack_ref(:output, 0, state)) <> top_thing_string) do
         state
       else
         stack_assoc(
@@ -28,7 +29,7 @@ defmodule Elixush.Instructions.IO do
     else
       top_thing = top_item(:integer, state)
       top_thing_string = Macro.to_string(top_thing)
-      if get_globals(:max_string_length) < length(to_string(stack_ref(:output, 0, state)) <> top_thing_string) do
+      if get_globals(:max_string_length) < String.length(to_string(stack_ref(:output, 0, state)) <> top_thing_string) do
         state
       else
         stack_assoc(
@@ -47,7 +48,7 @@ defmodule Elixush.Instructions.IO do
     else
       top_thing = top_item(:float, state)
       top_thing_string = Macro.to_string(top_thing)
-      if get_globals(:max_string_length) < length(to_string(stack_ref(:output, 0, state)) <> top_thing_string) do
+      if get_globals(:max_string_length) < String.length(to_string(stack_ref(:output, 0, state)) <> top_thing_string) do
         state
       else
         stack_assoc(
@@ -66,7 +67,7 @@ defmodule Elixush.Instructions.IO do
     else
       top_thing = top_item(:code, state)
       top_thing_string = Macro.to_string(top_thing)
-      if get_globals(:max_string_length) < length(to_string(stack_ref(:output, 0, state)) <> top_thing_string) do
+      if get_globals(:max_string_length) < String.length(to_string(stack_ref(:output, 0, state)) <> top_thing_string) do
         state
       else
         stack_assoc(
@@ -85,7 +86,7 @@ defmodule Elixush.Instructions.IO do
     else
       top_thing = top_item(:boolean, state)
       top_thing_string = Macro.to_string(top_thing)
-      if get_globals(:max_string_length) < length(to_string(stack_ref(:output, 0, state)) <> top_thing_string) do
+      if get_globals(:max_string_length) < String.length(to_string(stack_ref(:output, 0, state)) <> top_thing_string) do
         state
       else
         stack_assoc(
@@ -104,7 +105,7 @@ defmodule Elixush.Instructions.IO do
     else
       top_thing = top_item(:string, state)
       top_thing_string = Macro.to_string(top_thing)
-      if get_globals(:max_string_length) < length(to_string(stack_ref(:output, 0, state)) <> top_thing_string) do
+      if get_globals(:max_string_length) < String.length(to_string(stack_ref(:output, 0, state)) <> top_thing_string) do
         state
       else
         stack_assoc(
@@ -123,7 +124,7 @@ defmodule Elixush.Instructions.IO do
     else
       top_thing = top_item(:char, state)
       top_thing_string = Macro.to_string(top_thing)
-      if get_globals(:max_string_length) < length(to_string(stack_ref(:output, 0, state)) <> top_thing_string) do
+      if get_globals(:max_string_length) < String.length(to_string(stack_ref(:output, 0, state)) <> top_thing_string) do
         state
       else
         stack_assoc(
@@ -142,7 +143,7 @@ defmodule Elixush.Instructions.IO do
     else
       top_thing = top_item(:vector_integer, state)
       top_thing_string = Macro.to_string(top_thing)
-      if get_globals(:max_string_length) < length(to_string(stack_ref(:output, 0, state)) <> top_thing_string) do
+      if get_globals(:max_string_length) < String.length(to_string(stack_ref(:output, 0, state)) <> top_thing_string) do
         state
       else
         stack_assoc(
@@ -161,7 +162,7 @@ defmodule Elixush.Instructions.IO do
     else
       top_thing = top_item(:vector_float, state)
       top_thing_string = Macro.to_string(top_thing)
-      if get_globals(:max_string_length) < length(to_string(stack_ref(:output, 0, state)) <> top_thing_string) do
+      if get_globals(:max_string_length) < String.length(to_string(stack_ref(:output, 0, state)) <> top_thing_string) do
         state
       else
         stack_assoc(
@@ -180,7 +181,7 @@ defmodule Elixush.Instructions.IO do
     else
       top_thing = top_item(:vector_boolean, state)
       top_thing_string = Macro.to_string(top_thing)
-      if get_globals(:max_string_length) < length(to_string(stack_ref(:output, 0, state)) <> top_thing_string) do
+      if get_globals(:max_string_length) < String.length(to_string(stack_ref(:output, 0, state)) <> top_thing_string) do
         state
       else
         stack_assoc(
@@ -199,7 +200,7 @@ defmodule Elixush.Instructions.IO do
     else
       top_thing = top_item(:vector_string, state)
       top_thing_string = Macro.to_string(top_thing)
-      if get_globals(:max_string_length) < length(to_string(stack_ref(:output, 0, state)) <> top_thing_string) do
+      if get_globals(:max_string_length) < String.length(to_string(stack_ref(:output, 0, state)) <> top_thing_string) do
         state
       else
         stack_assoc(
@@ -213,7 +214,7 @@ defmodule Elixush.Instructions.IO do
   end
 
   def print_newline(state) do
-    if get_globals(:max_string_length) < (stack_ref(:output, 0, state) |> to_string) <> "\n" |> length do
+    if get_globals(:max_string_length) < (:output |> stack_ref(0, state) |> to_string) <> "\n" |> String.length do
       state
     else
       stack_assoc(to_string(stack_ref(:output, 0, state)) <> "\n", :output, 0, state)
@@ -226,7 +227,7 @@ defmodule Elixush.Instructions.IO do
   values are on the input stack. Recognizes vectors, simple literals and quoted code.
   """
   def handle_input_instruction(instr, state) do
-    n = Regex.run(~r/in(\d+)/, Atom.to_string(instr)) |> Enum.at(1) |> String.to_integer
+    n = ~r/in(\d+)/ |> Regex.run(Atom.to_string(instr)) |> Enum.at(1) |> String.to_integer
     if n > length(state[:input]) or n < 1 do
       raise(ArgumentError, message: "Undefined instruction: #{instr} \nNOTE: Likely not same number of items on input stack as input instructions.")
     else

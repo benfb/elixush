@@ -32,6 +32,8 @@ defmodule Elixush.Mixfile do
   defp deps do
     [
       {:ex_doc, "~> 0.11", only: [:dev]},
+      {:credo, "~> 0.3", only: [:dev, :test]},
+      {:dialyxir, "~> 0.3.3", only: [:dev, :test]},
       {:zipper, "~> 0.2.0"}
     ]
   end
