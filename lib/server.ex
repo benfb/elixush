@@ -11,7 +11,7 @@ defmodule Elixush.Server do
   end
 
   def handle_call({:run, program}, _from, state) do
-    result = Interpreter.run_push(program, PushState.make_push_state, true)
+    result = Interpreter.run_push(program, PushState.make_push_state)
     {:reply, result, state}
   end
 

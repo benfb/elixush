@@ -49,20 +49,20 @@ defmodule Elixush.Instructions.Float do
     end
   end
 
-  @doc """
-  Returns a function that pushes the modulus of the top two items. Does
-  nothing if the denominator would be zero.
-  """
-  def float_mod(state) do
-    if not(Enum.empty?(Enum.drop(state[:float], 1))) and not(stack_ref(:float, 0, state) == 0) do
-      first = stack_ref(:float, 0, state)
-      second = stack_ref(:float, 1, state)
-      item = second |> rem(first) |> keep_number_reasonable
-      push_item(item, :float, pop_item(:float, pop_item(:float, state)))
-    else
-      state
-    end
-  end
+  # @doc """
+  # Returns a function that pushes the modulus of the top two items. Does
+  # nothing if the denominator would be zero.
+  # """
+  # def float_mod(state) do
+  #   if not(Enum.empty?(Enum.drop(state[:float], 1))) and not(stack_ref(:float, 0, state) == 0) do
+  #     first = stack_ref(:float, 0, state)
+  #     second = stack_ref(:float, 1, state)
+  #     item = second |> rem(first) |> keep_number_reasonable
+  #     push_item(item, :float, pop_item(:float, pop_item(:float, state)))
+  #   else
+  #     state
+  #   end
+  # end
 
   ### Comparers
 
@@ -145,12 +145,13 @@ defmodule Elixush.Instructions.Float do
     end
   end
 
+  # TODO: make this exit more gracefully
   def float_fromstring(state) do
     if not(Enum.empty?(state[:string])) do
       try do
         pop_item(:string, push_item(keep_number_reasonable(String.to_float(top_item(:string, state))), :float, state))
       rescue
-        e in ArgumentError -> {e, state}
+        _error in ArgumentError -> state
       end
     else
       state
