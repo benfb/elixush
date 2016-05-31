@@ -225,7 +225,8 @@ defmodule Elixush.Instructions.IO do
   @doc """
   Allows Push to handle inN instructions, e.g. in2, using things from the input
   stack. We can tell whether a particular inN instruction is valid if N-1
-  values are on the input stack. Recognizes vectors, simple literals and quoted code.
+  values are on the input stack. Recognizes vectors, simple literals and
+  quoted code.
   """
   def handle_input_instruction(instr, state) do
     n = ~r/in(\d+)/ |> Regex.run(Atom.to_string(instr)) |> Enum.at(1) |> String.to_integer

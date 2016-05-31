@@ -50,16 +50,17 @@ defmodule Elixush.PushState do
   end
 
   @doc """
-  Returns a copy of the state with the value pushed on the named stack. This is a utility,
-  not for use in Push programs.
+  Returns a copy of the state with the value pushed on the named stack. This is
+  a utility, not for use in Push programs.
   """
   def push_item(value, type, state) do
     Map.put(state, type, List.insert_at(state[type], 0, value))
   end
 
   @doc """
-  Returns the top item of the type stack in state. Returns :no-stack-item if called on
-  an empty stack. This is a utility, not for use as an instruction in Push programs.
+  Returns the top item of the type stack in state. Returns :no-stack-item if
+  called on an empty stack. This is a utility, not for use as an instruction
+  in Push programs.
   """
   def top_item(type, state) do
     stack = state[type]
@@ -68,9 +69,9 @@ defmodule Elixush.PushState do
 
 
   @doc """
-  Returns the indicated item of the type stack in state. Returns :no-stack-item if called
-  on an empty stack. This is a utility, not for use as an instruction in Push programs.
-  NOT SAFE for invalid positions.
+  Returns the indicated item of the type stack in state. Returns :no_stack_item
+  if called on an empty stack. This is a utility, not for use as an instruction
+  in Push programs. NOT SAFE for invalid positions.
   """
   @spec stack_ref(atom, integer, map) :: any
   def stack_ref(type, position, state) do
@@ -89,8 +90,8 @@ defmodule Elixush.PushState do
   end
 
   @doc """
-  Returns a copy of the state with the specified stack popped. This is a utility,
-  not for use as an instruction in Push programs.
+  Returns a copy of the state with the specified stack popped. This is a
+  utility, not for use as an instruction in Push programs.
   """
   @spec pop_item(atom, map) :: map
   def pop_item(type, state) do
@@ -114,7 +115,10 @@ defmodule Elixush.PushState do
     loop.(loop, Map.get(state, :return), Map.merge(new_env, %{:exec => new_exec, :auxiliary => Map.get(state, :auxiliary)}))
   end
 
-  @doc "Returns a list of all registered instructions with the given type name as a prefix."
+  @doc """
+  Returns a list of all registered instructions with the given type name
+  as a prefix.
+  """
   @spec registered_for_type(atom, map) :: Enum.t
   def registered_for_type(type, argmap \\ %{}) do
     include_randoms = Map.get(argmap, :include_randoms, true)
@@ -126,10 +130,14 @@ defmodule Elixush.PushState do
     end
   end
 
-  @doc "Returns a list of all registered instructions aside from random instructions."
+  @doc """
+  Returns a list of all registered instructions aside from random instructions.
+  """
   @spec registered_nonrandom :: Enum.t
   def registered_nonrandom do
-    Enum.filter(get_globals(:registered_instructions), &(not(String.ends_with?(Atom.to_string(&1), "_rand"))))
+    :registered_instructions
+    |> get_globals
+    |> Enum.filter(&(not(String.ends_with?(Atom.to_string(&1), "_rand"))))
   end
 
   @doc """
@@ -144,8 +152,8 @@ defmodule Elixush.PushState do
   end
 
   @doc """
-  Takes a map of stack names and entire stack states, and returns a new push-state
-  with those stacks set.
+  Takes a map of stack names and entire stack states, and returns a new
+  push-state with those stacks set.
   """
   @spec push_state_from_stacks(map) :: map
   def push_state_from_stacks(stack_assignments) do

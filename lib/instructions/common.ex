@@ -59,7 +59,10 @@ defmodule Elixush.Instructions.Common do
   @doc "Pushes the depth of the type stack of the given state."
   def stackdepther(type, state), do: state[type] |> length |> push_item(:integer, state)
 
-  @doc "Yanks an item from deep in the specified stack, using the top integer to indicate how deep."
+  @doc """
+  Yanks an item from deep in the specified stack, using the top integer
+  to indicate how deep.
+  """
   def yanker(type, state) do
     if (type == :integer and not(Enum.empty?(Enum.drop(state[type], 1)))) or (type != :integer and (not(Enum.empty?(state[type])) and not(Enum.empty?(state[:integer])))) do
       raw_index = stack_ref(:integer, 0, state)
@@ -74,7 +77,10 @@ defmodule Elixush.Instructions.Common do
     end
   end
 
-  @doc "Yanks a copy of an item from deep in the specified stack, using the top integer to indicate how deep."
+  @doc """
+  Yanks a copy of an item from deep in the specified stack, using the top
+  integer to indicate how deep.
+  """
   def yankduper(type, state) do
     if (type == :integer and not(Enum.empty?(Enum.drop(state[type], 1)))) or (type != :integer and (not(Enum.empty?(state[type])) and not(Enum.empty?(state[:integer])))) do
       raw_index = stack_ref(:integer, 0, state)
@@ -87,7 +93,10 @@ defmodule Elixush.Instructions.Common do
     end
   end
 
-  @doc "Shoves an item deep in the specified stack, using the top integer to indicate how deep."
+  @doc """
+  Shoves an item deep in the specified stack, using the top integer to
+  indicate how deep.
+  """
   def shover(type, state) do
     if (type == :integer and not(Enum.empty?(Enum.drop(state[type], 1)))) or (type != :integer and (not(Enum.empty?(state[type])) and not(Enum.empty?(state[:integer])))) do
       raw_index = stack_ref(:integer, 0, state)

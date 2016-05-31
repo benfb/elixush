@@ -25,7 +25,11 @@ defmodule Elixush.Instructions.Code do
 
   def code_atom(state) do
     if not(Enum.empty?(state[:code])) do
-      push_item(not(is_list(stack_ref(:code, 0, state))), :boolean, pop_item(:code, state))
+      :code
+      |> stack_ref(0, state)
+      |> is_list()
+      |> Kernel.not
+      |> push_item(:boolean, pop_item(:code, state))
     else
       state
     end
@@ -70,7 +74,9 @@ defmodule Elixush.Instructions.Code do
 
   def code_do(state) do
     if not(Enum.empty?(state[:code])) do
-      push_item(stack_ref(:code, 0, state), :exec, push_item(:code_pop, :exec, state))
+      :code
+      |> stack_ref(0, state)
+      |> push_item(:exec, push_item(:code_pop, :exec, state))
     else
       state
     end
@@ -89,7 +95,8 @@ defmodule Elixush.Instructions.Code do
       to_do = List.first(state[:code])
       current_index = state[:integer] |> Enum.drop(1) |> List.first
       destination_index = state[:integer] |> List.first
-      args_popped = pop_item(:integer, pop_item(:integer, pop_item(:code, state)))
+      args_popped = :integer
+                    |> pop_item(pop_item(:integer, pop_item(:code, state)))
       increment = cond do
         current_index < destination_index -> 1
         current_index > destination_index -> -1
@@ -98,7 +105,8 @@ defmodule Elixush.Instructions.Code do
       continuation = if increment == 0 do
         args_popped
       else
-        push_item([current_index + increment, destination_index, :code_quote, to_do, :code_do_star_range], :exec, args_popped)
+        [current_index + increment, destination_index, :code_quote, to_do, :code_do_star_range]
+        |> push_item(:exec, args_popped)
       end
       push_item(to_do, :exec, push_item(current_index, :integer, continuation))
     else
@@ -139,26 +147,27 @@ defmodule Elixush.Instructions.Code do
 
   def exec_do_star_count(state) do # differs from code_do_star_count only in the source of the code and the recursive call
     if not((Enum.empty?(state[:integer]) or List.first(state[:integer]) < 1) or Enum.empty?(state[:exec])) do
-      [0, List.first(state[:integer]) - 1, :exec_do_star_range, List.first(state[:exec])] |>
-        push_item(:exec, pop_item(:integer, pop_item(:exec, state)))
+      [0, List.first(state[:integer]) - 1, :exec_do_star_range, List.first(state[:exec])]
+      |> push_item(:exec, pop_item(:integer, pop_item(:exec, state)))
     else
       state
     end
   end
 
   def code_do_star_times(state) do
-    if not((Enum.empty?(state[:integer]) or List.first(state[:integer]) < 1) or Enum.empty?(state[:code])) do
-      [0, List.first(state[:integer]) - 1, :code_quote, List.insert_at(ensure_list(List.first(state[:code])), 0, :integer_pop), :code_do_star_range] |>
-        push_item(:exec, pop_item(:integer, pop_item(:code, state)))
+    if state[:integer] != [] and List.first(state[:integer]) >= 1 and state[:code] != [] do
+      [0, List.first(state[:integer]) - 1, :code_quote, List.insert_at(ensure_list(List.first(state[:code])), 0, :integer_pop), :code_do_star_range]
+      |> push_item(:exec, pop_item(:integer, pop_item(:code, state)))
     else
       state
     end
   end
 
-  def exec_do_star_times(state) do # differs from code_do_star_times only in the source of the code and the recursive call
+  # differs from code_do_star_times only in the source of the code and the recursive call
+  def exec_do_star_times(state) do
     if not((Enum.empty?(state[:integer]) or List.first(state[:integer]) < 1) or Enum.empty?(state[:exec])) do
-      [0, List.first(state[:integer]) - 1, :exec_do_star_range, List.insert_at(ensure_list(List.first(state[:exec])), 0, :integer_pop)] |>
-        push_item(:exec, pop_item(:integer, pop_item(:exec, state)))
+      [0, List.first(state[:integer]) - 1, :exec_do_star_range, List.insert_at(ensure_list(List.first(state[:exec])), 0, :integer_pop)]
+      |> push_item(:exec, pop_item(:integer, pop_item(:exec, state)))
     else
       state
     end
@@ -196,7 +205,10 @@ defmodule Elixush.Instructions.Code do
         [:code_quote, item, List.first(state[:exec])]
       end
       second = [:code_wrap]
-      third = for _item <- Enum.drop(ensure_list(List.first(state[:code])), 1), do: :code_cons
+      third = for _item <- state[:code]
+                |> List.first
+                |> ensure_list
+                |> Enum.drop(1), do: :code_cons
       first
       |> Enum.concat(Enum.concat(second, third))
       |> push_item(:exec, pop_item(:code, pop_item(:exec, state)))
@@ -243,19 +255,22 @@ defmodule Elixush.Instructions.Code do
         List.first(Enum.drop(state[:code], 1))
       else
         List.first(state[:code])
-      end |> push_item(:exec, pop_item(:boolean, pop_item(:code, pop_item(:code, state))))
+      end
+      |> push_item(:exec, pop_item(:boolean, pop_item(:code, pop_item(:code, state))))
     else
       state
     end
   end
 
-  def exec_if(state) do # differs from code_if in the source of the code and in the order of the if/then parts
+  # differs from code_if in the source of the code and in the order of the if/then parts
+  def exec_if(state) do
     if not(Enum.empty?(state[:boolean]) or Enum.empty?(Enum.drop(state[:exec], 1))) do
       if List.first(state[:boolean]) do
         List.first(state[:exec])
       else
         List.first(Enum.drop(state[:exec], 1))
-      end |> push_item(:exec, pop_item(:boolean, pop_item(:exec, pop_item(:exec, state))))
+      end
+      |> push_item(:exec, pop_item(:boolean, pop_item(:exec, pop_item(:exec, state))))
     else
       state
     end
@@ -275,7 +290,11 @@ defmodule Elixush.Instructions.Code do
 
   def code_length(state) do
     if not(Enum.empty?(state[:code])) do
-      push_item(Enum.count(ensure_list(List.first(state[:code]))), :integer, pop_item(:code, state))
+      state[:code]
+      |> List.first
+      |> ensure_list
+      |> Enum.count
+      |> push_item(:integer, pop_item(:code, state))
     else
       state
     end
@@ -320,8 +339,12 @@ defmodule Elixush.Instructions.Code do
   end
 
   def code_nth(state) do # TODO: This is disgusting
+    top_code_as_list = state[:code] |> List.first |> ensure_list
+    top_int = List.first(state[:integer])
     if not((Enum.empty?(state[:integer]) or Enum.empty?(state[:code])) or Enum.empty?(ensure_list(List.first(state[:code])))) do
-      push_item(Enum.at(ensure_list(List.first(state[:code])), rem(abs(List.first(state[:integer])), Enum.count(ensure_list(List.first(state[:code]))))), :code, pop_item(:integer, pop_item(:code, state)))
+      top_code_as_list
+      |> Enum.at(rem(abs(top_int), Enum.count(top_code_as_list)))
+      |> push_item(:code, pop_item(:integer, pop_item(:code, state)))
     else
       state
     end
@@ -329,10 +352,13 @@ defmodule Elixush.Instructions.Code do
 
   def code_nthcdr(state) do
     if not((Enum.empty?(state[:integer]) or Enum.empty?(state[:code])) or Enum.empty?(ensure_list(List.first(state[:code])))) do
-      state[:code] |> List.first |> ensure_list |> Enum.drop(state[:integer]
-                                                             |> List.first
-                                                             |> abs
-                                                             |> rem(Enum.count(ensure_list(List.first(state[:code])))))
+      state[:code]
+      |> List.first
+      |> ensure_list
+      |> Enum.drop(state[:integer]
+                   |> List.first
+                   |> abs
+                   |> rem(Enum.count(ensure_list(List.first(state[:code])))))
       |> push_item(:code, pop_item(:integer, pop_item(:code, state)))
     else
       state
@@ -366,7 +392,8 @@ defmodule Elixush.Instructions.Code do
     if not(Enum.empty?(Enum.drop(state[:code], 1)) or Enum.empty?(state[:integer])) do
       new_item = insert_code_at_point(List.first(state[:code]), List.first(state[:integer]), Enum.at(state[:code], 1))
       if count_points(new_item) <= get_globals(:global_max_points) do
-        push_item(new_item, :code, pop_item(:code, pop_item(:code, pop_item(:integer, state))))
+        new_item
+        |> push_item(:code, pop_item(:code, pop_item(:code, pop_item(:integer, state))))
       else
         state
       end
@@ -377,7 +404,10 @@ defmodule Elixush.Instructions.Code do
 
   def code_subst(state) do
     if not(Enum.empty?(Enum.drop(Enum.drop(state[:code], 1), 1))) do
-      new_item = subst(stack_ref(:code, 2, state), stack_ref(:code, 1, state), stack_ref(:code, 0, state))
+      new_item =
+        :code
+        |> stack_ref(2, state)
+        |> subst(stack_ref(:code, 1, state), stack_ref(:code, 0, state))
       if count_points(new_item) <= get_globals(:global_max_points) do
         push_item(new_item, :code, pop_item(:code, pop_item(:code, pop_item(:code, state))))
       else

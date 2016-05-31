@@ -31,7 +31,8 @@ defmodule Elixush.Instructions.Boolean do
 
   def boolean_xor(state) do
     if not(state[:boolean] |> Enum.drop(1) |> Enum.empty?) do
-      to_push = not(stack_ref(:boolean, 0, state) == stack_ref(:boolean, 1, state))
+      to_push =
+        not(stack_ref(:boolean, 0, state) == stack_ref(:boolean, 1, state))
       push_item(to_push, :boolean, pop_item(:boolean, pop_item(:boolean, state)))
     else
       state
@@ -40,7 +41,8 @@ defmodule Elixush.Instructions.Boolean do
 
   def boolean_invert_first_then_and(state) do
     if not(state[:boolean] |> Enum.drop(1) |> Enum.empty?) do
-      to_push = not(stack_ref(:boolean, 0, state)) and stack_ref(:boolean, 1, state)
+      to_push =
+        not(stack_ref(:boolean, 0, state)) and stack_ref(:boolean, 1, state)
       push_item(to_push, :boolean, pop_item(:boolean, pop_item(:boolean, state)))
     else
       state
@@ -49,7 +51,8 @@ defmodule Elixush.Instructions.Boolean do
 
   def boolean_invert_second_then_and(state) do
     if not(state[:boolean] |> Enum.drop(1) |> Enum.empty?) do
-      to_push = stack_ref(:boolean, 0, state) and not(stack_ref(:boolean, 1, state))
+      to_push =
+        stack_ref(:boolean, 0, state) and not(stack_ref(:boolean, 1, state))
       push_item(to_push, :boolean, pop_item(:boolean, pop_item(:boolean, state)))
     else
       state

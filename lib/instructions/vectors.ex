@@ -67,7 +67,9 @@ defmodule Elixush.Instructions.Vectors do
       first_item = stack_ref(type, 0, state)
       second_item = stack_ref(type, 1, state)
       if get_globals(:max_vector_length) >= Enum.count(first_item) + Enum.count(second_item) do
-        second_item |> Enum.concat(first_item) |> push_item(type, pop_item(type, pop_item(type, state)))
+        second_item
+        |> Enum.concat(first_item)
+        |> push_item(type, pop_item(type, pop_item(type, state)))
       else
         state
       end
@@ -81,12 +83,18 @@ defmodule Elixush.Instructions.Vectors do
   def vector_boolean_concat(state), do: concater(:vector_boolean, state)
   def vector_string_concat(state), do: concater(:vector_string, state)
 
-  @doc "Takes a vec_type, a lit_type, and a state and conj's an item onto the type stack."
+  @doc """
+  Takes a vec_type, a lit_type, and a state and conj's an item onto the
+  type stack.
+  """
   def conjer(vec_type, lit_type, state) do
     if not(Enum.empty?(state[vec_type])) and not(Enum.empty?(state[lit_type])) do
-      result = lit_type |> top_item(state) |> List.insert_at(-1, top_item(vec_type, state))
+      result = lit_type
+               |> top_item(state)
+               |> List.insert_at(-1, top_item(vec_type, state))
       if get_globals(:max_vector_length) >= Enum.count(result) do
-        push_item(result, vec_type, pop_item(lit_type, pop_item(vec_type, state)))
+        result
+        |> push_item(vec_type, pop_item(lit_type, pop_item(vec_type, state)))
       else
         state
       end
@@ -100,10 +108,16 @@ defmodule Elixush.Instructions.Vectors do
   def vector_boolean_conj(state), do: conjer(:vector_boolean, :boolean, state)
   def vector_string_conj(state), do: conjer(:vector_string, :string, state)
 
-  @doc "Takes a type and a state and takes the first N items from the type stack, where N is from the integer stack."
+  @doc """
+  Takes a type and a state and takes the first N items from the type stack,
+  where N is from the integer stack.
+  """
   def taker(type, state) do
     if not(Enum.empty?(state[type])) and not(Enum.empty?(state[:integer])) do
-      type |> top_item(state) |> Enum.take(top_item(:integer, state)) |> push_item(type, pop_item(type, pop_item(:integer, state)))
+      type
+      |> top_item(state)
+      |> Enum.take(top_item(:integer, state))
+      |> push_item(type, pop_item(type, pop_item(:integer, state)))
     else
       state
     end
@@ -114,12 +128,19 @@ defmodule Elixush.Instructions.Vectors do
   def vector_boolean_take(state), do: taker(:vector_boolean, state)
   def vector_string_take(state), do: taker(:vector_string, state)
 
-  @doc "Takes a type and a state and takes the subvec of the top item on the type stack."
+  @doc """
+  Takes a type and a state and takes the subvec of the top item on the
+  type stack.
+  """
   def subvecer(type, state) do
     if not(Enum.empty?(state[type])) and not(Enum.empty?(Enum.drop(state[:integer], 1))) do
       vect = top_item(type, state)
-      first_index = min(Enum.count(vect), max(0, stack_ref(:integer, 1, state)))
-      second_index = min(Enum.count(vect), max(first_index, stack_ref(:integer, 0, state)))
+      first_index = vect
+                    |> Enum.count
+                    |> min(max(0, stack_ref(:integer, 1, state)))
+      second_index = vect
+                     |> Enum.count
+                     |> min(max(first_index, stack_ref(:integer, 0, state)))
       vect
       |> Enum.slice(first_index, second_index - first_index)
       |> push_item(type, pop_item(type, pop_item(:integer, pop_item(:integer, state))))
@@ -136,7 +157,10 @@ defmodule Elixush.Instructions.Vectors do
   @doc "Takes a type and a state and gets the first item from the type stack."
   def firster(type, lit_type, state) do
     if not(Enum.empty?(state[type])) and not(Enum.empty?(List.first(state[type]))) do
-      push_item(List.first(top_item(type, state)), lit_type, pop_item(type, state))
+      type
+      |> top_item(state)
+      |> List.first
+      |> push_item(lit_type, pop_item(type, state))
     else
       state
     end
@@ -150,7 +174,10 @@ defmodule Elixush.Instructions.Vectors do
   @doc "Takes a type and a state and gets the last item from the type stack."
   def laster(type, lit_type, state) do
     if not(Enum.empty?(state[type])) and not(Enum.empty?(List.first(state[type]))) do
-      push_item(List.last(top_item(type, state)), lit_type, pop_item(type, state))
+      type
+      |> top_item(state)
+      |> List.last
+      |> push_item(lit_type, pop_item(type, state))
     else
       state
     end
@@ -177,7 +204,9 @@ defmodule Elixush.Instructions.Vectors do
   def vector_boolean_nth(state), do: nther(:vector_boolean, :boolean, state)
   def vector_string_nth(state), do: nther(:vector_string, :string, state)
 
-  @doc "Takes a type and a state and takes the rest of the top item on the type stack."
+  @doc """
+  Takes a type and a state and takes the rest of the top item on the type stack.
+  """
   def rester(type, state) do
     if (not(Enum.empty?(state[type]))) do
       type |> top_item(state) |> Enum.drop(1) |> push_item(type, pop_item(type, state))
@@ -191,7 +220,10 @@ defmodule Elixush.Instructions.Vectors do
   def vector_boolean_rest(state), do: rester(:vector_boolean, state)
   def vector_string_rest(state), do: rester(:vector_string, state)
 
-  @doc "Takes a type and a state and takes the butlast of the top item on the type stack."
+  @doc """
+  Takes a type and a state and takes the butlast of the top item on the
+  type stack.
+  """
   def butlaster(type, state) do
     if (not(Enum.empty?(state[type]))) do
       type |> top_item(state) |> Enum.drop(-1) |> push_item(type, pop_item(type, state))
@@ -205,7 +237,10 @@ defmodule Elixush.Instructions.Vectors do
   def vector_boolean_butlast(state), do: butlaster(:vector_boolean, state)
   def vector_string_butlast(state), do: butlaster(:vector_string, state)
 
-  @doc "Takes a type and a state and takes the length of the top item on the type stack."
+  @doc """
+  Takes a type and a state and takes the length of the top item on the
+  type stack.
+  """
   def lengther(type, state) do
     if (not(Enum.empty?(state[type]))) do
       type |> top_item(state) |> Enum.count |> push_item(:integer, pop_item(type, state))
@@ -219,7 +254,10 @@ defmodule Elixush.Instructions.Vectors do
   def vector_boolean_length(state), do: lengther(:vector_boolean, state)
   def vector_string_length(state), do: lengther(:vector_string, state)
 
-  @doc "Takes a type and a state and takes the reverse of the top item on the type stack."
+  @doc """
+  Takes a type and a state and takes the reverse of the top item on the
+  type stack.
+  """
   def reverser(type, state) do
     if (not(Enum.empty?(state[type]))) do
       type |> top_item(state) |> Enum.reverse |> push_item(type, pop_item(type, state))
@@ -233,7 +271,10 @@ defmodule Elixush.Instructions.Vectors do
   def vector_boolean_reverse(state), do: reverser(:vector_boolean, state)
   def vector_string_reverse(state), do: reverser(:vector_string, state)
 
-  @doc "Takes a type and a state and pushes every item from the first vector onto the appropriate stack."
+  @doc """
+  Takes a type and a state and pushes every item from the first vector
+  onto the appropriate stack.
+  """
   def pushaller(type, lit_type, state) do
     if Enum.empty?(state[type]) do
       state
@@ -254,7 +295,10 @@ defmodule Elixush.Instructions.Vectors do
   def vector_boolean_pushall(state), do: pushaller(:vector_boolean, :boolean, state)
   def vector_string_pushall(state), do: pushaller(:vector_string, :string, state)
 
-  @doc "Takes a type and a state and pushes a boolean of whether the top vector is empty."
+  @doc """
+  Takes a type and a state and pushes a boolean of whether the top vector
+  is empty.
+  """
   def emptyvectorer(type, state) do
     if (not(Enum.empty?(state[type]))) do
       type |> top_item(state) |> Enum.empty? |> push_item(:boolean, pop_item(type, state))
@@ -268,7 +312,10 @@ defmodule Elixush.Instructions.Vectors do
   def vector_boolean_emptyvector(state), do: emptyvectorer(:vector_boolean, state)
   def vector_string_emptyvector(state), do: emptyvectorer(:vector_string, state)
 
-  @doc "Takes a type and a state and tells whether the top lit_type item is in the top type vector."
+  @doc """
+  Takes a type and a state and tells whether the top lit_type item is in the top
+  type vector.
+  """
   def containser(type, lit_type, state) do
     if Enum.empty?(state[type]) or Enum.empty?(state[lit_type]) do
       state
@@ -284,7 +331,10 @@ defmodule Elixush.Instructions.Vectors do
   def vector_boolean_contains(state), do: containser(:vector_boolean, :boolean, state)
   def vector_string_contains(state), do: containser(:vector_string, :string, state)
 
-  @doc "Takes a type and a state and finds the index of the top lit_type item in the top type vector."
+  @doc """
+  Takes a type and a state and finds the index of the top lit_type item
+  in the top type vector.
+  """
   def indexofer(type, lit_type, state) do
     if Enum.empty?(state[type]) or Enum.empty?(state[lit_type]) do
       state
@@ -301,7 +351,10 @@ defmodule Elixush.Instructions.Vectors do
   def vector_boolean_indexof(state), do: indexofer(:vector_boolean, :boolean, state)
   def vector_string_indexof(state), do: indexofer(:vector_string, :string, state)
 
-  @doc "Takes a type and a state and counts the occurrences of the top lit_type item in the top type vector."
+  @doc """
+  Takes a type and a state and counts the occurrences of the top lit_type item
+  in the top type vector.
+  """
   def occurrencesofer(type, lit_type, state) do
     if Enum.empty?(state[type]) or Enum.empty?(state[lit_type]) do
       state
@@ -330,7 +383,8 @@ defmodule Elixush.Instructions.Vectors do
       item = if lit_type == :integer, do: stack_ref(:integer, 1, state), else: top_item(lit_type, state)
       index = if Enum.empty?(vect), do: 0, else: rem(top_item(:integer, state), Enum.count(vect))
       result = if Enum.empty?(vect), do: vect, else: List.replace_at(vect, index, item)
-      result |> push_item(type, pop_item(lit_type, pop_item(:integer, pop_item(type, state))))
+      result
+      |> push_item(type, pop_item(lit_type, pop_item(:integer, pop_item(type, state))))
     end
   end
 
@@ -351,7 +405,8 @@ defmodule Elixush.Instructions.Vectors do
       to_replace = stack_ref(lit_type, 1, state)
       vect = top_item(type, state)
       result = vect |> Enum.map(&(if &1 == to_replace, do: replace_with, else: &1))
-      result |> push_item(type, pop_item(lit_type, pop_item(lit_type, pop_item(type, state))))
+      result
+      |> push_item(type, pop_item(lit_type, pop_item(lit_type, pop_item(type, state))))
     end
   end
 
@@ -384,8 +439,8 @@ defmodule Elixush.Instructions.Vectors do
   def vector_string_replacefirst(state), do: replacefirster(:vector_string, :string, state)
 
   @doc """
-  Takes a type and a state and removes all occurrences of the first lit_type item
-  in the top type vector.
+  Takes a type and a state and removes all occurrences of the first lit_type
+  item in the top type vector.
   """
   def removeer(type, lit_type, state) do
     if Enum.empty?(state[type]) or Enum.empty?(state[lit_type]) do
@@ -404,8 +459,8 @@ defmodule Elixush.Instructions.Vectors do
   def vector_string_remove(state), do: removeer(:vector_string, :string, state)
 
   @doc """
-  Takes a type and a state and iterates over the type vector using the code on the
-  exec stack. If the vector isn't empty, expands to:
+  Takes a type and a state and iterates over the type vector using the code on
+  the exec stack. If the vector isn't empty, expands to:
   ((first vector) (top-item :exec state) (rest vector) exec_do*vector_type (top-item :exec state) rest_of_program)
   """
   def iterateer(type, lit_type, instr, state) do

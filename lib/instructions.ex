@@ -1,4 +1,6 @@
 defmodule Elixush.Instructions do
+  @moduledoc "Defines a macro for importing all Elixush instructions at once."
+
   alias Elixush.PushState
   import Elixush.Instructions.{}
 
@@ -15,7 +17,6 @@ defmodule Elixush.Instructions do
           PushState.define_registered(f_atom, f_partial)
         end)
       end)
-      # Logger.info("Instructions:\n#{inspect(Elixush.Globals.Agent.get_globals(:instruction_table), pretty: true)}")
       Logger.info("Elixush interpreter started!")
     end
   end

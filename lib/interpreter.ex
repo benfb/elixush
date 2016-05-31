@@ -67,10 +67,15 @@ defmodule Elixush.Interpreter do
             trace == :changes -> if execution_result == s do
               execution_result
             else
-              Map.put(execution_result, :trace, List.insert_at((if is_list(s[:trace]), do: s[:trace], else: []), 0, exec_top))
+              full_trace = if is_list(s[:trace]), do: s[:trace], else: []
+                           |> List.insert_at(0, exec_top)
+              Map.put(execution_result, :trace, full_trace)
             end
             trace == false -> execution_result
-            trace == true -> Map.put(execution_result, :trace, List.insert_at((if is_list(s[:trace]), do: s[:trace], else: []), 0, exec_top))
+            trace == true ->
+              full_trace = if is_list(s[:trace]), do: s[:trace], else: []
+                           |> List.insert_at(0, exec_top)
+              Map.put(execution_result, :trace, full_trace)
           end
         end
         if print_steps do

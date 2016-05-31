@@ -32,8 +32,8 @@ defmodule Elixush.Evaluate do
   @doc """
   Calculates one meta-error for each meta-error category provided. Each
   meta-error-category should either be a keyword for a built-in meta category
-  or a function that takes an individual and an argmap and returns a meta error value.
-  The built-in meta categories include:
+  or a function that takes an individual and an argmap and returns a meta
+  error value. The built-in meta categories include:
     :size (minimize size of program)
     :compressibility (minimize ammount a program compresses compared to itself)
     :total-error (minimize total error)

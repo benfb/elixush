@@ -149,12 +149,13 @@ defmodule Elixush.Instructions.Integer do
     end
   end
 
+  # TODO: make this fail more gracefully
   def integer_fromstring(state) do
     if not(Enum.empty?(state[:string])) do
       try do
         pop_item(:string, push_item(keep_number_reasonable(String.to_integer(top_item(:string, state))), :integer, state))
       rescue
-        e in ArgumentError -> {e, state}
+        _error in ArgumentError -> state
       end
     else
       state
