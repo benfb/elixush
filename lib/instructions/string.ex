@@ -41,7 +41,7 @@ defmodule Elixush.Instructions.String do
 
   def string_concat(state) do
     if not(state[:string] |> Enum.drop(1) |> Enum.empty?) do
-      if(get_globals(:max_string_length) >= Enum.count(stack_ref(:string, 1, state)) + Enum.count(stack_ref(:string, 0, state))) do
+      if get_globals(:max_string_length) >= Enum.count(stack_ref(:string, 1, state)) + Enum.count(stack_ref(:string, 0, state)) do
         push_item(stack_ref(:string, 1, state) <> stack_ref(:string, 0, state), :string, pop_item(:string, pop_item(:string, state)))
       else
         state
