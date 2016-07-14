@@ -38,22 +38,25 @@ defmodule Elixush.Util do
 
   @doc "Returns a version of n that obeys limit parameters."
   @spec keep_number_reasonable(number) :: number
+  def keep_number_reasonable(n) when is_integer(n) do
+    max_number_magnitude = get_globals(:max_number_magnitude)
+    cond do
+      n > max_number_magnitude -> max_number_magnitude
+      n < -max_number_magnitude -> -max_number_magnitude
+      true -> n
+    end
+  end
+
+  @doc "Returns a version of n that obeys limit parameters."
+  @spec keep_number_reasonable(number) :: number
   def keep_number_reasonable(n) do
     max_number_magnitude = get_globals(:max_number_magnitude)
     min_number_magnitude = get_globals(:min_number_magnitude)
-    if is_integer(n) do
-      cond do
-        n > max_number_magnitude -> max_number_magnitude
-        n < -max_number_magnitude -> -max_number_magnitude
-        true -> n
-      end
-    else
-      cond do
-        n > max_number_magnitude -> max_number_magnitude * 1.0
-        n < -max_number_magnitude -> -max_number_magnitude * 1.0
-        n < min_number_magnitude and n > -min_number_magnitude -> 0.0
-        true -> n
-      end
+    cond do
+      n > max_number_magnitude -> max_number_magnitude * 1.0
+      n < -max_number_magnitude -> -max_number_magnitude * 1.0
+      n < min_number_magnitude and n > -min_number_magnitude -> 0.0
+      true -> n
     end
   end
 

@@ -215,10 +215,20 @@ defmodule Elixush.Instructions.IO do
   end
 
   def print_newline(state) do
-    if get_globals(:max_string_length) < (:output |> stack_ref(0, state) |> to_string) <> "\n" |> String.length do
+    string_length =
+      :output
+      |> stack_ref(0, state)
+      |> to_string
+      |> (fn(x) -> x <> "\n" end).()
+      |> String.length
+    if get_globals(:max_string_length) < string_length do
       state
     else
-      stack_assoc(to_string(stack_ref(:output, 0, state)) <> "\n", :output, 0, state)
+      :output
+      |> stack_ref(0, state)
+      |> to_string
+      |> (fn(x) -> x <> "\n" end).()
+      |> stack_assoc(:output, 0, state)
     end
   end
 

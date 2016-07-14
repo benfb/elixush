@@ -340,7 +340,7 @@ defmodule Elixush.Instructions.Code do
     end
   end
 
-  def code_nth(state) do # TODO: This is disgusting
+  def code_nth(state) do
     top_code_as_list = state[:code] |> List.first |> ensure_list
     top_int = List.first(state[:integer])
     if not((Enum.empty?(state[:integer]) or Enum.empty?(state[:code])) or Enum.empty?(ensure_list(List.first(state[:code])))) do
@@ -449,7 +449,8 @@ defmodule Elixush.Instructions.Code do
 
   def code_position(state) do
     if not(Enum.empty?(Enum.drop(state[:code], 1))) do
-      positions(&(&1 == stack_ref(:code, 1, state)), ensure_list(stack_ref(:code, 0, state)))
+      &(&1 == stack_ref(:code, 1, state))
+      |> positions(ensure_list(stack_ref(:code, 0, state)))
       |> List.first
       |> (fn(x) -> x or -1 end).()
       |> push_item(:integer, pop_item(:code, pop_item(:code, state)))

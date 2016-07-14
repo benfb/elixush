@@ -43,8 +43,9 @@ defmodule Elixush.Interpreter do
 
   def inner_loop(iteration, s, time_limit, print_steps, trace, save_state_sequence) do
     both_empty = empty?(s[:exec]) and empty?(s[:environment])
+    normal_status = if both_empty, do: :normal, else: :abnormal
     if ((iteration > get_globals(:global_evalpush_limit)) or both_empty) or (time_limit != 0 and (System.system_time(:nano_seconds) > time_limit)) do
-      Map.put(s, :termination, if(both_empty, do: :normal, else: :abnormal))
+      Map.put(s, :termination, normal_status)
     else
       if empty?(s[:exec]) do
         s = end_environment(s)
