@@ -79,7 +79,7 @@ some testing is still necessary.
 
 * Clean up codebase
 * Finish porting over instructions from Clojush
-* Add tests!
+* Improve tests
 * Make a standalone executable?
 * Implement GP?
 * Implement Plush?
