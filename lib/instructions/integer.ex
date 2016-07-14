@@ -31,7 +31,10 @@ defmodule Elixush.Instructions.Integer do
     if not(Enum.empty?(Enum.drop(state[:integer], 1))) and not(stack_ref(:integer, 0, state) == 0) do
       first = stack_ref(:integer, 0, state)
       second = stack_ref(:integer, 1, state)
-      item = (second * first) |> keep_number_reasonable
+      item =
+        second
+        |> (fn(x) -> x * first end).()
+        |> keep_number_reasonable
       push_item(item, :integer, pop_item(:integer, pop_item(:integer, state)))
     else
       state

@@ -30,7 +30,10 @@ defmodule Elixush.Instructions.Float do
     if not(Enum.empty?(Enum.drop(state[:float], 1))) and not(stack_ref(:float, 0, state) == 0) do
       first = stack_ref(:float, 0, state)
       second = stack_ref(:float, 1, state)
-      item = (second * first) |> keep_number_reasonable
+      item =
+        second
+        |> (fn(x) -> x * first end).()
+        |> keep_number_reasonable
       push_item(item, :float, pop_item(:float, pop_item(:float, state)))
     else
       state
@@ -42,7 +45,10 @@ defmodule Elixush.Instructions.Float do
     if not(Enum.empty?(Enum.drop(state[:float], 1))) and not(stack_ref(:float, 0, state) == 0) do
       first = stack_ref(:float, 0, state)
       second = stack_ref(:float, 1, state)
-      item = (second / first) |> keep_number_reasonable
+      item =
+        second
+        |> (fn(x) -> x / first end).()
+        |> keep_number_reasonable
       push_item(item, :float, pop_item(:float, pop_item(:float, state)))
     else
       state

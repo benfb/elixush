@@ -9,7 +9,9 @@ defmodule Elixush.Mixfile do
      start_permanent: Mix.env == :prod,
      description: description,
      package: package,
-     deps: deps]
+     deps: deps,
+     test_coverage: [tool: Coverex.Task, coveralls: true],
+   ]
   end
 
   # Configuration for the OTP application

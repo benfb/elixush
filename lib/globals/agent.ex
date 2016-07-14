@@ -29,7 +29,7 @@ defmodule Elixush.Globals.Agent do
       instruction_table: %{},
       # These definitions are used by instructions to keep computed values within limits
       # or when using random instructions.
-      max_number_magnitude: 1000000000000, # Used by keep-number-reasonable as the maximum size of any integer or float
+      max_number_magnitude: 1_000_000_000_000, # Used by keep-number-reasonable as the maximum size of any integer or float
       min_number_magnitude: 1.0E-10, # Used by keep-number-reasonable as the minimum magnitude of any float
       max_string_length: 5000, # Used by string instructions to ensure that strings don't get too large
       max_vector_length: 5000, # Used by vector instructions to ensure that vectors don't get too large
@@ -52,7 +52,7 @@ defmodule Elixush.Globals.Agent do
       # These definitions are used by Push instructions and therefore must be global
       global_atom_generators: [], # The instructions and literals that may be used in Push programs.
       global_max_points: 100, # The maximum size of a Push program. Also, the maximum size of code that can appear on the exec or code stacks.
-      global_tag_limit: 10000, # The size of the tag space
+      global_tag_limit: 10_000, # The size of the tag space
       global_epigenetic_markers: [:close], # A vector of the epigenetic markers that should be used in the individuals. Implemented options include: :close, :silent
       global_close_parens_probabilities: [0.772, 0.206, 0.021, 0.001], # A vector of the probabilities for the number of parens ending at that position. See random-closes in clojush.random
       global_silent_instruction_probability: 0.2, # If :silent is used as an epigenetic-marker, this is the probability of random instructions having :silent be true

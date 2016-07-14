@@ -251,11 +251,12 @@ defmodule Elixush.Instructions.Code do
 
   def code_if(state) do
     if not(Enum.empty?(state[:boolean]) or Enum.empty?(Enum.drop(state[:code], 1))) do
-      if List.first(state[:boolean]) do
+      instr_to_run = if List.first(state[:boolean]) do
         List.first(Enum.drop(state[:code], 1))
       else
         List.first(state[:code])
       end
+      instr_to_run
       |> push_item(:exec, pop_item(:boolean, pop_item(:code, pop_item(:code, state))))
     else
       state
@@ -265,11 +266,12 @@ defmodule Elixush.Instructions.Code do
   # differs from code_if in the source of the code and in the order of the if/then parts
   def exec_if(state) do
     if not(Enum.empty?(state[:boolean]) or Enum.empty?(Enum.drop(state[:exec], 1))) do
-      if List.first(state[:boolean]) do
+      instr_to_run = if List.first(state[:boolean]) do
         List.first(state[:exec])
       else
         List.first(Enum.drop(state[:exec], 1))
       end
+      instr_to_run
       |> push_item(:exec, pop_item(:boolean, pop_item(:exec, pop_item(:exec, state))))
     else
       state
@@ -447,8 +449,10 @@ defmodule Elixush.Instructions.Code do
 
   def code_position(state) do
     if not(Enum.empty?(Enum.drop(state[:code], 1))) do
-      (List.first(positions(&(&1 == stack_ref(:code, 1, state)), ensure_list(stack_ref(:code, 0, state)))) or -1)
-        |> push_item(:integer, pop_item(:code, pop_item(:code, state)))
+      positions(&(&1 == stack_ref(:code, 1, state)), ensure_list(stack_ref(:code, 0, state)))
+      |> List.first
+      |> (fn(x) -> x or -1 end).()
+      |> push_item(:integer, pop_item(:code, pop_item(:code, state)))
     end
   end
 
