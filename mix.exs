@@ -17,7 +17,6 @@ defmodule Elixush.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     [applications: [:logger],
-     test_coverage: [tool: Coverex.Task],
      mod: {Elixush, []}]
   end
 
