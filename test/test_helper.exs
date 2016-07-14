@@ -1,3 +1,3 @@
 ExUnit.start()
 
-ExUnit.configure [tool: Coverex.Task]
+ExUnit.configure [tool: Coverex.Task, coveralls: true]
