@@ -13,7 +13,7 @@ defmodule Elixush.PushStateTest do
   test "push_item pushes an item successfully" do
     assert push_item(true, :boolean, make_push_state)
            |> Map.get(:boolean)
-           |> List.first == true
+           |> List.first
   end
 
 

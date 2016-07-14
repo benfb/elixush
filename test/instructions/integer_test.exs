@@ -46,25 +46,25 @@ defmodule Elixush.Instructions.IntegerTest do
   test ":integer_lte works properly" do
     assert Elixush.Server.run_program([100, 100, :integer_lte])
            |> Map.get(:boolean)
-           |> List.first == true
-    assert Elixush.Server.run_program([100, 2, :integer_lte])
+           |> List.first
+    refute Elixush.Server.run_program([100, 2, :integer_lte])
            |> Map.get(:boolean)
-           |> List.first == false
+           |> List.first
   end
 
   test ":integer_gt works properly" do
     assert Elixush.Server.run_program([100, 2, :integer_gt])
            |> Map.get(:boolean)
-           |> List.first == true
+           |> List.first
   end
 
   test ":integer_gte works properly" do
     assert Elixush.Server.run_program([100, 100, :integer_gte])
            |> Map.get(:boolean)
-           |> List.first == true
+           |> List.first
     assert Elixush.Server.run_program([100, 2, :integer_gte])
            |> Map.get(:boolean)
-           |> List.first == true
+           |> List.first
   end
 
   test ":integer_fromboolean works properly" do

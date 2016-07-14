@@ -3,7 +3,7 @@ defmodule Elixush.Evaluate do
   import Enum, only: [count: 1, map: 2, reduce: 2]
   import Elixush.Globals.Agent
 
-  ########################################################
+  # ######################################################
   # calculate the solution rates (only called from pushgp)
   @spec calculate_hah_solution_rates(Enum.t, map) :: nil
   def calculate_hah_solution_rates(pop_agents, argmap) do
@@ -26,7 +26,7 @@ defmodule Elixush.Evaluate do
     end
   end
 
-  #######################
+  # #####################
   # calculate meta-errors
 
   @doc """
@@ -53,7 +53,7 @@ defmodule Elixush.Evaluate do
     Enum.map(Map.get(argmap, :meta_error_categories), meta_error_fn)
   end
 
-  ######################
+  # ####################
   # evaluate individuals
 
   @spec compute_total_error(Enum.t) :: float
@@ -64,7 +64,7 @@ defmodule Elixush.Evaluate do
   @spec compute_root_mean_squared_error(Enum.t) :: Enum.t
   def compute_root_mean_squared_error(errors) do
     mse = errors |> map(&(&1 * &1)) |> reduce(&+/2)
-    :math.sqrt(mse/count(errors))
+    :math.sqrt(mse / count(errors))
   end
 
   @spec compute_hah_error(Enum.t) :: float
