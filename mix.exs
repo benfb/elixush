@@ -17,6 +17,7 @@ defmodule Elixush.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     [applications: [:logger],
+     test_coverage: [tool: Coverex.Task],
      mod: {Elixush, []}]
   end
 
@@ -32,8 +33,9 @@ defmodule Elixush.Mixfile do
   defp deps do
     [
       {:ex_doc, "~> 0.12", only: [:dev]},
+      {:coverex, "~> 1.4.9", only: :test},
       {:credo, "~> 0.4", only: [:dev, :test]},
-      {:dialyxir, "~> 0.3.3", only: [:dev, :test]},
+      {:dialyxir, "~> 0.3.5", only: [:dev, :test]},
       {:zipper, "0.2.0"}
     ]
   end
