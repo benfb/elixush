@@ -107,6 +107,9 @@ defmodule Elixush.Instructions.FloatTest do
     assert Elixush.Server.run_program(["127", :float_fromstring])
            |> Map.get(:float)
            |> List.first == nil
+    assert Elixush.Server.run_program([1.0, :float_fromstring])
+           |> Map.get(:float)
+           |> List.first == 1.0
   end
 
   test ":float_min works properly" do
@@ -131,6 +134,9 @@ defmodule Elixush.Instructions.FloatTest do
     assert Elixush.Server.run_program([:math.pi, :float_sin])
            |> Map.get(:float)
            |> List.first == 0.0
+    assert Elixush.Server.run_program(["test", true, :float_sin])
+           |> Map.get(:float)
+           |> List.first == nil
   end
 
   test ":float_cos works properly" do
