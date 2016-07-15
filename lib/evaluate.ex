@@ -46,8 +46,10 @@ defmodule Elixush.Evaluate do
         is_function(cat) -> cat.(ind, argmap)
         cat == :size -> length(Map.get(ind, :genome))
         cat == :total_error -> Map.get(ind, :total_error)
-        cat == :unsolved_cases -> length(Enum.filter(Map.get(ind, :errors), &(&1 > Map.get(argmap, :error_threshold))))
-        true -> raise(ArgumentError, message: "Unrecognized meta category: #{cat}")
+        cat == :unsolved_cases ->
+          length(Enum.filter(Map.get(ind, :errors), &(&1 > Map.get(argmap, :error_threshold))))
+        true ->
+          raise(ArgumentError, message: "Unrecognized meta category: #{cat}")
       end
     end
     Enum.map(Map.get(argmap, :meta_error_categories), meta_error_fn)
@@ -85,11 +87,7 @@ defmodule Elixush.Evaluate do
       map(errors, fn(err) ->
         case normalization do
           :divide_by_max_error ->
-            if err >= max_error do
-              1.0
-            else
-              err / max_error
-            end
+            if err >= max_error, do: 1.0, else: err / max_error
           :e_over_e_plus_1 ->
             err / (err + 1)
           true ->
@@ -124,15 +122,17 @@ defmodule Elixush.Evaluate do
     total_error_method = Map.get(argmap, :total_error_method)
     normalization = Map.get(argmap, :normalization)
     max_error = Map.get(argmap, :max_error)
-    pass_individual_to_error_function = Map.get(argmap, :pass_individual_to_error_function)
+    pass_individual_to_error_function =
+      Map.get(argmap, :pass_individual_to_error_function)
     p = Map.get(i, :program)
-    raw_errors = if not(reuse_errors) or is_nil(Map.get(i, :errors)) or is_nil(Map.get(i, :total_error)) do
-      if pass_individual_to_error_function do
-        error_function.(i)
-      else
-        error_function.(p)
+    raw_errors =
+      if not(reuse_errors) or is_nil(Map.get(i, :errors)) or is_nil(Map.get(i, :total_error)) do
+        if pass_individual_to_error_function do
+          error_function.(i)
+        else
+          error_function.(p)
+        end
       end
-    end
     e = if reuse_errors and not(is_nil(Map.get(i, :errors))) do
       Map.get(i, :errors)
     else
@@ -150,22 +150,22 @@ defmodule Elixush.Evaluate do
       compute_total_error(e)
     end
     we = case total_error_method do
-      :sum -> nil
-      :ifs -> nil
       :hah -> compute_hah_error(e)
       :rmse -> compute_root_mean_squared_error(e)
       _else -> nil
     end
+    hist =
+      if print_history do
+        List.insert_at(Map.get(i, :history), 0, te)
+      else
+        Map.get(i, :history)
+      end
     new_ind = Map.merge(i, %{
       errors: e,
       total_error: te,
       weighted_error: we,
       normalized_error: ne,
-      history: if print_history do
-        List.insert_at(Map.get(i, :history), 0, te)
-      else
-        Map.get(i, :history)
-      end
+      history: hist,
     })
     me = calculate_meta_errors(new_ind, argmap)
     Map.put(new_ind, :meta_errors, me)

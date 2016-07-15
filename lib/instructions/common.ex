@@ -85,7 +85,8 @@ defmodule Elixush.Instructions.Common do
     if (type == :integer and not(Enum.empty?(Enum.drop(state[type], 1)))) or (type != :integer and (not(Enum.empty?(state[type])) and not(Enum.empty?(state[:integer])))) do
       raw_index = stack_ref(:integer, 0, state)
       with_index_popped = pop_item(:integer, state)
-      actual_index = raw_index |> min(length(with_index_popped[type]) - 1) |> max(0)
+      actual_index =
+        raw_index |> min(length(with_index_popped[type]) - 1) |> max(0)
       item = stack_ref(type, actual_index, with_index_popped)
       push_item(item, type, with_index_popped)
     else

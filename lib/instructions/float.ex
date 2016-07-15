@@ -8,7 +8,10 @@ defmodule Elixush.Instructions.Float do
     if not(Enum.empty?(Enum.drop(state[:float], 1))) do
       first = stack_ref(:float, 0, state)
       second = stack_ref(:float, 1, state)
-      push_item(keep_number_reasonable(first + second), :float, pop_item(:float, pop_item(:float, state)))
+      first
+      |> (fn(x) -> x + second end).()
+      |> keep_number_reasonable
+      |> push_item(:float, pop_item(:float, pop_item(:float, state)))
     else
       state
     end
@@ -19,14 +22,17 @@ defmodule Elixush.Instructions.Float do
     if not(Enum.empty?(Enum.drop(state[:float], 1))) do
       first = stack_ref(:float, 0, state)
       second = stack_ref(:float, 1, state)
-      push_item(keep_number_reasonable(second - first), :float, pop_item(:float, pop_item(:float, state)))
+      second
+      |> (fn(x) -> x - first end).()
+      |> keep_number_reasonable
+      |> push_item(:float, pop_item(:float, pop_item(:float, state)))
     else
       state
     end
   end
 
   @doc "Pushes the product of the top two items."
-  def float_mult(state) do
+  def float_mult(%{float: float} = state) when true do
     if not(Enum.empty?(Enum.drop(state[:float], 1))) and not(stack_ref(:float, 0, state) == 0) do
       first = stack_ref(:float, 0, state)
       second = stack_ref(:float, 1, state)
@@ -39,6 +45,8 @@ defmodule Elixush.Instructions.Float do
       state
     end
   end
+
+  def float_mult(state), do: state
 
   @doc "Returns a function that pushes the product of the top two items."
   def float_div(state) do
@@ -155,7 +163,10 @@ defmodule Elixush.Instructions.Float do
   def float_fromstring(state) do
     if not(Enum.empty?(state[:string])) do
       try do
-        pop_item(:string, push_item(keep_number_reasonable(String.to_float(top_item(:string, state))), :float, state))
+        pop_item(:string, push_item(:string
+                                    |> top_item(state)
+                                    |> String.to_float
+                                    |> keep_number_reasonable, :float, state))
       rescue
         _error in ArgumentError -> state
       end
@@ -171,7 +182,9 @@ defmodule Elixush.Instructions.Float do
     if not(Enum.empty?(Enum.drop(state[:float], 1))) do
       first = stack_ref(:float, 0, state)
       second = stack_ref(:float, 1, state)
-      push_item(min(second, first), :float, pop_item(:float, pop_item(:float, state)))
+      second
+      |> min(first)
+      |> push_item(:float, pop_item(:float, pop_item(:float, state)))
     else
       state
     end
@@ -182,7 +195,9 @@ defmodule Elixush.Instructions.Float do
     if not(Enum.empty?(Enum.drop(state[:float], 1))) do
       first = stack_ref(:float, 0, state)
       second = stack_ref(:float, 1, state)
-      push_item(max(second, first), :float, pop_item(:float, pop_item(:float, state)))
+      second
+      |> max(first)
+      |> push_item(:float, pop_item(:float, pop_item(:float, state)))
     else
       state
     end
@@ -190,7 +205,11 @@ defmodule Elixush.Instructions.Float do
 
   def float_sin(state) do
     if not(Enum.empty?(state[:float])) do
-      push_item(keep_number_reasonable(:math.sin(stack_ref(:float, 0, state))), :float, pop_item(:float, state))
+      :float
+      |> stack_ref(0, state)
+      |> :math.sin
+      |> keep_number_reasonable
+      |> push_item(:float, pop_item(:float, state))
     else
       state
     end
@@ -198,7 +217,11 @@ defmodule Elixush.Instructions.Float do
 
   def float_cos(state) do
     if not(Enum.empty?(state[:float])) do
-      push_item(keep_number_reasonable(:math.cos(stack_ref(:float, 0, state))), :float, pop_item(:float, state))
+      :float
+      |> stack_ref(0, state)
+      |> :math.cos
+      |> keep_number_reasonable
+      |> push_item(:float, pop_item(:float, state))
     else
       state
     end
@@ -206,7 +229,11 @@ defmodule Elixush.Instructions.Float do
 
   def float_tan(state) do
     if not(Enum.empty?(state[:float])) do
-      push_item(keep_number_reasonable(:math.tan(stack_ref(:float, 0, state))), :float, pop_item(:float, state))
+      :float
+      |> stack_ref(0, state)
+      |> :math.tan
+      |> keep_number_reasonable
+      |> push_item(:float, pop_item(:float, state))
     else
       state
     end
@@ -214,7 +241,11 @@ defmodule Elixush.Instructions.Float do
 
   def float_inc(state) do
     if not(Enum.empty?(state[:float])) do
-      push_item(keep_number_reasonable(stack_ref(:float, 0, state)) + 1.0, :float, pop_item(:float, state))
+      :float
+      |> stack_ref(0, state)
+      |> (fn(x) -> x + 1.0 end).()
+      |> keep_number_reasonable
+      |> push_item(:float, pop_item(:float, state))
     else
       state
     end
@@ -222,7 +253,11 @@ defmodule Elixush.Instructions.Float do
 
   def float_dec(state) do
     if not(Enum.empty?(state[:float])) do
-      push_item(keep_number_reasonable(stack_ref(:float, 0, state)) - 1.0, :float, pop_item(:float, state))
+      :float
+      |> stack_ref(0, state)
+      |> (fn(x) -> x - 1.0 end).()
+      |> keep_number_reasonable
+      |> push_item(:float, pop_item(:float, state))
     else
       state
     end

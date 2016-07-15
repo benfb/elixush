@@ -7,24 +7,27 @@ defmodule Elixush.Interpreter do
 
   @doc "Executes a single Push instruction."
   def execute_instruction(instruction, state) do
-    update_globals(:point_evaluations_count, get_globals(:point_evaluations_count) + 1)
+    :point_evaluations_count
+    |> update_globals(get_globals(:point_evaluations_count) + 1)
     if is_nil(instruction) do
       state
     else
       literal_type = recognize_literal(instruction)
       cond do
         literal_type -> push_item(instruction, literal_type, state)
-        is_list(instruction) and ([] == instruction) -> push_item([], :vector_integer, push_item([], :vector_float, push_item([], :vector_string, push_item([], :vector_boolean, state))))
-        :instruction_table |> get_globals |> Map.has_key?(instruction) -> Map.get(get_globals(:instruction_table), instruction).(state)
+        is_list(instruction) and ([] == instruction) ->
+          push_item([], :vector_integer, push_item([], :vector_float, push_item([], :vector_string, push_item([], :vector_boolean, state))))
+        :instruction_table |> get_globals |> Map.has_key?(instruction) ->
+          Map.get(get_globals(:instruction_table), instruction).(state)
         true -> raise(ArgumentError, message: "Undefined instruction: #{Macro.to_string(instruction)}")
       end
     end
   end
 
   @doc """
-  Executes the contents of the exec stack, aborting prematurely if execution limits are
-  exceeded. The resulting push state will map :termination to :normal if termination was
-  normal, or :abnormal otherwise.
+  Executes the contents of the exec stack, aborting prematurely if execution
+  limits are exceeded. The resulting push state will map :termination to
+  :normal if termination was normal, or :abnormal otherwise.
   """
   def eval_push(state), do: eval_push(state, false, false, false)
 
@@ -41,7 +44,7 @@ defmodule Elixush.Interpreter do
     inner_loop(1, state, time_limit, print_steps, trace, save_state_sequence)
   end
 
-  def inner_loop(iteration, s, time_limit, print_steps, trace, save_state_sequence) do
+  defp inner_loop(iteration, s, time_limit, print_steps, trace, save_state_sequence) do
     both_empty = empty?(s[:exec]) and empty?(s[:environment])
     normal_status = if both_empty, do: :normal, else: :abnormal
     if ((iteration > get_globals(:global_evalpush_limit)) or both_empty) or (time_limit != 0 and (System.system_time(:nano_seconds) > time_limit)) do
@@ -55,8 +58,11 @@ defmodule Elixush.Interpreter do
         end
         # REVIEW: saved_state_sequence is in globals which may not be correct
         if save_state_sequence,
-          do: update_globals(:saved_state_sequence, List.insert_at(get_globals(:saved_state_sequence), 0, s))
-        inner_loop(iteration + 1, s, time_limit, print_steps, trace, save_state_sequence)
+          do: :saved_state_sequence
+              |> update_globals(List.insert_at(get_globals(:saved_state_sequence), 0, s))
+        iteration
+        |> (fn(x) -> x + 1 end).()
+        |> inner_loop(s, time_limit, print_steps, trace, save_state_sequence)
       else
         exec_top = top_item(:exec, s)
         s = pop_item(:exec, s)
@@ -68,8 +74,9 @@ defmodule Elixush.Interpreter do
             trace == :changes -> if execution_result == s do
               execution_result
             else
-              full_trace = if is_list(s[:trace]), do: s[:trace], else: []
-                           |> List.insert_at(0, exec_top)
+              full_trace =
+                if is_list(s[:trace]), do: s[:trace], else: []
+                |> List.insert_at(0, exec_top)
               Map.put(execution_result, :trace, full_trace)
             end
             trace == false -> execution_result

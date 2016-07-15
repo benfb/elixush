@@ -61,7 +61,11 @@ defmodule Elixush.Instructions.Code do
 
   def code_cons(state) do
     if not(Enum.empty?(Enum.drop(state[:code], 1))) do
-      new_item = List.insert_at(ensure_list(stack_ref(:code, 0, state)), 0, stack_ref(:code, 1, state))
+      new_item =
+        :code
+        |> stack_ref(0, state)
+        |> ensure_list
+        |> List.insert_at(0, stack_ref(:code, 1, state))
       if count_points(new_item) <= get_globals(:global_max_points) do
         push_item(new_item, :code, pop_item(:code, pop_item(:code, state)))
       else
@@ -105,7 +109,11 @@ defmodule Elixush.Instructions.Code do
       continuation = if increment == 0 do
         args_popped
       else
-        [current_index + increment, destination_index, :code_quote, to_do, :code_do_star_range]
+        [current_index + increment,
+         destination_index,
+         :code_quote,
+         to_do,
+         :code_do_star_range]
         |> push_item(:exec, args_popped)
       end
       push_item(to_do, :exec, push_item(current_index, :integer, continuation))
@@ -119,7 +127,8 @@ defmodule Elixush.Instructions.Code do
       to_do = List.first(state[:exec])
       current_index = state[:integer] |> Enum.drop(1) |> List.first
       destination_index = state[:integer] |> List.first
-      args_popped = pop_item(:integer, pop_item(:integer, pop_item(:exec, state)))
+      args_popped =
+        pop_item(:integer, pop_item(:integer, pop_item(:exec, state)))
       increment = cond do
         current_index < destination_index -> 1
         current_index > destination_index -> -1
@@ -128,7 +137,11 @@ defmodule Elixush.Instructions.Code do
       continuation = if increment == 0 do
         args_popped
       else
-        push_item([current_index + increment, destination_index, :exec_do_star_range, to_do], :exec, args_popped)
+        [current_index + increment,
+         destination_index,
+         :exec_do_star_range,
+         to_do]
+        |> push_item(:exec, args_popped)
       end
       push_item(to_do, :exec, push_item(current_index, :integer, continuation))
     else
@@ -145,7 +158,9 @@ defmodule Elixush.Instructions.Code do
     end
   end
 
-  def exec_do_star_count(state) do # differs from code_do_star_count only in the source of the code and the recursive call
+  # differs from code_do_star_count only in the source of the code and
+  # the recursive call
+  def exec_do_star_count(state) do
     if not((Enum.empty?(state[:integer]) or List.first(state[:integer]) < 1) or Enum.empty?(state[:exec])) do
       [0, List.first(state[:integer]) - 1, :exec_do_star_range, List.first(state[:exec])]
       |> push_item(:exec, pop_item(:integer, pop_item(:exec, state)))
@@ -163,10 +178,14 @@ defmodule Elixush.Instructions.Code do
     end
   end
 
-  # differs from code_do_star_times only in the source of the code and the recursive call
+  # differs from code_do_star_times only in the source of the code and
+  # the recursive call
   def exec_do_star_times(state) do
     if not((Enum.empty?(state[:integer]) or List.first(state[:integer]) < 1) or Enum.empty?(state[:exec])) do
-      [0, List.first(state[:integer]) - 1, :exec_do_star_range, List.insert_at(ensure_list(List.first(state[:exec])), 0, :integer_pop)]
+      [0,
+       List.first(state[:integer]) - 1,
+       :exec_do_star_range,
+       List.insert_at(ensure_list(List.first(state[:exec])), 0, :integer_pop)]
       |> push_item(:exec, pop_item(:integer, pop_item(:exec, state)))
     else
       state
@@ -184,7 +203,8 @@ defmodule Elixush.Instructions.Code do
           pop_item(:exec, pop_item(:boolean, state))
         else
           block = stack_ref(:exec, 0, state)
-          pop_item(:boolean, push_item(block, :exec, push_item(:exec_while, :exec, state)))
+          :boolean
+          |> pop_item(push_item(block, :exec, push_item(:exec_while, :exec, state)))
         end
       end
     end
@@ -263,7 +283,8 @@ defmodule Elixush.Instructions.Code do
     end
   end
 
-  # differs from code_if in the source of the code and in the order of the if/then parts
+  # differs from code_if in the source of the code and in the order
+  # of the if/then parts
   def exec_if(state) do
     if not(Enum.empty?(state[:boolean]) or Enum.empty?(Enum.drop(state[:exec], 1))) do
       instr_to_run = if List.first(state[:boolean]) do
@@ -378,7 +399,10 @@ defmodule Elixush.Instructions.Code do
 
   def code_size(state) do
     if not(Enum.empty?(state[:code])) do
-      push_item(state[:code] |> List.first |> count_points, :integer, pop_item(:code, state))
+      state[:code]
+      |> List.first
+      |> count_points
+      |> push_item(:integer, pop_item(:code, state))
     else
       state
     end
@@ -386,13 +410,19 @@ defmodule Elixush.Instructions.Code do
 
   def code_extract(state) do
     if not(Enum.empty?(state[:code]) or Enum.empty?(state[:integer])) do
-      push_item(code_at_point(List.first(state[:code]), List.first(state[:integer])), :code, pop_item(:code, pop_item(:integer, state)))
+      state[:code]
+      |> List.first
+      |> code_at_point(List.first(state[:integer]))
+      |> push_item(:code, pop_item(:code, pop_item(:integer, state)))
     end
   end
 
   def code_insert(state) do
     if not(Enum.empty?(Enum.drop(state[:code], 1)) or Enum.empty?(state[:integer])) do
-      new_item = insert_code_at_point(List.first(state[:code]), List.first(state[:integer]), Enum.at(state[:code], 1))
+      new_item =
+        state[:code]
+        |> List.first
+        |> insert_code_at_point(List.first(state[:integer]), Enum.at(state[:code], 1))
       if count_points(new_item) <= get_globals(:global_max_points) do
         new_item
         |> push_item(:code, pop_item(:code, pop_item(:code, pop_item(:integer, state))))
@@ -422,7 +452,10 @@ defmodule Elixush.Instructions.Code do
 
   def code_contains(state) do
     if not(Enum.empty?(Enum.drop(state[:code], 1))) do
-      push_item(contains_subtree(stack_ref(:code, 1, state), stack_ref(:code, 0, state)), :boolean, pop_item(:code, pop_item(:code, state)))
+      :code
+      |> stack_ref(1, state)
+      |> contains_subtree(stack_ref(:code, 0, state))
+      |> push_item(:boolean, pop_item(:code, pop_item(:code, state)))
     else
       state
     end
@@ -430,7 +463,10 @@ defmodule Elixush.Instructions.Code do
 
   def code_container(state) do
     if not(Enum.empty?(Enum.drop(state[:code], 1))) do
-      push_item(containing_subtree(stack_ref(:code, 0, state), stack_ref(:code, 1, state)), :code, pop_item(:code, pop_item(:code, state)))
+      :code
+      |> stack_ref(0, state)
+      |> containing_subtree(stack_ref(:code, 1, state))
+      |> push_item(:code, pop_item(:code, pop_item(:code, state)))
     else
       state
     end
@@ -441,15 +477,17 @@ defmodule Elixush.Instructions.Code do
   is true for items in coll.
   """
   def positions(pred, coll) do
-    with_nils = for {idx, elt} <- Enum.zip(Stream.iterate(0, &(&1 + 1)), coll) do
-      if pred.(elt), do: idx
-    end
+    with_nils =
+      for {idx, elt} <- Enum.zip(Stream.iterate(0, &(&1 + 1)), coll) do
+        if pred.(elt), do: idx
+      end
     Enum.filter(with_nils, &(&1 != nil))
   end
 
   def code_position(state) do
     if not(Enum.empty?(Enum.drop(state[:code], 1))) do
-      &(&1 == stack_ref(:code, 1, state))
+      pred = fn(x) -> x == stack_ref(:code, 1, state) end
+      pred
       |> positions(ensure_list(stack_ref(:code, 0, state)))
       |> List.first
       |> (fn(x) -> x or -1 end).()
@@ -459,7 +497,9 @@ defmodule Elixush.Instructions.Code do
 
   def exec_k(state) do
     if not(Enum.empty?(Enum.drop(state[:exec], 1))) do
-      push_item(List.first(state[:exec]), :exec, pop_item(:exec, pop_item(:exec, state)))
+      state[:exec]
+      |> List.first
+      |> push_item(:exec, pop_item(:exec, pop_item(:exec, state)))
     else
       state
     end
@@ -485,7 +525,9 @@ defmodule Elixush.Instructions.Code do
     if not(Enum.empty?(state[:exec])) do
       new_item = [:exec_y, List.first(state[:exec])]
       if count_points(new_item) <= get_globals(:global_max_points) do
-        push_item(List.first(state[:exec]), :exec, push_item(new_item, :exec, pop_item(:exec, state)))
+        state[:exec]
+        |> List.first
+        |> push_item(:exec, push_item(new_item, :exec, pop_item(:exec, state)))
       else
         state
       end
@@ -499,7 +541,10 @@ defmodule Elixush.Instructions.Code do
     if not(Enum.empty?(state[:exec])) do
       new_exec = top_item(:exec, state)
       parent_env = pop_item(:exec, state)
-      push_item(new_exec, :exec, parent_env |> push_item(:environment, state) |> Map.put(:return, []) |> Map.put(:exec, []))
+      push_item(new_exec, :exec, parent_env
+                                 |> push_item(:environment, state)
+                                 |> Map.put(:return, [])
+                                 |> Map.put(:exec, []))
     else
       state
     end
@@ -507,7 +552,10 @@ defmodule Elixush.Instructions.Code do
 
   @doc "Creates new environment using the entire exec stack"
   def environment_begin(state) do
-    Map.put(push_item(Map.put(state, :exec, []), :environment, state), :return, [])
+    state
+    |> Map.put(:exec, [])
+    |> push_item(:environment, state)
+    |> Map.put(:return, [])
   end
 
   @doc "Ends current environment"

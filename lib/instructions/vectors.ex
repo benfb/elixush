@@ -342,7 +342,9 @@ defmodule Elixush.Instructions.Vectors do
       item = top_item(lit_type, state)
       vect = top_item(type, state)
       result = Enum.find_index(vect, item)
-      (if result == nil, do: -1, else: result) |> push_item(:integer, pop_item(lit_type, pop_item(type, state)))
+      result
+      |> (fn(x) -> x or -1 end).()
+      |> push_item(:integer, pop_item(lit_type, pop_item(type, state)))
     end
   end
 
