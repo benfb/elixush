@@ -205,16 +205,18 @@ defmodule Elixush.Util do
   #     update_val = if pred.(other_element, current_element) do
   #       # if the elements are deemed equivalent according to the predicate
   #       # pred, then no change has taken place to the string, so we are
-  #       # going to set it the same value as diagonal (which is the previous edit-distance)
-  #       diagonal
+  #       # going to set it the same value as diagonal (which is the previous
+  #       # edit-distance) diagonal
+  #
   #     else
-  #       # in the case where the elements are not considered equivalent, then we are going
-  #       # to figure out if its a substitution (then there is a change of 1 from the previous
-  #       # edit distance) thus the value is diagonal + 1 or if its a deletion, then the value
-  #       # is present in the columns, but not in the rows, the edit distance is the edit-distance
-  #       # of last of row + 1 (since we will be using vectors, peek is more efficient)
-  #       # or it could be a case of insertion, then the value is above+1, and we chose
-  #       # the minimum of the three
+  #       # in the case where the elements are not considered equivalent, then
+  #       # we are going to figure out if its a substitution (then there is a
+  #       # change of 1 from the previous edit distance) thus the value is
+  #       # diagonal + 1 or if its a deletion, then the value is present in the
+  #       # columns, but not in the rows, the edit distance is the edit-distance
+  #       # of last of row + 1 (since we will be using vectors, peek is more
+  #       # efficient) or it could be a case of insertion, then the value is
+  #       # above+1, and we chose the minimum of the three
   #       Enum.min([diagonal, above, hd(row)]) + 1
   #     end
   #     List.insert_at(row, 0, update_val)

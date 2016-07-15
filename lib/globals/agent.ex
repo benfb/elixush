@@ -6,8 +6,9 @@ defmodule Elixush.Globals.Agent do
   may change depending on arguments to pushgp.
 
   Most of the values and atoms in this file are those that are used by Push
-  instructions; all others, with few exceptions, should be defined in push_argmap
-  in pushgp.ex and should be passed to whatever functions use them as arguments.
+  instructions; all others, with few exceptions, should be defined in
+  push_argmap in pushgp.ex and should be passed to whatever functions use them
+  as arguments.
   """
 
   def start_link(name) do

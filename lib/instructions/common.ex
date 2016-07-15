@@ -9,7 +9,7 @@ defmodule Elixush.Instructions.Common do
   Takes a type and a state and duplicates the top item of the appropriate
   stack of the state.
   """
-  def duper(type, state) do
+  defp duper(type, state) do
     if Enum.empty?(state[type]), do: state, else: type |> top_item(state) |> push_item(type, state)
   end
 
