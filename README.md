@@ -8,16 +8,18 @@ The result is a minimalist, simply-implemented Push interpreter.
 The package can be installed as:
 
   1. Add elixush to your list of dependencies in `mix.exs`:
-
+        ```elixir
         def deps do
           [{:elixush, "~> 0.0.4"}]
         end
+        ```
 
   2. Ensure elixush is started before your application:
-
+        ```elixir
         def application do
           [applications: [:elixush]]
         end
+        ```
 
 ## Running
 
@@ -51,7 +53,7 @@ This server can be accessed by calling `Elixush.Server.run_program` from the REP
 followed by a list of instructions, such as `Elixush.Server.run_program [1, 2, :integer_add]`.
 This will print out the stack state at the end of the program's execution, or in
 this case the following map:
-```
+```elixir
 %{auxiliary: [], boolean: [], char: [], code: [], environment: [], exec: [],
   float: [], genome: [], input: [], integer: [3], output: [], return: [],
   string: [], tag: [], termination: :normal, vector_boolean: [],
