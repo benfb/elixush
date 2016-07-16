@@ -10,7 +10,11 @@ defmodule Elixush.Instructions.Common do
   stack of the state.
   """
   def duper(type, state) do
-    if Enum.empty?(state[type]), do: state, else: type |> top_item(state) |> push_item(type, state)
+    if Enum.empty?(state[type]) do
+      state
+    else
+      type |> top_item(state) |> push_item(type, state)
+    end
   end
 
   @doc """
@@ -63,14 +67,46 @@ defmodule Elixush.Instructions.Common do
   Yanks an item from deep in the specified stack, using the top integer
   to indicate how deep.
   """
-  def yanker(type, state) do
-    if (type == :integer and not(Enum.empty?(Enum.drop(state[type], 1)))) or (type != :integer and (not(Enum.empty?(state[type])) and not(Enum.empty?(state[:integer])))) do
+  def yanker(:integer, state) do
+    if not(Enum.empty?(Enum.drop(state[:integer], 1))) do
       raw_index = stack_ref(:integer, 0, state)
       with_index_popped = pop_item(:integer, state)
-      actual_index = raw_index |> min(length(with_index_popped[type]) - 1) |> max(0)
+      actual_index =
+        raw_index
+        |> min(length(with_index_popped[:integer]) - 1)
+        |> max(0)
+      item = stack_ref(:integer, actual_index, with_index_popped)
+      stk = with_index_popped[:integer]
+      new_type_stack =
+        stk
+        |> Enum.take(actual_index)
+        |> Enum.concat(Enum.drop(Enum.drop(stk, actual_index), 1))
+      with_item_pulled =
+        with_index_popped
+        |> Map.merge(%{:integer => new_type_stack})
+      push_item(item, :integer, with_item_pulled)
+    else
+      state
+    end
+  end
+
+  def yanker(type, state) do
+    if not(Enum.empty?(state[type])) and not(Enum.empty?(state[:integer])) do
+      raw_index = stack_ref(:integer, 0, state)
+      with_index_popped = pop_item(:integer, state)
+      actual_index =
+        raw_index
+        |> min(length(with_index_popped[type]) - 1)
+        |> max(0)
       item = stack_ref(type, actual_index, with_index_popped)
       stk = with_index_popped[type]
-      with_item_pulled = Map.merge(with_index_popped, %{type => Enum.concat(Enum.take(stk, actual_index), Enum.drop(Enum.drop(stk, actual_index), 1))})
+      new_type_stack =
+        stk
+        |> Enum.take(actual_index)
+        |> Enum.concat(Enum.drop(Enum.drop(stk, actual_index), 1))
+      with_item_pulled =
+        with_index_popped
+        |> Map.merge(%{type => new_type_stack})
       push_item(item, type, with_item_pulled)
     else
       state
@@ -81,8 +117,21 @@ defmodule Elixush.Instructions.Common do
   Yanks a copy of an item from deep in the specified stack, using the top
   integer to indicate how deep.
   """
+  def yankduper(:integer, state) do
+    if not(Enum.empty?(Enum.drop(state[:integer], 1))) do
+      raw_index = stack_ref(:integer, 0, state)
+      with_index_popped = pop_item(:integer, state)
+      actual_index =
+        raw_index |> min(length(with_index_popped[:integer]) - 1) |> max(0)
+      item = stack_ref(:integer, actual_index, with_index_popped)
+      push_item(item, :integer, with_index_popped)
+    else
+      state
+    end
+  end
+
   def yankduper(type, state) do
-    if (type == :integer and not(Enum.empty?(Enum.drop(state[type], 1)))) or (type != :integer and (not(Enum.empty?(state[type])) and not(Enum.empty?(state[:integer])))) do
+    if not(Enum.empty?(state[type])) and not(Enum.empty?(state[:integer])) do
       raw_index = stack_ref(:integer, 0, state)
       with_index_popped = pop_item(:integer, state)
       actual_index =

@@ -57,9 +57,11 @@ defmodule Elixush.Interpreter do
           state_pretty_print(s)
         end
         # REVIEW: saved_state_sequence is in globals which may not be correct
-        if save_state_sequence,
-          do: :saved_state_sequence
-              |> update_globals(List.insert_at(get_globals(:saved_state_sequence), 0, s))
+        if save_state_sequence do
+          global_sss = get_globals(:saved_state_sequence)
+          :saved_state_sequence
+          |> update_globals(List.insert_at(global_sss, 0, s))
+        end
         iteration
         |> (fn(x) -> x + 1 end).()
         |> inner_loop(s, time_limit, print_steps, trace, save_state_sequence)
@@ -91,9 +93,14 @@ defmodule Elixush.Interpreter do
           state_pretty_print(s)
         end
         # REVIEW: saved_state_sequence is in globals which may not be correct
-        if save_state_sequence,
-          do: update_globals(:saved_state_sequence, List.insert_at(get_globals(:saved_state_sequence), 0, s))
-        inner_loop(iteration + 1, s, time_limit, print_steps, trace, save_state_sequence)
+        if save_state_sequence do
+          global_sss = get_globals(:saved_state_sequence)
+          :saved_state_sequence
+          |> update_globals(List.insert_at(global_sss, 0, s))
+        end
+        iteration
+        |> (fn(x) -> x + 1 end).()
+        |> inner_loop(s, time_limit, print_steps, trace, save_state_sequence)
       end
     end
   end
