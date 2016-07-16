@@ -1,4 +1,4 @@
-# Elixush
+# Elixush [![Build Status](https://travis-ci.org/benfb/elixush.svg?branch=master)](https://travis-ci.org/benfb/elixush) [![Coverage Status](https://coveralls.io/repos/github/benfb/elixush/badge.svg?branch=master)](https://coveralls.io/github/benfb/elixush?branch=master)
 
 An Elixir-based interpreter for the [Push genetic programming language](http://pushlanguage.org).
 The result is a minimalist, simply-implemented Push interpreter.
