@@ -8,18 +8,18 @@ The result is a minimalist, simply-implemented Push interpreter.
 The package can be installed as:
 
   1. Add elixush to your list of dependencies in `mix.exs`:
-        ```elixir
-        def deps do
-          [{:elixush, "~> 0.0.4"}]
-        end
-        ```
+  ```elixir
+  def deps do
+    [{:elixush, "~> 0.0.4"}]
+  end
+  ```
 
   2. Ensure elixush is started before your application:
-        ```elixir
-        def application do
-          [applications: [:elixush]]
-        end
-        ```
+  ```elixir
+  def application do
+    [applications: [:elixush]]
+  end
+  ```
 
 ## Running
 
