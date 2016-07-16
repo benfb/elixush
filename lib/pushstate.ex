@@ -119,9 +119,8 @@ defmodule Elixush.PushState do
   Returns a list of all registered instructions with the given type name
   as a prefix.
   """
-  @spec registered_for_type(atom, map) :: Enum.t
-  def registered_for_type(type, argmap \\ %{}) do
-    include_randoms = Map.get(argmap, :include_randoms, true)
+  def registered_for_type(type, args \\ []) do
+    include_randoms = args[:include_randoms] && true
     for_type = Enum.filter(get_globals(:registered_instructions), &(String.starts_with?(Atom.to_string(&1), Atom.to_string(type))))
     if include_randoms do
       for_type

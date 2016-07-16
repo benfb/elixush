@@ -16,5 +16,24 @@ defmodule Elixush.PushStateTest do
            |> List.first
   end
 
+  test "register_instruction registers an instruction successfully" do
+    assert register_instruction(:integer_test) == :ok
+    assert_raise ArgumentError, fn ->
+      register_instruction(:integer_test)
+    end
+  end
+
+  test "registered_for_type returns correct instructions" do
+    assert registered_for_type(:boolean) |> Enum.member?(:boolean_and)
+    refute registered_for_type(:boolean) |> Enum.member?(:integer_gte)
+    assert registered_for_type(:genome, include_randoms: false)
+           |> Enum.member?(:genome_gene_dup)
+  end
+
+  test "registered_nonrandom returns correct instructions" do
+    assert registered_nonrandom() |> Enum.member?(:boolean_and)
+    refute registered_nonrandom() |> Enum.member?(:autoconstructive_integer_rand)
+  end
+
 
 end
