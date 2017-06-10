@@ -126,25 +126,25 @@ defmodule Elixush.Evaluate do
       Map.get(argmap, :pass_individual_to_error_function)
     p = Map.get(i, :program)
     raw_errors =
-      if not(reuse_errors) or is_nil(Map.get(i, :errors)) or is_nil(Map.get(i, :total_error)) do
+      if not(reuse_errors) or Map.get(i, :errors, true) or Map.get(i, :total_error, true) do
         if pass_individual_to_error_function do
           error_function.(i)
         else
           error_function.(p)
         end
       end
-    e = if reuse_errors and not(is_nil(Map.get(i, :errors))) do
+    e = if reuse_errors and not(Map.get(i, :errors, false)) do
       Map.get(i, :errors)
     else
       update_globals(:evaluations_count, get_globals(:evaluations_count) + 1)
       normalize_errors(raw_errors, normalization, max_error)
     end
-    te = if reuse_errors and not(is_nil(Map.get(i, :total_error))) do
+    te = if reuse_errors and not(Map.get(i, :total_error, false)) do
       Map.get(i, :total_error)
     else
       compute_total_error(raw_errors)
     end
-    ne = if reuse_errors and not(is_nil(Map.get(i, :normalized_error))) do
+    ne = if reuse_errors and not(Map.get(i, :normalized_error, false)) do
       Map.get(i, :normalized_error)
     else
       compute_total_error(e)

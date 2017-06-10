@@ -47,7 +47,8 @@ defmodule Elixush.Interpreter do
   defp inner_loop(iteration, s, time_limit, print_steps, trace, save_state_sequence) do
     both_empty = empty?(s[:exec]) and empty?(s[:environment])
     normal_status = if both_empty, do: :normal, else: :abnormal
-    if ((iteration > get_globals(:global_evalpush_limit)) or both_empty) or (time_limit != 0 and (System.system_time(:nano_seconds) > time_limit)) do
+    if ((iteration > get_globals(:global_evalpush_limit)) or both_empty) or
+       (time_limit != 0 and (System.system_time(:nano_seconds) > time_limit)) do
       Map.put(s, :termination, normal_status)
     else
       if empty?(s[:exec]) do
@@ -89,7 +90,9 @@ defmodule Elixush.Interpreter do
           end
         end
         if print_steps do
-          IO.puts("\nState after #{iteration} steps (last step: #{if is_list(exec_top), do: "(...)", else: to_string(exec_top)}):\n")
+          str =
+            if is_list(exec_top), do: "(...)", else: to_string(exec_top)
+          IO.puts("\nState after #{iteration} steps (last step: #{str}):\n")
           state_pretty_print(s)
         end
         # REVIEW: saved_state_sequence is in globals which may not be correct
@@ -107,9 +110,13 @@ defmodule Elixush.Interpreter do
 
   def run_push(code, state), do: run_push(code, state, false, false, false)
 
-  def run_push(code, state, print_steps), do: run_push(code, state, print_steps, false, false)
+  def run_push(code, state, print_steps) do
+    run_push(code, state, print_steps, false, false)
+  end
 
-  def run_push(code, state, print_steps, trace), do: run_push(code, state, print_steps, trace, false)
+  def run_push(code, state, print_steps, trace) do
+    run_push(code, state, print_steps, trace, false)
+  end
 
   def run_push(code, state, print_steps, trace, save_state_sequence) do
     s = if get_globals(:global_top_level_push_code),
